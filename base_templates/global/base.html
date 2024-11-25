@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% include "global/partials/_head.html" %}
+    
+</head>
+<body>
+    {% include "global/partials/_header.html" %}
+    {% include "global/partials/_messages.html" %}
+    
+
+    <main class="content">
+        {% block content_pedidos %}{% endblock content_pedidos %}
+
+        {% block content_processos %}{% endblock content_processos %}
+
+        {% block content_contratos %}{% endblock content_contratos %}
+
+
+
+
+
+    </main>
+
+    <!-- script para  limpar o campo de filtagem e retornar a pagina inicial, por enquanto precisa remover -->
+ <script>
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function () {
+                // Verifica se algum <select> tem o valor vazio, ou seja, um <option> vazio foi selecionado
+                const isAnySelectOptionEmpty = Array.from(select.options).some(option => option.value === "" && option.selected);
+
+                if (isAnySelectOptionEmpty) {
+                    // Remove o parâmetro do filtro se algum option vazio for selecionado
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete(this.name); // Remove o parâmetro do filtro
+                    window.location.href = url.toString(); // Atualiza a página sem o filtro
+                }
+            });
+        });
+</script>
+
+
+    
+</body>
+</html>

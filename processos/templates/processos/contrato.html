@@ -1,0 +1,59 @@
+{% extends "global/base.html" %}
+{% load alfilters %}
+
+{% block content_contratos %}
+<h1 class="table-header" style="text-align: center">COMERCIAL</h1>
+    <div class="responsive-table">
+    <table class="contacts-table">
+        <caption class="table-caption">
+            <h1>contratos</h1>
+        </caption>
+        <thead>
+           <tr class="table-row table-row-header">
+               <th class="table-header" style="text-align: center">Id contrato </th>
+                <th class="table-header" style="text-align: center">Processo origem </th>
+                <th class="table-header" style="text-align: center">Contratante</th>
+               <th class="table-header" style="text-align: center">Nº Contrato</th>
+                <th class="table-header" style="text-align: center">Data de Inicio</th>
+                <th class="table-header" style="text-align: center">Vigencia</th>
+                <th class="table-header" style="text-align: center">Data Finalização</th>
+                <th class="table-header" style="text-align: center">Valor total</th>
+                <th class="table-header" style="text-align: center">Valor executado/Valor total</th>
+                <th class="table-header" style="text-align: center">Valor executavel/Valor total</th>
+
+           </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+            {% for contrato in contratos %}
+            <tr class="table-row">
+                <td class="table-cel" style="text-align: center">
+                    <a href="{% url 'processos:detalhe_contrato' contrato.pk %}">
+                                {{ contrato.pk }}
+                    </a>
+                </td>
+                <td class="table-cel" style="text-align: center">{{contrato.processo}}</td>
+
+                <td class="table-cel" style="text-align: center">{{contrato.contratante}}</td>
+
+                <td class="table-cel" style="text-align: center">{{contrato.numero}}</td>
+
+                <td class="table-cel" style="text-align: center">{{contrato.inicio}}</td>
+
+                <td class="table-cel" style="text-align: center">{{contrato.vigencia}}</td>
+
+                <td class="table-cel" style="text-align: center">{{contrato.fim_contrato}}</td>
+                <td class="table-cel" style="text-align: center">{{contrato.valor_total|formata_preco}}</td>
+                <td class="table-cel" style="text-align: center">{{contrato.executado|formata_preco}}/
+                    {{contrato.valor_total|formata_preco}}</td>
+                <td class="table-cel" style="text-align: center">{{contrato.executavel|formata_preco}}/
+                    {{contrato.valor_total|formata_preco}}</td>
+            </tr>
+
+            {% endfor %}
+    </table>
+   </div>
+
+
+{% endblock content_contratos %}

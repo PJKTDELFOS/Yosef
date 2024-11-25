@@ -1,0 +1,22 @@
+{% extends "global/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content_processos %}
+<div class="form-wrapper">>
+    <form
+        action="{% url 'processos:inserirprocesso' %}"
+        method="post"
+        enctype="multipart/form-data">
+        <h1>PROCESSO</h1>
+        {% csrf_token %}
+        {{create_process_form|crispy}}
+        <div style="display: grid; gap: 10px; flex-wrap: wrap; align-items: stretch;">
+            <button type="submit" style="flex: 1; height: 50px;width: 20%; text-align: center; padding: 10px;
+            background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"><b>INSERIR</b></button>
+
+            <a href="{% url 'processos:processo' %}" style="flex: 1; height: 50px;width: 20%; text-align: center; display: flex; align-items:center; justify-content: center; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">Retornar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

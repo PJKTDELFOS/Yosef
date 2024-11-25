@@ -1,0 +1,74 @@
+{% extends "global/base.html" %}
+{% load alfilters %}
+{% block content_contratos %}
+  <div class="single-contact">
+    <h1 class="single-contact-name"> Informaçoes do contrato</h1><p><b></b></p>
+      <p><b>Id Contrato</b> {{ contrato.pk }} </p>
+      <p><b>Processo de origem</b> {{contrato.processo}} </p>
+      <p><b>Contratante</b> {{contrato.contratante}} </p>
+      <p><b>Nº contrato</b> {{contrato.numero}} </p>
+      <p><b>Data de Inicio</b> {{contrato.inicio}} </p>
+      <p><b>Vigencia</b>  {{contrato.vigencia}} </p>
+      <p><b>data de encerramento(provavel)</b> {{contrato.fim_contrato}} </p>
+      <p><b>valor total</b> {{contrato.valor_total|formata_preco}} </p>
+      <p><b>Valor executado/Valor total</b>  {{contrato.executado|formata_preco}}/
+                    {{contrato.valor_total|formata_preco}} </p>
+      <p><b>Valor executavel/Valor total</b> {{contrato.executavel|formata_preco}}/
+                    {{contrato.valor_total|formata_preco}} </p>
+      <p><b>SEGURO</b> {{contrato.seguro}} </p>
+
+
+
+    <h2> Pedidos deste Contrato</h2>
+
+     <div class="responsive-table">
+    <table class="contacts-table">
+        <caption class="table-caption">
+            <h1>Pedidos</h1>
+        </caption>
+        <thead>
+           <tr class="table-row table-row-header">
+                <th class="table-header" style="text-align: center">Id do pedido</th>
+                <th class="table-header" style="text-align: center">Contrato</th>
+                <th class="table-header" style="text-align: center">Numero</th>
+                <th class="table-header" style="text-align: center">Contratante</th>
+                <th class="table-header" style="text-align: center">Data entrega</th>
+                <th class="table-header" style="text-align: center">Unidade de fornecimento</th>
+                <th class="table-header" style="text-align: center">Coordenador</th>
+
+
+           </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+            {% for pedido in pedidos %}
+            <tr class="table-row">
+                <td class="table-cel" style="text-align: center">
+                    <a href="{% url 'processos:detalhe_pedido' pedido.pk %}">
+                                {{ pedido.pk }}
+                    </a>
+                </td>
+                <td class="table-cel" style="text-align: center">{{pedido.contrato}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.numero}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.contratante}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.data_entrega}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.unidade_fornecimento}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.coordenador}}</td>
+            </tr>
+
+
+
+            {% endfor %}
+    </table>
+   </div>
+
+
+  </div>
+
+{% endblock %}

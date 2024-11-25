@@ -1,0 +1,42 @@
+<header class="header">
+    <h1 class="header-heading">
+        <a href="/" class="header-link">
+            SISTEMA YOSEF
+        </a>
+    </h1>
+
+    <nav class="menu">
+        <ul class="menu-list">
+            fazer aqui o block
+            <li class="menu-item">
+                <a href="{% url 'processos:inserirprocesso' %}" class="menu-link">
+                    <b>INSERIR PROCESSO</b>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'processos:processo' %}" class="menu-link">
+                    PROCESSOS
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'processos:listarcontratos' %}" class="menu-link">
+                    CONTRATOS
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'processos:listarpedidos' %}" class="menu-link">
+                    PEDIDOS
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="" class="menu-link"> <!-- Ajuste o URL name conforme necessário -->
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+    {% block searchprocesso %}
+<!-- LOGICA DO SEARCH -->
+    {% endblock %}
+</header>
+

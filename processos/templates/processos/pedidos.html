@@ -1,0 +1,54 @@
+{% extends "global/base.html" %}
+{% load alfilters %}
+
+{% block content_pedidos %}
+    <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
+   <div class="responsive-table">
+    <table class="contacts-table">
+        <caption class="table-caption">
+            <h1>Pedidos</h1>
+        </caption>
+        <thead>
+           <tr class="table-row table-row-header">
+                <th class="table-header" style="text-align: center">Id do pedido</th>
+                <th class="table-header" style="text-align: center">Contrato</th>
+                <th class="table-header" style="text-align: center">Numero</th>
+                <th class="table-header" style="text-align: center">Contratante</th>
+                <th class="table-header" style="text-align: center">Data entrega</th>
+                <th class="table-header" style="text-align: center">Unidade de fornecimento</th>
+                <th class="table-header" style="text-align: center">Coordenador</th>
+                
+
+           </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+            {% for pedido in pedidos %}
+            <tr class="table-row">
+                <td class="table-cel" style="text-align: center">
+                    <a href="{% url 'processos:detalhe_pedido' pedido.pk %}">
+                                {{ pedido.pk }}
+                    </a>
+                </td>
+                <td class="table-cel" style="text-align: center">{{pedido.contrato}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.numero}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.contratante}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.data_entrega}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.unidade_fornecimento}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.coordenador}}</td>
+            </tr>
+
+
+            
+            {% endfor %}
+    </table>
+   </div> 
+    
+
+{% endblock content_pedidos %}

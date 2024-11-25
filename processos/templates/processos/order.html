@@ -1,0 +1,23 @@
+{% extends "global/base.html" %}
+{% load alfilters %}
+{% block content_pedidos %}
+    <div class="single-contact">
+    <h1 class="single-contact-name"> Informaçoes do pedido</h1><p><b></b></p>
+      <p><b>Id do pedidoo</b> {{ pedido.pk }} </p>
+      <p><b>Contrato</b> {{pedido.contato}} </p>
+      <p><b>Numero do Pedido</b> {{pedido.numero}} </p>
+      <p><b>Contratante</b> {{pedido.contratante}} </p>
+      <p><b>Empenho</b> {{pedido.empenho}} </p>
+      <p><b>Eecebimento do empenho</b>  {{pedido.data_origem}} </p>
+      <p><b>Data de entrega</b> {{pedido.data_entrega}} </p>
+      <p><b>Objeto</b> {{pedido.objeto}} </p>
+      <p><b>Unidade de fornecimento</b> {{pedido.unidade_fornecimento}} </p>
+      <p><b>Coordenador Responsavel</b> {{pedido.coordenador}} </p>
+        <p><b>STATUS DO PEDIDO</b> {{pedido.status}} </p>
+
+    </div>
+
+
+{% endblock %}
+
+

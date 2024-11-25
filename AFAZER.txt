@@ -1,0 +1,81 @@
+PROXIMOS PASSOS
+1- REPRODUZIR A LOGICA DOS ARQUIVOS DOS PROCESSOS PARA O PERFIL(RECURSOS HUMANOS)  OK
+2-CRIAR LOGICAS ADICIONAIS AOS RECURSOS HUMANOS OK
+3-CRIAR OS FORMULARIOS DE ENTRADA PARA CADASTRAR USUARIOS(FUNCIONARIOS) E OS PROCESSOS-  PROXIMO PASSO
+4-CRIAR LOGICA DE SEGREGAÇÃO CONFORME NECESSIDADES, A PRIMEIRA DEVE SER A DE SEGREGAR
+AS INFORMAÇOES QUE CADA GRUPO(SETOR) TEM ACESSO PELOS TEMPLATES, VER COMO FAZ BACK END
+5-CRIAR OS TEMPLATES QUE FALTA, E REDEFINIR OS ATUAIS PARA REFLETIR AS MUDANÇAS NA ESTRUTURA DO PROJETO
+6-CRIAR O SETOR FINANCEIRO, APLICAS AS LOGICAS NO QUE COUBER DO QUE JA FOI FEITO ATE AQUI
+7-FAZER TODA A FRONT-END SEMELHANTE AO COMPRASNET
+8 A PAGINA INICIAL SERA A DE LOGIN, AONDE HAVERA A OPÇÃO DE chamado(ainda ser nomeada, provavel suporte ou fane conosco)
+aonde poderao ser abertos chamados ou enviados questoes para serem resolvidas de fora(tickets)- essa função podera
+ser acessada de fora e de dentro, ou seja , podera ser acessada tanto logado quanto deslogado
+
+9-PARA O FINANCEIRO SERA CRIADO UMA CLASSE DE CENTRO DE CUSTO ESPECIFICA, AONDE SERAO LANÇADOS, E ISSO TAMBEM ATUALIZARA
+O TIPO DE DOCUMENTO PARA AS PASTAS DO FINANCEIRO (OU PELO VENCIMENTO-COMPETENCIA) A DECIDIR AINDA
+
+
+DEFINIR A TELA INICIAL PARA AVISOS GERAIS , AONDE OS AVISOS SAO DIRECIONADOS, E PODEM SER CRIADOS POR QUEM COM
+AUTORIDADE , E DIRECIONADOS PARA O SETOR, QUE VAI LOGAR E TER ACESSO A VISTA E INFORMAÇOES DE ACORDO COM SUAS PERMISSOES
+SETOR/SUBSETOR
+
+avisos poderam ser gerais , derecionadis ou inter-setor
+
+no setor operacional, vai ter 2 sub setores , produção que recebera e atualizara os pedidos, e logistica que cuidara de
+almoxarifado,inventario, e gestao de frota
+
+refazer a estrutura operacional-produção vai ter acesso segregado  para informaçoes no comercial, enquanto operacional
+vai cuidar de logistica]
+criar  modelos separados em almoxarifado, paraos itens e fornecedor, de forma que os itens recebam fornecedor, mais nao
+sejam deletaveis caso o fornecdor ou item seja excluido, o fornecedor pode receber  cotações, entre outros arquivos 
+ORGANIZAÇÃO DO PROJETO
+
+DEFINIR NA HEADER COMO UMA LISTA SUSPENSA EM CADA SETOR, COM UMA LISTA SAINDO DA OPÇÃO QUANDOA TENHA , POR EXEMPLO
+
+estrutura de segregação
+
+COMERCIAL
+PROCESSO{
+PODE VER TUDO(COMERCIAL,ADM)
+PODE VER PARCIAL:(PRODUÇAO(NAO MOSTRAR VALOR) FINAN(VER PEDIDO COM VALOR PARA FATURAMENTO)
+}
+
+ordem do projeto:
+comercial
+
+criar forms de atualização e deleçao de processo ambos devem ser acessados pelo processo individual
+criar forms de inserir contrato pelo processo, e pela tabela
+criar forms de criação, atualização e deleção de contrato e pedidos,
+criar filtros adicionais para o comercial , de forma a pode ver pelo id, data, contratante, e por ai vai
+
+
+<form method="post" action="{% url 'processos:atualizarprocesso' processo.pk %}">
+                {% csrf_token %}
+                {{ process_form|crispy}}
+                <a
+                  href="{% url 'processos:atualizarprocesso' processo.pk %}"
+                   class="btn btn-primary"> {% csrf_token %}Editar Processo
+                </a>
+            </form>
+
+
+
+<div class="container" style="">
+            <form method="post" action="{% url 'processos:deletarprocesso' processo.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
+
+            <a href="{% url 'processos:processo' %}" class="btn btn-danger" >
+                    Retornar
+            </a>
+
+            <form method="post" action="{% url 'processos:atualizarprocesso' processo.pk %}">
+                 <button type="submit" class="btn btn-danger">{% csrf_token %} Editar Processos</button>
+            </form>
+
+             <form method="post" action="{% url 'processos:processo' %}" >
+                <button type="submit" class="btn btn-danger"> {% csrf_token %} Inserir Contrator</button>
+             </form>
+    </div>
+
