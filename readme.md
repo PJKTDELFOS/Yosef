@@ -7,4 +7,4 @@ Portanto para contornar essa limitação, primeiro crie e depois adicione
 arquivos.
 
 
-2. 
+2. para fazer download via media url adicio na nos context processors, 'django.template.context_processors.media',

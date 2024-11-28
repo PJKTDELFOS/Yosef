@@ -30,11 +30,8 @@ class ProcessForm(forms.ModelForm):
             'status': forms.Select(),
             'tipo_documento': forms.Select(),
         }
+        # segurar a data para atualização ja que e o mesmo form para ambos
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        if self.instance and self.instance.data_disputa:
-            self.fields['data_disputa'].initial = localtime(self.instance.data_disputa).strftime('%Y-%m-%dT%H:%M')
 
         ''' forma de validaçao nos forms '''
 
@@ -65,10 +62,21 @@ class ProcessForm(forms.ModelForm):
         if not valor_total:
             print('falhou valor_total')
             raise forms.ValidationError("este campo e obrigatorio 6")
-
         if numero_processo and numero_licitacao and contratante and modalidade and data_disputa and valor_total:
-            print('deu certo',cleaned_data)
             return cleaned_data
+# quando for necessario  que um campo especifico assuma um valor,faça pela forms, ate ter coisa melhor
+    #se nao por nenhum tipo, ele entra automatico em  diversos, e uma solução interessante, ate
+    def clean_tipo_documento(self):
+        tipo_documento = self.cleaned_data['tipo_documento']
+        if not tipo_documento or tipo_documento == '':
+            return 'DIVERSOS'
+        return tipo_documento
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        if self.instance and self.instance.data_disputa:
+            self.fields['data_disputa'].initial = localtime(self.instance.data_disputa).strftime('%Y-%m-%dT%H:%M')
+
 
 
 

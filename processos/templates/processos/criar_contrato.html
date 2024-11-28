@@ -8,16 +8,16 @@
         action=""
         method="post"
         enctype="multipart/form-data"> <!-- Necessário se houver upload de arquivos -->
-        <h1>PROCESSO</h1>
+        <h1>contrato</h1>
 
         {% csrf_token %} <!-- Proteção contra ataques CSRF -->
 
         <!-- Renderiza o formulário com estilo do Crispy Forms -->
-        {{ process_form|crispy}}
+        {{ create_contract_form|crispy}}
 
         <!-- Botões de submissão -->
         <div class="d-flex justify-content-between">
-            <a href="{% url 'processos:inserirprocesso' %}" class="btn btn-secondary">
+            <a href="{% url 'processos:processo' %}" class="btn btn-secondary">
                 <button type="submit" class="btn btn-primary"><b>INSERIR</b></button></a>
 
             <a href="{% url 'processos:processo' %}" class="btn btn-secondary">

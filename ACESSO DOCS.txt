@@ -1,0 +1,22 @@
+ if arquivo_excluir and subpasta:
+        caminho_subpasta = os.path.join(caminho_base, subpasta)
+        caminho_arquivo_excluir = os.path.join(caminho_subpasta, arquivo_excluir)
+
+        # Verifica se o arquivo existe antes de tentar excluir
+        if os.path.exists(caminho_arquivo_excluir):
+            try:
+                os.remove(caminho_arquivo_excluir)
+            except Exception as e:
+                print(f"Erro ao deletar o arquivo: {e}")
+        else:
+            print("Arquivo não encontrado.")
+    else:
+        print("Parâmetros inválidos enviados na requisição.")
+
+
+
+        modelo url para  baixar e acessar contratos
+{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}} par acessar arquivos
+{{ MEDIA_URL }}processos/{{ processo.pk }}/contratos/{{contrato.pk}}{{ tipo }}/{{ arquivo}}  contratos
+
+return os.path.join(f'processos/{processo_nome}/contratos/{contrato_nome}/{tipo_documento}', filename)

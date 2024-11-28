@@ -3,8 +3,7 @@
 {% block content_processos %}
 {% load crispy_forms_tags %}
   <div class="single-contact">
-    <h1 class="single-contact-name"> Informaçoes</h1>
-
+    <h1 class="single-contact-name"> DETALHES DO PROCESSO</h1>
       <p class="table-cel" ><b>Numero do processo</b> {{processo.numero_processo}}</p>
       <p class="table-cel" ><b>Numero da licitação</b> {{processo.numero_licitacao}}</p>
       <p class="table-cel" ><b>Contratante</b> {{processo.contratante}}</p>
@@ -15,46 +14,86 @@
       <p class="table-cel" ><b>Status</b> {{processo.status}}</p>
 
 
-    <div style="display: grid; gap: 10px; flex-wrap: wrap; align-items: stretch;">
 
 
-        <form method="post" action="{% url 'processos:atualizarprocesso' processo.pk %}"
-              style="margin: 0; flex: 1;">
-                {% csrf_token %}
-                {{att_process_form|crispy}}
-                <a href="{% url 'processos:atualizarprocesso' processo.pk %}" style="flex: 1; height: 50px;width: 20%; text-align: center; display: flex; align-items:center; justify-content: center; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
-                        Editar Processos
-                </a>
+          <h3> Documentos Disponiveis</h3>
+            {% if arquivos %}
+                <ul>
+                    {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                        <li>
+                        <b>{{ tipo }}</b>
+                        <ul>
+                            {% for arquivo in tipo_arquivos %}
+                                <a
+                                 href="{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}}" download>
+                                <li>{{ arquivo}}</li>
+                                </a>
+                                <form action="{% url 'processos:delete' processo.pk %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="acao" value="deletar">
+                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                <input type="hidden" name="tipo" value="{{ tipo }}">
+                                <button type="submit"
+                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                        background-color: #007bff;
+                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                >
+                                    Deletar</button>
+                            </form>
+                            {% endfor %}
+                        </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum arquivo disponivel para este processo</p>
+            {% endif %}
 
-        </form>
 
-        <form method="post" action="{% url 'processos:deletarprocesso' processo.pk %}" style="margin: 0; flex: 1;">
-            {% csrf_token %}
-            <button
-                style="flex: 1; height: 50px;width: 20%; text-align: center; padding: 10px;
-                background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
-                Excluir
-            </button>
-        </form>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; align-items: stretch;">
+                <form method="post" action="{% url 'processos:atualizarprocesso' processo.pk %}"
+                      style="margin: 0; flex: 1;">
+                        {% csrf_token %}
+                        {{att_process_form|crispy}}
+                        <a href="{% url 'processos:atualizarprocesso' processo.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                Editar Processos
+                        </a>
+                </form>
 
-
-        <form method="post" action="{% url 'processos:processo' %}" style="margin: 0;
+                <form method="post" action="{% url 'processos:deletarprocesso' processo.pk %}" style="margin: 0; flex: 1;">
+                    {% csrf_token %}
+                    <button
+                        style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="return confirm('Ao apagar o processo, contratos e pedidos associados serão perdidos')"
+                    >
+                        Excluir
+                    </button>
+                </form>
+        <form method="post" action="{% url 'processos:criarcontrato' processo.pk %}" style="margin: 0;
         flex: 1;">
             {% csrf_token %}
             <button type="submit"
-                style="flex: 1; height: 50px;width: 20%; text-align: center; padding: 10px;
+                style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
                  background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
                 Inserir Contrato
             </button>
         </form>
 
        <a href="{% url 'processos:processo' %}"
-            style="flex: 1; height: 50px;width: 20%; text-align: center; display: flex; align-items:
+            style="flex: 1; height: 50px;width: 50%; text-align: center; display: flex; align-items:
             center; justify-content: center; background-color: #007bff; color: #fff;
             text-decoration: none; border-radius: 5px; cursor: pointer;">
             Retornar
         </a>
-</div>
+
+</div><br>
 
 
 

@@ -1,12 +1,11 @@
-from http.client import responses
 
-from django.shortcuts import get_object_or_404,redirect
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404,redirect,render,HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from processos import models
 from .process_forms import ProcessForm
+from.contract_forms import ContractForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView,UpdateView
 from django.contrib import messages
@@ -14,8 +13,11 @@ from django.db.models import Q
 from urllib.parse import urlencode
 from django.utils.decorators import method_decorator#decoradores
 from django.views.decorators.cache import never_cache# para nao deixar carregar cache
+import os
+from django.conf import settings
+from django.http import Http404
 
-
+from ..models import Processo
 
 # Create your views here.
 
@@ -118,7 +120,23 @@ class DetalharProcesso(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['contratos']=self.get_object().contratos.all()
+
+        processo_nome=str(self.object.pk)
+        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')#cria o acesso  pasta de processos
+        #aonde estao
+        if not os.path.exists(caminho_base):
+            context['arquivos']={}
+        else:
+            tipo_arquivos={}
+            for subpasta in os.listdir(caminho_base):
+                caminho_subpasta=os.path.join(caminho_base, subpasta)
+                tipo_arquivos[subpasta]=os.listdir(caminho_subpasta)
+            context['arquivos']=tipo_arquivos
         return context
+
+
+
+
 
 class CriarProcesso(CreateView):
     model = models.Processo
@@ -137,6 +155,8 @@ class CriarProcesso(CreateView):
         return response
 
     def form_invalid(self, create_process_form):
+        print('algo falhando aqui')
+        print(create_process_form.errors)
         messages.warning(self.request, 'processo nao criado com sucesso!')
         return super().form_invalid(create_process_form)
 
@@ -144,8 +164,34 @@ class DeletarProcesso(View):
     def post(self, request, *args, **kwargs):
         processo=get_object_or_404(models.Processo, pk=kwargs['pk'])
         messages.warning(self.request, 'Processo excluido com sucesso!')
+        print('deletei aqui')
         processo.delete()
         return redirect('processos:processo')
+
+def delete_arquivos(request,pk):
+    if request.method == 'POST':# muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
+        processo_nome=str(pk)
+        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')
+        arquivo_excluir=request.POST.get('arquivo')
+        subpasta=request.POST.get('tipo')
+        if arquivo_excluir and subpasta:
+            caminho_subpasta=os.path.join(caminho_base, subpasta)
+            caminho_arquivo_excluir=os.path.join(caminho_subpasta, arquivo_excluir)
+            if os.path.exists(caminho_arquivo_excluir):
+                try:
+                    os.remove(caminho_arquivo_excluir)
+                    messages.success(request, 'Arquivo excluido com sucesso!')
+                except Exception as e:
+                    print(f"Erro ao deletar o arquivo: {e}")
+            else:
+                print("Parâmetros inválidos enviados na requisição.")
+
+        processo_deletado=DetalharProcesso()
+        if processo_deletado:
+            os.remove(caminho_base)
+    return redirect('processos:detalhe',pk=pk)
+
+
 
 
 @method_decorator(never_cache, name='dispatch')
@@ -161,6 +207,8 @@ class UpdateProcesso(UpdateView):
         context=super().get_context_data(**kwargs)
         context['att_process_form']=context['form']
         print(context['form'].initial)
+
+
         return context
 
     def form_valid(self, att_process_form):
@@ -197,9 +245,6 @@ class listarcontratos(ListView):
             ).order_by('-id')
         return queryset
 
-
-
-
 class DetalharContrato(DetailView):
     model = models.Contratos
     template_name = 'processos/contract.html'
@@ -211,6 +256,48 @@ class DetalharContrato(DetailView):
         context = super().get_context_data(**kwargs)
         context['pedidos']=self.get_object().pedidos.all()
         return context
+
+class Criarcontrato(CreateView):
+    model = models.Contratos
+    template_name = 'processos/criar_contrato.html'
+    form_class =ContractForm
+    success_url = reverse_lazy('processos:contrato')
+
+    def get_initial(self):
+        initial=super().get_initial()
+        processo=get_object_or_404(models.Processo, pk=self.kwargs['pk'])
+        print(f'{processo} pk do processo')
+        initial['numero_processo']=processo.numero_processo
+        return initial
+
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['create_contract_form'] = context['form']
+
+        return context
+
+    def form_valid(self, create_contract_form,):
+        processo=get_object_or_404(models.Processo, pk=self.kwargs['pk'])
+        contrato=create_contract_form.save()
+        contrato.numero_processo=processo
+        print('deu certo valid')
+        contrato.save()
+        messages.success(self.request, f'Contrato criado com sucesso')
+        return redirect(self.get_success_url)
+
+    def form_invalid(self, create_contract_form):
+        response=super().form_invalid(create_contract_form)
+        print('falhando aqui invalid')
+        print(create_contract_form.errors)
+        messages.warning(self.request, 'contrato nao criado com sucesso!')
+        return  response
+
+
+
+
+
+
 
 
 #PEDIDOS

@@ -58,8 +58,7 @@ class Processo(models.Model):
     documentos = models.FileField(
         blank=True,
         upload_to=tools_utils.processo_upload_path,
-        validators=[validade_pdf],
-        verbose_name="Documentos",)
+        verbose_name='arquivo',)
     show = models.BooleanField(default=True)
 
 
@@ -80,6 +79,7 @@ class Contratos (models.Model):
         ('NÃO', 'NÃO POSSUI SEGURO'),
     ))
     tipo_documento=models.CharField(default='diversos', max_length=25, choices=(
+        ('', ''),
         ('apolice', 'apolice de seguro'),
         ('seg.boleto', 'boleto de seguro'),
         ('contrato', 'contrato assinado'),

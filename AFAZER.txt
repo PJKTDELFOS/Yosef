@@ -79,3 +79,4 @@ criar filtros adicionais para o comercial , de forma a pode ver pelo id, data, c
              </form>
     </div>
 
+{{ MEDIA_URL }}processos/{{ processo.pk }}/contratos/{{contrato.pk}}{{ tipo }}/{{ arquivo}}

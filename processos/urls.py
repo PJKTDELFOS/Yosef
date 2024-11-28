@@ -19,6 +19,7 @@ from django.urls import path,include
 from processos import views
 
 
+
 app_name='processos'
 
 urlpatterns = [
@@ -30,21 +31,29 @@ urlpatterns = [
     path('processos/adicionarprocesso/',views.CriarProcesso.as_view(),name='inserirprocesso'),
     path('processo/<int:pk>/deletarprocesso',views.DeletarProcesso.as_view(),name='deletarprocesso'),
     path('processos/atualizarprocesso/<int:pk>/',views.UpdateProcesso.as_view(),name='atualizarprocesso'),
-    path('processos/<int:pk>/',views.DetalharProcesso.as_view(),name='detalhe'),
+    path('detalhe/<int:pk>/',views.DetalharProcesso.as_view(),name='detalhe'),
+    path('detalhe/<int:pk>/delete',views.delete_arquivos,name='delete'),
+
 
 
     #crud contrato
     path('contratos/',views.listarcontratos.as_view(),name='listarcontratos'),
+    path('contratos/<int:pk>/',views.DetalharContrato.as_view(),name='detalhe_contrato'),
+    path('processo/criarcontrato/<int:pk>',views.Criarcontrato.as_view(),name='criarcontrato'),
+
+
     #crud pedido
     path('',views.listarpedidos.as_view(),name='listarpedidos'),
-    #detalhe
+
+    path('pedidos/<int:pk>/',views.DetalharPedido.as_view(),name='detalhe_pedido'),
+
 
     ###############################################################################################
 
-    #slugs
 
-    path('contratos/<int:pk>/',views.DetalharContrato.as_view(),name='detalhe_contrato'),
-    path('pedidos/<int:pk>/',views.DetalharPedido.as_view(),name='detalhe_pedido'),
+
+
+
 
 ]
 
