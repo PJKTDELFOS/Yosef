@@ -23,6 +23,7 @@ class ProcessForm(forms.ModelForm):
 
         }
 # aqui so vale impot para  date time
+        #TEM QUE SER O EQUIVALENTE NO MODELS PARA DATEFIELD
         widgets={
             'data_disputa':forms.DateTimeInput(format='%Y-%m-%dT%H:%M',attrs={'type':'datetime-local'}),#segurar data
             'objeto':forms.Textarea(attrs={'rows':4}),

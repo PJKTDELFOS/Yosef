@@ -1,26 +1,18 @@
-DIA 23/11/2024
-SEARCH E FILTROS PRONTOS E LOGICA COMPLETA (finalizado dia 27)
+PROCESSO TODO FEITO OK(CRUD E CRUD ARQUIVOS COMPLETO)
+
+observaçoes de problemas a resolver
+
+1-estou com problemas para capturar um valor especifico da query set, ja consegui ver o valor certo, mais ele esta na
+chaves e nao quero assim, preciso remover ele para mandarpara o processo nome
+
+resolução: processo=self.get_object().processo acessar o que voce quer com get_object
 
 
+2-quando acesso um contrato pelo processo, pego o valo sozinho, quando aceso o contrato pela tabela geral, ele pega os 2
+valores, isso pode atrapalhar, acho que tem haver com a questao de url, mais nao tenho certeza,INVESTIGAR
+
+3
 
 
-FAZER:
-LISTAGEM DE DOCUMENTOS NAS PASTAS EXIBINDO PELAS PASTAS E COM O NOME DOS-feito
-MESMOS NA FORMA DE LINK, feito tanto para baixar, quanto para deletar, alem do problema da pasta nao existente
-
-fazer:
-filtros de busca para contratos
-filtros de ordenaçao por valor(total,executado, executavel) ,data  fim
-
-DOCUMENTAR INTEIRAMENTE O PROCEDIMENTO PARA ESTUDO POSTERIOR
-
-FINALIZAR TEMPLATES DO COMERCIAL-APENAS REPRODUZIR O QUE JA FOI FEITO DE PROCESSO
-(ORDEM: CONTRATOS VAI SER CRIADO DENTRO DO PROCESSO SE ASSOCIANDO A ELE, NA LISTAGEM DOS OCNTRATOS
-SEGUE A LOGICA DE PROCESSOS PARA FILTRAGEM E CORRELATOS, MESMO PROCEDIMENTO PARA PEDIDOS)
-{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}}
-
-
-
-
-
+estudar
 

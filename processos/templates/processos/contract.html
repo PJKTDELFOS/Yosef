@@ -17,6 +17,90 @@
                     {{contrato.valor_total|formata_preco}} </p>
       <p><b>SEGURO</b> {{contrato.seguro}} </p>
 
+    <h3> Documentos Disponiveis</h3>
+        {% if arquivos %}
+                <ul>
+                    {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                        <li>
+                        <b>{{ tipo }}</b>
+                        <ul>
+                            {% for arquivo in tipo_arquivos %}
+                                <a
+                             href="{{ MEDIA_URL }}processos/{{ contrato.processo.pk }}/contratos/{{ contrato.pk }}/{{ tipo }}/{{ arquivo }}" download>
+
+                                <li>{{ arquivo}}</li>
+                                </a>
+                                <form action="" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="acao" value="deletar">
+                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                <input type="hidden" name="tipo" value="{{ tipo }}">
+                                <button type="submit"
+                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                        background-color: #007bff;
+                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                >
+                                    Deletar</button>
+                            </form>
+                            {% endfor %}
+                        </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum arquivo disponivel para este processo</p>
+        {% endif %}
+
+
+
+
+
+
+   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; align-items: stretch;">
+                <form method="post" action="{% url 'processos:atualizarcontrato' contrato.pk %}"
+                      style="margin: 0; flex: 1;"><!-- AQUI VAI ATUALIZAÇÃO DO CONTRAATO-->
+                        {% csrf_token %}
+                        <a href="{% url 'processos:atualizarcontrato' contrato.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                ATUALIZAR CONTRATO
+                        </a>
+                </form>
+
+                <form method="post" action="{% url 'processos:deletarcontrato' contrato.pk %}" style="margin: 0; flex: 1;">
+                    {% csrf_token %}
+                    <button
+                        style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="return confirm('Ao apagar o processo, ' +
+                         'contratos e pedidos associados serão perdidos')">
+                        Excluir
+                    </button>
+                </form>
+
+            <form method="post" action="{% url 'processos:listarcontratos' %}" style="margin: 0;
+            flex: 1;"><!-- AQUI VAI inserir pedido-->
+                {% csrf_token %}
+                <button type="submit"
+                    style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                     background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+                    Inserir pedido
+                </button>
+            </form>
+
+       <a href="{% url 'processos:listarcontratos' %}"
+            style="flex: 1; height: 50px;width: 50%; text-align: center; display: flex; align-items:
+            center; justify-content: center; background-color: #007bff; color: #fff;
+            text-decoration: none; border-radius: 5px; cursor: pointer;">
+            Retornar
+        </a>
+
+</div><br>
+
 
 
     <h2> Pedidos deste Contrato</h2>

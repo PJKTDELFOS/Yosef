@@ -26,6 +26,7 @@
                             {% for arquivo in tipo_arquivos %}
                                 <a
                                  href="{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}}" download>
+
                                 <li>{{ arquivo}}</li>
                                 </a>
                                 <form action="{% url 'processos:delete' processo.pk %}" method="POST" style="display:inline;">
@@ -53,7 +54,7 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px; align-items: stretch;">
-                <form method="post" action="{% url 'processos:atualizarprocesso' processo.pk %}"
+                <form method="post" action="{% url 'processos:atualizarprocesso' processo.pk  %}"
                       style="margin: 0; flex: 1;">
                         {% csrf_token %}
                         {{att_process_form|crispy}}
@@ -76,7 +77,7 @@
                         Excluir
                     </button>
                 </form>
-        <form method="post" action="{% url 'processos:criarcontrato' processo.pk %}" style="margin: 0;
+        <form method="post" action="{% url 'processos:criarcontrato' processo.pk%}" style="margin: 0;
         flex: 1;">
             {% csrf_token %}
             <button type="submit"
@@ -125,7 +126,7 @@
             {% for contrato in contratos %}
             <tr class="table-row">
                 <td class="table-cel" style="text-align: center">
-                    <a href="{% url 'processos:detalhe_contrato' contrato.pk %}">
+                    <a href="{% url 'processos:detalhe_contrato' processo.pk contrato.pk %}">
                                 {{ contrato.pk }}</a>
                 </td>
                 <td class="table-cel" style="text-align: center">{{contrato.processo}}</td>

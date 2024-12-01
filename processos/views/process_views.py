@@ -7,7 +7,7 @@ from processos import models
 from .process_forms import ProcessForm
 from.contract_forms import ContractForm
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView,UpdateView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.contrib import messages
 from django.db.models import Q
 from urllib.parse import urlencode
@@ -15,9 +15,10 @@ from django.utils.decorators import method_decorator#decoradores
 from django.views.decorators.cache import never_cache# para nao deixar carregar cache
 import os
 from django.conf import settings
-from django.http import Http404
+import shutil
 
-from ..models import Processo
+
+
 
 # Create your views here.
 
@@ -86,19 +87,15 @@ class listarprocessos(ListView):
 
         return queryset
 
-
-
+#
 # tem que fazer os 2 context, e get query set
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+#filtragem por  categorias em dropdown
         # Obter as modalidades disponíveis dinamicamente
         context['modalidades'] = models.Processo.objects.values_list('modalidade', flat=True).distinct()
         context['situacao'] = models.Processo.objects.values_list('status', flat=True).distinct()
         context['tipos'] = models.Processo.objects.values_list('tipo', flat=True).distinct()
-        context['query_params']=self.request.GET.urlencode()# para links mais a frente, agora
-        # nao estou pensando nisso
-
         return context
 # para capturar os filtros atuais e ir adicionando novos ao contexto sem perder a pagina
     def post(self, request, *args, **kwargs):
@@ -108,9 +105,6 @@ class listarprocessos(ListView):
             parametros['novofiltro']=novofiltro
         return redirect(f"{self.request.path}?{urlencode(parametros)}")
 
-
-
-
 class DetalharProcesso(DetailView):
     model = models.Processo
     template_name = 'processos/process.html'
@@ -119,11 +113,11 @@ class DetalharProcesso(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['contratos']=self.get_object().contratos.all()
-
+        context['contratos']=self.get_object().contratos.all() # captura os contratos
         processo_nome=str(self.object.pk)
-        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')#cria o acesso  pasta de processos
-        #aonde estao
+        print(processo_nome,'processo-pk do context data do processo')
+        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')
+        #cria o acesso  pasta de processos#aonde estao
         if not os.path.exists(caminho_base):
             context['arquivos']={}
         else:
@@ -133,9 +127,6 @@ class DetalharProcesso(DetailView):
                 tipo_arquivos[subpasta]=os.listdir(caminho_subpasta)
             context['arquivos']=tipo_arquivos
         return context
-
-
-
 
 
 class CriarProcesso(CreateView):
@@ -155,8 +146,8 @@ class CriarProcesso(CreateView):
         return response
 
     def form_invalid(self, create_process_form):
-        print('algo falhando aqui')
-        print(create_process_form.errors)
+        # print('algo falhando aqui')
+        # print(create_process_form.errors)
         messages.warning(self.request, 'processo nao criado com sucesso!')
         return super().form_invalid(create_process_form)
 
@@ -164,8 +155,18 @@ class DeletarProcesso(View):
     def post(self, request, *args, **kwargs):
         processo=get_object_or_404(models.Processo, pk=kwargs['pk'])
         messages.warning(self.request, 'Processo excluido com sucesso!')
-        print('deletei aqui')
-        processo.delete()
+        processo_nome=processo.pk
+        caminho_base = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}')
+        processo.delete()#deletar o processo
+        if os.path.exists(caminho_base):
+            try:
+                shutil.rmtree(caminho_base)
+                messages.success(request, 'Processo excluido com sucesso!')
+            except Exception as e:
+                print(f"Erro ao deletar o arquivo: {e}")
+        else:
+            print("Parâmetros inválidos enviados na requisição.")
+
         return redirect('processos:processo')
 
 def delete_arquivos(request,pk):
@@ -185,12 +186,7 @@ def delete_arquivos(request,pk):
                     print(f"Erro ao deletar o arquivo: {e}")
             else:
                 print("Parâmetros inválidos enviados na requisição.")
-
-        processo_deletado=DetalharProcesso()
-        if processo_deletado:
-            os.remove(caminho_base)
     return redirect('processos:detalhe',pk=pk)
-
 
 
 
@@ -206,24 +202,21 @@ class UpdateProcesso(UpdateView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['att_process_form']=context['form']
-        print(context['form'].initial)
-
-
+        #print(context['att_process_form'].initial)
         return context
-
     def form_valid(self, att_process_form):
         response = super().form_valid(att_process_form)
-        print('estou aqui no valido')
+        #print('estou aqui no valido')
         print(att_process_form.cleaned_data)
         messages.success(self.request, f'Processo { self.object.numero_processo} atualizado com sucesso')
         return response
-
     def form_invalid(self, att_process_form):
         response=super().form_invalid(att_process_form)
-        print('estou aqui no invavalido')
+        #print('estou aqui no invavalido')
         print(att_process_form.errors)
         messages.warning(self.request, f'Processo { self.object.numero_processo} nao pode ser atualizado')
         return response
+
 
 
 
@@ -232,7 +225,6 @@ class listarcontratos(ListView):
     model=models.Contratos
     template_name = 'processos/contrato.html'
     context_object_name = 'contratos'
-
     def get_queryset(self):
         queryset = models.Contratos.objects.filter(show=True).order_by('-id')
         search_query = self.request.GET.get('q', '')
@@ -244,56 +236,110 @@ class listarcontratos(ListView):
                 Q(modalidade__icontains=search_query)
             ).order_by('-id')
         return queryset
-
 class DetalharContrato(DetailView):
     model = models.Contratos
     template_name = 'processos/contract.html'
     context_object_name = 'contrato'
-
-
-#captura os pedidos para a pagina do contrato, os associando
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pedidos']=self.get_object().pedidos.all()
+        context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
+        processo=self.get_object().processo
+        processo_nome=str(processo.pk)
+        print(processo_nome,'processo_nome no contrato')
+        contrato_nome=self.object.pk
+        print(contrato_nome,'contrato_nome')
+        caminho_base_contratos = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}/contratos/{contrato_nome}')
+        # cria o acesso  pasta de processos#aonde estao
+        if not os.path.exists(caminho_base_contratos):
+            context['arquivos_contrato'] = {}
+        else:
+            tipo_arquivos = {}
+            for subpasta in os.listdir(caminho_base_contratos):
+                caminho_subpasta = os.path.join(caminho_base_contratos, subpasta)
+                tipo_arquivos[subpasta] = os.listdir(caminho_subpasta)
+            context['arquivos'] = tipo_arquivos
         return context
+
+
+
 
 class Criarcontrato(CreateView):
     model = models.Contratos
     template_name = 'processos/criar_contrato.html'
     form_class =ContractForm
-    success_url = reverse_lazy('processos:contrato')
+    success_url = reverse_lazy('processos:listarcontratos')
 
-    def get_initial(self):
-        initial=super().get_initial()
-        processo=get_object_or_404(models.Processo, pk=self.kwargs['pk'])
-        print(f'{processo} pk do processo')
-        initial['numero_processo']=processo.numero_processo
-        return initial
-
+#o problema ta entre esses doias aqui,
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['create_contract_form'] = context['form']
-
         return context
 
-    def form_valid(self, create_contract_form,):
-        processo=get_object_or_404(models.Processo, pk=self.kwargs['pk'])
-        contrato=create_contract_form.save()
-        contrato.numero_processo=processo
-        print('deu certo valid')
-        contrato.save()
-        messages.success(self.request, f'Contrato criado com sucesso')
-        return redirect(self.get_success_url)
+    def get_form_kwargs(self):
+        kwargs=super().get_form_kwargs()
+        pk_processo=self.kwargs.get('pk')
+        processo=get_object_or_404(models.Processo, pk=pk_processo)
+        kwargs['processo']=processo
+        return kwargs
 
+    def form_valid(self, create_contract_form,):
+        pk_processo=self.kwargs.get('pk')
+        processo=get_object_or_404(models.Processo, pk=pk_processo)
+        create_contract_form.instance.processo=processo
+        if create_contract_form.is_valid():
+            print(create_contract_form.cleaned_data)
+            create_contract_form.save(commit=False)
+            messages.success(self.request, f'Contrato criado com sucesso')
+            return super().form_valid(create_contract_form)
+        else:
+            messages.error(self.request, f'Existem campos a serem preenchidos')
+
+#numero_processo=self.kwargs['numero_processo']
     def form_invalid(self, create_contract_form):
-        response=super().form_invalid(create_contract_form)
+        super().form_invalid(create_contract_form)
         print('falhando aqui invalid')
         print(create_contract_form.errors)
-        messages.warning(self.request, 'contrato nao criado com sucesso!')
+        response=super().form_invalid(create_contract_form)
+        messages.warning(self.request, 'Contrato sendo gerado, preencha as informaçoes com cuidado!')
         return  response
 
 
+class Deletarcontrato(View):
+    def post(self, request, *args, **kwargs):
+        contrato=get_object_or_404(models.Contratos,pk=kwargs['pk'])
+        contrato.delete()
+        messages.success(self.request, 'Contrato Excluido com Sucesso o!')# deletar o processo
+        return redirect('processos:listarcontratos')
+
+class UpdateContrato(UpdateView):
+    model = models.Contratos
+    template_name = 'processos/att_contrato.html'
+    form_class = ContractForm
+    success_url = reverse_lazy('processos:listarcontratos')
+    # e aprendemos com isso da pior forma possivel, que  era so trocar
+    # de button para a, e resolvia o Bo inteiro
+    #a solução mais simples e a melhor
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['att_contract_form']=context['form']
+        return context
+    def form_valid(self, att_contract_form):
+        response = super().form_valid(att_contract_form)
+        print('estou aqui no valido')
+        processo_nome = str(self.request.GET.get('processo.pk'))
+        print(processo_nome, 'processo')
+        contrato_nome = str(self.request.GET.get('contrato.pk'))
+        print(contrato_nome, 'contrato')
+        print(att_contract_form.cleaned_data)
+        messages.success(self.request, f'Contrato { self.object.numero} atualizado com sucesso')
+        return response
+    def form_invalid(self, att_process_form):
+        response=super().form_invalid(att_process_form)
+        print('estou aqui no invavalido')
+        print(att_process_form.errors)
+        messages.warning(self.request, f'Contrato { self.object.numero} nao pode ser atualizado')
+        return response
 
 
 

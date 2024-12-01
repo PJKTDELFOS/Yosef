@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
 from processos import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path,include
+
 
 
 
@@ -34,12 +38,20 @@ urlpatterns = [
     path('detalhe/<int:pk>/',views.DetalharProcesso.as_view(),name='detalhe'),
     path('detalhe/<int:pk>/delete',views.delete_arquivos,name='delete'),
 
-
+#POOSSO MANDAR A URL DIRETO PELA FUNÇÃO QUE ELE TA, SEM PASSAR PELAS OUTRAS BOM SABER
 
     #crud contrato
     path('contratos/',views.listarcontratos.as_view(),name='listarcontratos'),
+    path('detalhe/<int:processo_pk>/contratos/<int:pk>/',
+         views.DetalharContrato.as_view(),name='detalhe_contrato'),
     path('contratos/<int:pk>/',views.DetalharContrato.as_view(),name='detalhe_contrato'),
-    path('processo/criarcontrato/<int:pk>',views.Criarcontrato.as_view(),name='criarcontrato'),
+    path('processo/criarcontrato/',views.Criarcontrato.as_view(),name='criarcontrato'),
+    path('processo/criarcontrato/<int:pk>/',views.Criarcontrato.as_view(),name='criarcontrato'),
+    path('detalhe_contrato/<int:pk>/',views.Deletarcontrato.as_view(),name='deletarcontrato'),
+    path('contratos/atualizarcontrato/<int:pk>',views.UpdateContrato.as_view(),name='atualizarcontrato'),
+
+
+
 
 
     #crud pedido
@@ -56,4 +68,7 @@ urlpatterns = [
 
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
