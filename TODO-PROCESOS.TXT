@@ -46,5 +46,7 @@ def delete_arquivos_contrato(request,pk,processo_pk):
     return redirect('processos:detalhe_contrato',pk=pk)
 
 
-estudar
+problema com deletar a pasta do arquivo contrato,  nao estava conseguindo captirar a url
+resolução usar  kwargs.get na def post, onde fiz a deleçao do contrato,
+
 

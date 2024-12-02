@@ -74,7 +74,7 @@
                         </a>
                 </form>
 
-                <form method="post" action="{% url 'processos:deletarcontrato' contrato.pk %}" style="margin: 0; flex: 1;">
+                <form method="post" action="{% url 'processos:deletarcontrato' contrato.processo.pk  contrato.pk %}" style="margin: 0; flex: 1;">
                     {% csrf_token %}
                     <button
                         style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
