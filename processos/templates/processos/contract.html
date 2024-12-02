@@ -25,12 +25,15 @@
                         <b>{{ tipo }}</b>
                         <ul>
                             {% for arquivo in tipo_arquivos %}
+                                <p>Processo: {{ contrato.processo.pk }}</p>
+                                <p>Contrato: {{ contrato.pk }}</p>
                                 <a
                              href="{{ MEDIA_URL }}processos/{{ contrato.processo.pk }}/contratos/{{ contrato.pk }}/{{ tipo }}/{{ arquivo }}" download>
 
                                 <li>{{ arquivo}}</li>
                                 </a>
-                                <form action="" method="POST" style="display:inline;">
+                                <form action="{% url 'processos:deletefilescontract' contrato.processo.pk  contrato.pk  %}"
+                                      method="POST" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="acao" value="deletar">
                                 <input type="hidden" name="arquivo" value="{{ arquivo }}">
@@ -47,7 +50,7 @@
                         </ul>
                         </li>
                     {% endfor %}
-                </ul>
+                </ul><br>
             {% else %}
                 <p>Nenhum arquivo disponivel para este processo</p>
         {% endif %}

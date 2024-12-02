@@ -11,7 +11,39 @@ resolução: processo=self.get_object().processo acessar o que voce quer com get
 2-quando acesso um contrato pelo processo, pego o valo sozinho, quando aceso o contrato pela tabela geral, ele pega os 2
 valores, isso pode atrapalhar, acho que tem haver com a questao de url, mais nao tenho certeza,INVESTIGAR
 
-3
+resolução {{ MEDIA_URL }}processos/{{ contrato.processo.pk }}/contratos/{{ contrato.pk }}/{{ tipo }}/{{ arquivo }}"
+adicionar a instancia que quer buscar naquela url, por exemplo contrato.processo.pk
+provavel do pdido ser pedido.contrato.processo.pk  pois processo pk e a raiz
+
+3 problema na deleção de arquivos nos contratos, que esta dentro do processos
+
+resolução: criar uma função post, que recebe o pk, e o processo_pk, alem do tipo e nome dos arquivos
+no template volta manter a logica do contrato.processo.pk para pegar a url raiz, e continuar
+exemplo pratico
+
+def delete_arquivos_contrato(request,pk,processo_pk):
+    if request.method == 'POST':
+        # muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
+        processo_nome=str(processo_pk)
+        print(processo_nome,'processo_nome no contrato do post')
+        contrato_nome=str(pk)
+        print(contrato_nome,'contrato_nome no contrato do post')
+        caminho_base=os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}/contratos/{contrato_nome}')
+        arquivo_excluir=request.POST.get('arquivo')
+        subpasta=request.POST.get('tipo')
+        if arquivo_excluir and subpasta:
+            caminho_subpasta=os.path.join(caminho_base, subpasta)
+            caminho_arquivo_excluir=os.path.join(caminho_subpasta, arquivo_excluir)
+            if os.path.exists(caminho_arquivo_excluir):
+                try:
+                    os.remove(caminho_arquivo_excluir)
+                    messages.success(request, 'Arquivo excluido com sucesso!')
+                    print(caminho_arquivo_excluir)
+                except Exception as e:
+                    print(f"Erro ao deletar o arquivo: {e}")
+            else:
+                print("Parâmetros inválidos enviados na requisição.")
+    return redirect('processos:detalhe_contrato',pk=pk)
 
 
 estudar

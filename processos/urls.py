@@ -48,7 +48,10 @@ urlpatterns = [
     path('processo/criarcontrato/',views.Criarcontrato.as_view(),name='criarcontrato'),
     path('processo/criarcontrato/<int:pk>/',views.Criarcontrato.as_view(),name='criarcontrato'),
     path('detalhe_contrato/<int:pk>/',views.Deletarcontrato.as_view(),name='deletarcontrato'),
+
     path('contratos/atualizarcontrato/<int:pk>',views.UpdateContrato.as_view(),name='atualizarcontrato'),
+    path('detalhe/<int:processo_pk>/detalhe_contrato/<int:pk>/delete/',
+         views.delete_arquivos_contrato,name='deletefilescontract'),
 
 
 

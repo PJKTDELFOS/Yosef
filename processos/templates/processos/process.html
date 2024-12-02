@@ -19,33 +19,37 @@
           <h3> Documentos Disponiveis</h3>
             {% if arquivos %}
                 <ul>
-                    {% for tipo, tipo_arquivos in arquivos.items %}<br>
-                        <li>
-                        <b>{{ tipo }}</b>
-                        <ul>
-                            {% for arquivo in tipo_arquivos %}
-                                <a
-                                 href="{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}}" download>
 
-                                <li>{{ arquivo}}</li>
-                                </a>
-                                <form action="{% url 'processos:delete' processo.pk %}" method="POST" style="display:inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="acao" value="deletar">
-                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
-                                <input type="hidden" name="tipo" value="{{ tipo }}">
-                                <button type="submit"
-                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
-                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
-                                        background-color: #007bff;
-                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
-                                >
-                                    Deletar</button>
-                            </form>
-                            {% endfor %}
-                        </ul>
-                        </li>
-                    {% endfor %}
+                        {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                            {% if tipo != "contratos" %}
+                                        <li>
+                                        <b>{{ tipo }}</b>
+                                        <ul>
+                                            {% for arquivo in tipo_arquivos %}
+                                                <a
+                                                href="{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo}}" download>
+
+                                                <li>{{ arquivo}}</li>
+                                                </a>
+                                                <form action="{% url 'processos:delete' processo.pk %}" method="POST" style="display:inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="acao" value="deletar">
+                                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                                <input type="hidden" name="tipo" value="{{ tipo }}">
+                                                <button type="submit"
+                                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                                        background-color: #007bff;
+                                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                                >
+                                                    Deletar</button><br>
+                                            </form>
+                                            {% endfor %}
+                                        </ul>
+                                        </li>
+                            {% endif %}
+                        {% endfor %}
+                    
                 </ul>
             {% else %}
                 <p>Nenhum arquivo disponivel para este processo</p>

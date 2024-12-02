@@ -18,22 +18,7 @@ from django.conf import settings
 import shutil
 
 
-
-
 # Create your views here.
-
-'''
-posso por um filtro de show,=true, usando .filter no  lugar do .all e 
-passando o valor =True
-o index vai exibir os pedidos de cara e depois vai relacionar aos contratos e processos
-
-tambem havera uma função de acesso direto aos processos, que vai listar  os contratos dentro de processos
-
-e os pedidos dentro de contrato 
-o context da a sinformaçoes para o template da seguinte maneira a chave  'pedido' por exemplo, indica ao template o que
-ele deve ler, e o valor -variavel, o que sera lido.
-'''
-
 
 
 def login(request):
@@ -43,7 +28,6 @@ def index(request):
     return  HttpResponse('index')
 
 #PROCESSOS
-
 class listarprocessos(ListView):
     model = models.Processo
     template_name = 'processos/processo.html'
@@ -91,13 +75,13 @@ class listarprocessos(ListView):
 # tem que fazer os 2 context, e get query set
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-#filtragem por  categorias em dropdown
+        #filtragem por  categorias em dropdown
         # Obter as modalidades disponíveis dinamicamente
         context['modalidades'] = models.Processo.objects.values_list('modalidade', flat=True).distinct()
         context['situacao'] = models.Processo.objects.values_list('status', flat=True).distinct()
         context['tipos'] = models.Processo.objects.values_list('tipo', flat=True).distinct()
         return context
-# para capturar os filtros atuais e ir adicionando novos ao contexto sem perder a pagina
+    # para capturar os filtros atuais e ir adicionando novos ao contexto sem perder a pagina
     def post(self, request, *args, **kwargs):
         parametros=request.GET.copy()
         novofiltro=request.POST.get('novofiltro', 'NONE')
@@ -109,8 +93,6 @@ class DetalharProcesso(DetailView):
     model = models.Processo
     template_name = 'processos/process.html'
     context_object_name = 'processo'
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['contratos']=self.get_object().contratos.all() # captura os contratos
@@ -127,14 +109,11 @@ class DetalharProcesso(DetailView):
                 tipo_arquivos[subpasta]=os.listdir(caminho_subpasta)
             context['arquivos']=tipo_arquivos
         return context
-
-
 class CriarProcesso(CreateView):
     model = models.Processo
     template_name = 'processos/criar_processo.html'
     form_class = ProcessForm
     success_url = reverse_lazy('processos:processo')
-
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['create_process_form'] = context['form']
@@ -150,45 +129,6 @@ class CriarProcesso(CreateView):
         # print(create_process_form.errors)
         messages.warning(self.request, 'processo nao criado com sucesso!')
         return super().form_invalid(create_process_form)
-
-class DeletarProcesso(View):
-    def post(self, request, *args, **kwargs):
-        processo=get_object_or_404(models.Processo, pk=kwargs['pk'])
-        messages.warning(self.request, 'Processo excluido com sucesso!')
-        processo_nome=processo.pk
-        caminho_base = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}')
-        processo.delete()#deletar o processo
-        if os.path.exists(caminho_base):
-            try:
-                shutil.rmtree(caminho_base)
-                messages.success(request, 'Processo excluido com sucesso!')
-            except Exception as e:
-                print(f"Erro ao deletar o arquivo: {e}")
-        else:
-            print("Parâmetros inválidos enviados na requisição.")
-
-        return redirect('processos:processo')
-
-def delete_arquivos(request,pk):
-    if request.method == 'POST':# muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
-        processo_nome=str(pk)
-        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')
-        arquivo_excluir=request.POST.get('arquivo')
-        subpasta=request.POST.get('tipo')
-        if arquivo_excluir and subpasta:
-            caminho_subpasta=os.path.join(caminho_base, subpasta)
-            caminho_arquivo_excluir=os.path.join(caminho_subpasta, arquivo_excluir)
-            if os.path.exists(caminho_arquivo_excluir):
-                try:
-                    os.remove(caminho_arquivo_excluir)
-                    messages.success(request, 'Arquivo excluido com sucesso!')
-                except Exception as e:
-                    print(f"Erro ao deletar o arquivo: {e}")
-            else:
-                print("Parâmetros inválidos enviados na requisição.")
-    return redirect('processos:detalhe',pk=pk)
-
-
 
 @method_decorator(never_cache, name='dispatch')
 class UpdateProcesso(UpdateView):
@@ -216,7 +156,42 @@ class UpdateProcesso(UpdateView):
         print(att_process_form.errors)
         messages.warning(self.request, f'Processo { self.object.numero_processo} nao pode ser atualizado')
         return response
+class DeletarProcesso(View):
+    def post(self, request, *args, **kwargs):
+        processo=get_object_or_404(models.Processo, pk=kwargs['pk'])
+        messages.warning(self.request, 'Processo excluido com sucesso!')
+        processo_nome=processo.pk
+        caminho_base = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}')
+        processo.delete()#deletar o processo
+        if os.path.exists(caminho_base):
+            try:
+                shutil.rmtree(caminho_base)
+                messages.success(request, 'Processo excluido com sucesso!')
+            except Exception as e:
+                print(f"Erro ao deletar o arquivo: {e}")
+        else:
+            print("Parâmetros inválidos enviados na requisição.")
 
+        return redirect('processos:processo')
+def delete_arquivos(request,pk):
+    if request.method == 'POST':# muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
+        processo_nome=str(pk)
+        caminho_base=os.path.join(settings.MEDIA_ROOT,f'processos/{processo_nome}')
+        arquivo_excluir=request.POST.get('arquivo')
+        subpasta=request.POST.get('tipo')
+        if arquivo_excluir and subpasta:
+            caminho_subpasta=os.path.join(caminho_base, subpasta)
+            caminho_arquivo_excluir=os.path.join(caminho_subpasta, arquivo_excluir)
+            if os.path.exists(caminho_arquivo_excluir):
+                try:
+                    os.remove(caminho_arquivo_excluir)
+                    messages.success(request, 'Arquivo excluido com sucesso!')
+                    print(caminho_arquivo_excluir)
+                except Exception as e:
+                    print(f"Erro ao deletar o arquivo: {e}")
+            else:
+                print("Parâmetros inválidos enviados na requisição.")
+    return redirect('processos:detalhe',pk=pk)
 
 
 
@@ -236,6 +211,9 @@ class listarcontratos(ListView):
                 Q(modalidade__icontains=search_query)
             ).order_by('-id')
         return queryset
+
+
+
 class DetalharContrato(DetailView):
     model = models.Contratos
     template_name = 'processos/contract.html'
@@ -245,9 +223,9 @@ class DetalharContrato(DetailView):
         context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
         processo=self.get_object().processo
         processo_nome=str(processo.pk)
-        print(processo_nome,'processo_nome no contrato')
+        print(processo_nome,'processo_nome no contrato no get context')
         contrato_nome=self.object.pk
-        print(contrato_nome,'contrato_nome')
+        print(contrato_nome,'contrato_nome no get context')
         caminho_base_contratos = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}/contratos/{contrato_nome}')
         # cria o acesso  pasta de processos#aonde estao
         if not os.path.exists(caminho_base_contratos):
@@ -258,9 +236,59 @@ class DetalharContrato(DetailView):
                 caminho_subpasta = os.path.join(caminho_base_contratos, subpasta)
                 tipo_arquivos[subpasta] = os.listdir(caminho_subpasta)
             context['arquivos'] = tipo_arquivos
+            # if self.request.method == 'GET':
+            #     processo = get_object_or_404(models.Processo, pk=kwargs['pk'])
+            #     contrato = get_object_or_404(models.Contratos, pk=kwargs['pk'])
+            #     processo_nome = str(processo)
+            #     print(processo_nome, 'processo_nome no contrato do post')
+            #     contrato_nome = str(contrato)
+            #     print(contrato_nome, 'contrato_nome no contrato do post')
+            #     print(f'processo {processo_nome} m contrato {contrato_nome}')
+            #     caminho_base = os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}/contratos/{contrato_nome}')
+            #     print(caminho_base, 'caminho base no post')
+            #     subpasta = self.request.POST.get('tipo')
+            #     print(subpasta, 'sub pasta no post')
+            #     arquivo_excluir = self.request.POST.get('arquivo')
+            #     print(arquivo_excluir, 'arquivo excluir no post')
+            #     if arquivo_excluir and subpasta:
+            #         caminho_subpasta = os.path.join(caminho_base, subpasta)
+            #         caminho_arquivo_excluir = os.path.join(caminho_subpasta, arquivo_excluir)
+            #         if os.path.exists(caminho_arquivo_excluir):
+            #             try:
+            #                 os.remove(caminho_arquivo_excluir)
+            #                 messages.success(request, 'Arquivo excluido com sucesso!')
+            #             except Exception as e:
+            #                 print(f"Erro ao deletar o arquivo: {e}")
+            #         else:
+            #             print("Parâmetros inválidos enviados na requisição.")
+
         return context
 
 
+
+def delete_arquivos_contrato(request,pk,processo_pk):
+    if request.method == 'POST':
+        # muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
+        processo_nome=str(processo_pk)
+        print(processo_nome,'processo_nome no contrato do post')
+        contrato_nome=str(pk)
+        print(contrato_nome,'contrato_nome no contrato do post')
+        caminho_base=os.path.join(settings.MEDIA_ROOT, f'processos/{processo_nome}/contratos/{contrato_nome}')
+        arquivo_excluir=request.POST.get('arquivo')
+        subpasta=request.POST.get('tipo')
+        if arquivo_excluir and subpasta:
+            caminho_subpasta=os.path.join(caminho_base, subpasta)
+            caminho_arquivo_excluir=os.path.join(caminho_subpasta, arquivo_excluir)
+            if os.path.exists(caminho_arquivo_excluir):
+                try:
+                    os.remove(caminho_arquivo_excluir)
+                    messages.success(request, 'Arquivo excluido com sucesso!')
+                    print(caminho_arquivo_excluir)
+                except Exception as e:
+                    print(f"Erro ao deletar o arquivo: {e}")
+            else:
+                print("Parâmetros inválidos enviados na requisição.")
+    return redirect('processos:detalhe_contrato',pk=pk)
 
 
 class Criarcontrato(CreateView):
@@ -310,6 +338,7 @@ class Deletarcontrato(View):
         contrato=get_object_or_404(models.Contratos,pk=kwargs['pk'])
         contrato.delete()
         messages.success(self.request, 'Contrato Excluido com Sucesso o!')# deletar o processo
+        print(contrato,'estou deletando sem querer bem aqui no deletar contratos de forma errada')
         return redirect('processos:listarcontratos')
 
 class UpdateContrato(UpdateView):
@@ -340,9 +369,6 @@ class UpdateContrato(UpdateView):
         print(att_process_form.errors)
         messages.warning(self.request, f'Contrato { self.object.numero} nao pode ser atualizado')
         return response
-
-
-
 
 
 
