@@ -47,6 +47,6 @@ def delete_arquivos_contrato(request,pk,processo_pk):
 
 
 problema com deletar a pasta do arquivo contrato,  nao estava conseguindo captirar a url
-resolução usar  kwargs.get na def post, onde fiz a deleçao do contrato,
+resolução usar  kwargs.get na def post, onde fiz a deleçao do contr
 
 
