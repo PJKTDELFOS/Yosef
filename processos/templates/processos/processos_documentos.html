@@ -1,0 +1,30 @@
+{% extends "global/base.html" %}
+{% load alfilters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content_processos_documentos %}
+    <div>
+          <h3> Documentos Disponiveis</h3>
+            {% if arquivos %}
+                <ul>
+                    {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                        <li>
+                        <b>{{ tipo }}</b>
+                        <ul>
+                            {% for arquivo in tipo_arquivos %}
+                                <a
+                                 href="{{ MEDIA_URL }}processos/{{ processo.pk }}/{{ tipo }}/{{ arquivo.url }}" download>
+                                <li>{{ arquivo }}</li>
+                                </a>
+                            {% endfor %}
+                        </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum arquivo disponivel para este processo</p>
+            {% endif %}
+      </div><br>
+
+{% endblock  %}
