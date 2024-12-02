@@ -49,4 +49,7 @@ def delete_arquivos_contrato(request,pk,processo_pk):
 problema com deletar a pasta do arquivo contrato,  nao estava conseguindo captirar a url
 resolução usar  kwargs.get na def post, onde fiz a deleçao do contr
 
+para fazer uma dicionario de filtragem da seguinte maneira
+{'parametro recebido':'parametro de ordenação na query set"}
+
 

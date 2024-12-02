@@ -204,12 +204,40 @@ class listarcontratos(ListView):
         search_query = self.request.GET.get('q', '')
         if search_query:
             queryset = queryset.filter(
-                Q(numero_processo__icontains=search_query) |
-                Q(numero_licitacao__icontains=search_query) |
+                Q(numero__icontains=search_query) |
+                Q(objeto__icontains=search_query) |
                 Q(contratante__icontains=search_query) |
-                Q(modalidade__icontains=search_query)
+                Q(processo__icontains=search_query)|
+                Q(observacoes__icontains=search_query)
             ).order_by('-id')
+
+#ordenação por multiplos fatores
+        sort_param = self.request.GET.get('sort', '')  # self.request captura as informaçoes do template
+        sort_options={
+            'fim_contrato':'-fim_contrato',
+            'fim_contrato_asc':'fim_contrato',
+            'valor_total':'-valor_total',
+            'valor_total_asc':'valor_total',
+            'executado':'-executado',
+            'executado_asc':'executado',
+            'executavel':'-executavel',
+            'executavel_asc':'executavel',
+        }
+
+        if sort_param in sort_options:
+            queryset = queryset.order_by(sort_options[sort_param])
+        # filtro por categoria do models
+        seguro = self.request.GET.get('seguro', 'None')
+        if seguro != 'None' and seguro:
+            queryset = queryset.filter(seguro=seguro)
         return queryset
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #filtragem por  categorias em dropdown
+        # Obter as modalidades disponíveis dinamicamente
+        context['seguros'] = models.Contratos.objects.values_list('seguro', flat=True).distinct()
+
+        return context
 
 class Criarcontrato(CreateView):
     model = models.Contratos

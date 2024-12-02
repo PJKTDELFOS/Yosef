@@ -1,12 +1,28 @@
 {% extends "global/base.html" %}
 {% load alfilters %}
 
+{% block searchcontrato %}
+<div class="search">
+        <form action="{% url 'processos:listarcontratos' %}" method="get">
+            <input
+                type="text"
+                class="search-input"
+                placeholder="SEARCH"
+                name="q"
+                id="search"
+                value="{{ request.GET.q }}"
+                style="background: slategray"
+            >
+        </form>
+</div>
+{% endblock %}
+
 {% block content_contratos %}
 <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
     <div class="responsive-table">
     <table class="contacts-table">
         <caption class="table-caption">
-            <h1>contratos</h1>
+                <h1>CONTRATOS</h1>
         </caption>
         <thead>
            <tr class="table-row table-row-header">
@@ -20,6 +36,31 @@
                 <th class="table-header" style="text-align: center">Valor total</th>
                 <th class="table-header" style="text-align: center">Valor executado/Valor total</th>
                 <th class="table-header" style="text-align: center">Valor executavel/Valor total</th>
+               <th class="table-header" style="text-align: center">
+                    Seguro-contrato
+                    <form  action="{% url 'processos:listarcontratos' %}" method="get" >
+
+                        {% for key , value  in request.GET.items %}
+                            {% if key != seguro %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+
+                        <select name="seguro" onchange="this.form.submit()" id="">
+                            <option value="" {% if not request.GET.seguro %}selected{% endif %}>
+                                SELECIONE
+                            </option>
+
+                            {% for seguro in seguros %}
+                                <option value="{{ seguro }}" {% if request.GET.seguro == seguro %}selected {% endif %}>
+                                    {{seguro}}
+                                </option>
+                            {% endfor %}
+                        </select>
+
+                    </form>
+                </th>
+
 
            </tr>
         </thead>
@@ -49,6 +90,7 @@
                     {{contrato.valor_total|formata_preco}}</td>
                 <td class="table-cel" style="text-align: center">{{contrato.executavel|formata_preco}}/
                     {{contrato.valor_total|formata_preco}}</td>
+
             </tr>
 
             {% endfor %}

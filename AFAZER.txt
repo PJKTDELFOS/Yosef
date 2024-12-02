@@ -13,9 +13,10 @@ fazer ainda  update, delete, pedidos pelo contrato, logica dos arquivos, com viz
 
 
  a fazer agora
- 1-clean do seguro e seguradora pra criar e atualizar
- 2-documentos dos contratos fazer agora
- 3-template
- 4- filtros
+ 1-clean do seguro e seguradora pra criar e atualizar fazer aida
+ 2-documentos dos contratos fazer agora finalizado
+ 3-template fianlizado o do processo, e do contrato, creio que amanha ja termino tudo do comercial, (documentos é fora
+ parte)
+ 4- filtros finalizando contrato, mais tarde fazer os pedidos ja
 
 atualização dos contratos feitos

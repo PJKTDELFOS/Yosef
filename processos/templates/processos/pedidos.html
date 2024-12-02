@@ -1,6 +1,23 @@
 {% extends "global/base.html" %}
 {% load alfilters %}
 
+{% block searchpedidos %}
+<div class="search">
+        <form action="{% url 'processos:listarpedidos' %}" method="get">
+            <input
+                type="text"
+                class="search-input"
+                placeholder="SEARCH"
+                name="q"
+                id="search"
+                value="{{ request.GET.q }}"
+                style="background: slategray"
+            >
+        </form>
+</div>
+
+{% endblock %}
+
 {% block content_pedidos %}
     <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
    <div class="responsive-table">

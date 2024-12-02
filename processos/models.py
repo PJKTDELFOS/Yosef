@@ -67,9 +67,7 @@ class Processo(models.Model):
 
 class Contratos (models.Model):
     processo = models.ForeignKey(Processo, on_delete=models.CASCADE, related_name='contratos')
-
     contratante=models.CharField(max_length=50,blank=False,null=False,verbose_name='Contratante')
-
     objeto=models.TextField(max_length=1200,blank=False,verbose_name='Objeto',null=False)
     numero=models.CharField(max_length=50,blank=False,null=False,default='')
     seguro = models.CharField(default='',blank=True, max_length=25,null=False, choices=(

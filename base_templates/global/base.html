@@ -3,14 +3,21 @@
 <html lang="en">
 <head>
    {% include "global/partials/_head.html" %}
+
     
 </head>
 <body>
     {% include "global/partials/_header.html" %}
     {% include "global/partials/_messages.html" %}
-    
 
     <main class="content">
+     {% block searchcontrato %}
+<!-- LOGICA DO SEARCH -->
+    {% endblock %}
+    {% block searchpedidos %}
+<!-- LOGICA DO SEARCH -->
+    {% endblock %}
+
         {% block content_pedidos %}{% endblock content_pedidos %}
 
         {% block content_processos %}{% endblock content_processos %}
