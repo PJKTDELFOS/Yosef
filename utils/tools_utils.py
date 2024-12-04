@@ -1,6 +1,8 @@
 from django.template import Library
 from openpyxl import load_workbook
 from django import template
+import os
+from django.conf import settings
 
 register=Library()
 @register.filter
@@ -81,9 +83,11 @@ def pedido_upload_path(instance, filename):
     tipo_documento = sanitize_name(instance.tipo_documento)
 
     return os.path.join(
-        f'processos/{processo_nome}/contratos/{contrato_nome}/pedidos/{pedido_nome}/{tipo_documento}',
-        filename
+        settings.MEDIA_ROOT,'processos',processo_nome,'contratos',
+        contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
     )
+
+# settings.MEDIA_ROOT, 'processos', processo_nome, 'contratos', contrato_nome, 'pedidos', pedido_nome, tipo_documento, filename
 
 def docs_rh_load_path(instance, filename):
     funcionario_arquivos = (f'{instance.pk or "novo"}')

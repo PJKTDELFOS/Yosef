@@ -20,3 +20,12 @@
 {{ MEDIA_URL }}processos/{{ processo.pk }}/contratos/{{contrato.pk}}{{ tipo }}/{{ arquivo}}  contratos
 
 return os.path.join(f'processos/{processo_nome}/contratos/{contrato_nome}/{tipo_documento}', filename)
+
+para criar a planilha dentro do pedido, e usar o uploado path e so passar o metodo da planilha pra dentro da classe,
+
+so olhar o modelks
+
+metodo para salvamento de datas
+self.data_hora_att.astimezone(br_tz).strftime('%d/%m/%Y %H:%M:%S') if self.data_hora_att else ''
+pip install pytz
+import pytz

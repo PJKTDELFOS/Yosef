@@ -47,7 +47,7 @@ class listarprocessos(ListView):
                 Q(modalidade__icontains=search_query)
             ).order_by('-id')
         # ordena do maior para o menor, atençao quando lançar a logica no template, o eroo
-        # era Seu template usava -data_disputa, mas o backend esperava data_disputa_asc.
+        # era template usava -data_disputa, mas o backend esperava data_disputa_asc.
         sort_param = self.request.GET.get('sort', '')# self.request captura as informaçoes do template
 
         if sort_param =='data_disputa':
@@ -207,9 +207,10 @@ class listarcontratos(ListView):
                 Q(numero__icontains=search_query) |
                 Q(objeto__icontains=search_query) |
                 Q(contratante__icontains=search_query) |
-                Q(processo__icontains=search_query)|
+                Q(processo__numero_processo__icontains=search_query)|
                 Q(observacoes__icontains=search_query)
             ).order_by('-id')
+
 
 #ordenação por multiplos fatores
         sort_param = self.request.GET.get('sort', '')  # self.request captura as informaçoes do template
