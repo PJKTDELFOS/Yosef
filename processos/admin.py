@@ -55,7 +55,7 @@ class ContratoAdmin(admin.ModelAdmin):
 
 @admin.register(Pedidos)
 class Pedidoadmin(admin.ModelAdmin):
-    list_display = ('id','contrato','numero','valor','data_entrega','show','data_hora_att','show')
+    list_display = ('id','contrato','numero','valor','data_entrega','show','data_hora_att',)
     ordering = ('-data_entrega',)
     list_editable = ('show',)
 

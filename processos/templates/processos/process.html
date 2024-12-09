@@ -19,7 +19,6 @@
           <h3> Documentos Disponiveis</h3>
             {% if arquivos %}
                 <ul>
-
                         {% for tipo, tipo_arquivos in arquivos.items %}<br>
                             {% if tipo != "contratos" %}
                                         <li>
@@ -49,7 +48,6 @@
                                         </li>
                             {% endif %}
                         {% endfor %}
-                    
                 </ul>
             {% else %}
                 <p>Nenhum arquivo disponivel para este processo</p>

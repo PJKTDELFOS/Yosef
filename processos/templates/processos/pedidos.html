@@ -31,9 +31,64 @@
                 <th class="table-header" style="text-align: center">Contrato</th>
                 <th class="table-header" style="text-align: center">Numero</th>
                 <th class="table-header" style="text-align: center">Contratante</th>
-                <th class="table-header" style="text-align: center">Data entrega</th>
+
+
+
+               <th class="table-header" style="text-align: center">
+                    <a href="?q={{ request.GET.q }}&sort={% if request.GET.sort == 'data_entrega' %}data_entrega_asc{% elif request.GET.sort == 'data_entrega_asc' %}data_entrega{% else %}data_entrega{% endif %}">
+                        Data entrega
+                        {% if request.GET.sort == 'data_entrega' %}
+                            <span>&#9650;</span> <!-- codigo  Ícone de ordenação crescente -->
+                        {% elif request.GET.sort == 'data_entrega_asc' %}
+                            <span>&#9660;</span> <!-- codigo Ícone de ordenação decrescente -->
+                        {% else %}
+                            <span>&#9651;</span> <!--codigo Ícone neutro quando sem ordenação -->
+                        {% endif %}
+                    </a>
+                </th>
+
                 <th class="table-header" style="text-align: center">Unidade de fornecimento</th>
                 <th class="table-header" style="text-align: center">Coordenador</th>
+
+
+               <th class="table-header" style="text-align: center">
+                    <a href="?q={{ request.GET.q }}&sort={% if request.GET.sort == 'valor' %}valor_asc{% elif request.GET.sort == 'valor_asc' %}valor{% else %}valor{% endif %}">
+                        Valor
+                        {% if request.GET.sort == 'valor' %}
+                            <span>&#9650;</span> <!-- codigo  Ícone de ordenação crescente -->
+                        {% elif request.GET.sort == 'valor_asc' %}
+                            <span>&#9660;</span> <!-- codigo Ícone de ordenação decrescente -->
+                        {% else %}
+                            <span>&#9651;</span> <!--codigo Ícone neutro quando sem ordenação -->
+                        {% endif %}
+                    </a>
+                </th>
+
+            <th class="table-header" style="text-align: center">
+                    Status pedido
+                    <form  action="{% url 'processos:listarpedidos' %}" method="get" >
+
+                        {% for key , value  in request.GET.items %}
+                            {% if key != seguro %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+
+                        <select name="status" onchange="this.form.submit()" id="">
+                            <option value="" {% if not request.GET.seguro %}selected{% endif %}>
+                                SELECIONE
+                            </option>
+
+                            {% for situacao in status %}
+                                <option value="{{ situacao }}" {% if request.GET.seguro == seguro %}selected {% endif %}>
+                                    {{situacao}}
+                                </option>
+                            {% endfor %}
+                        </select>
+
+                    </form>
+                </th>
+
                 
 
            </tr>
@@ -44,7 +99,7 @@
             {% for pedido in pedidos %}
             <tr class="table-row">
                 <td class="table-cel" style="text-align: center">
-                    <a href="{% url 'processos:detalhe_pedido' pedido.pk %}">
+                    <a href="{% url 'processos:detalhe_pedido_tabela' pedido.pk %}">
                                 {{ pedido.pk }}
                     </a>
                 </td>
@@ -59,6 +114,10 @@
                 <td class="table-cel" style="text-align: center">{{pedido.unidade_fornecimento}}</td>
 
                 <td class="table-cel" style="text-align: center">{{pedido.coordenador}}</td>
+
+                <td class="table-cel" style="text-align: center">{{pedido.valor}}</td>
+                 <td class="table-cel" style="text-align: center">{{pedido.status}}</td>
+
             </tr>
 
 

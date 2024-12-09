@@ -2,8 +2,7 @@ from time import localtime
 
 from django import forms
 from processos import models
-from processos.models import Processo
-from .process_forms import ProcessForm
+
 
 class ContractForm(forms.ModelForm):
     processo=forms.ModelChoiceField(
@@ -45,7 +44,7 @@ class ContractForm(forms.ModelForm):
             'fim_contrato':forms.DateInput(format='%Y-%m-%d',attrs={'type':'date'}),
             'objeto':forms.Textarea(attrs={'type':'textarea',
                                            'rows':5,
-                                           'placeholder': 'Descreva as ocorrências...'},
+                                           'placeholder': 'Descreva o objeto'},
                                     ),
             'seguro':forms.Select(),
             'tipo_documento':forms.Select(),
@@ -55,11 +54,11 @@ class ContractForm(forms.ModelForm):
 
 
             }
-    def __init__(self, *args, **kwargs):
-        processo = kwargs.pop('processo',None)
-        super().__init__(*args, **kwargs)
-        if processo:
-            self.fields['processo'].initial =processo
+    # def __init__(self, *args, **kwargs):
+    #     processo = kwargs.pop('processo',None)
+    #     super().__init__(*args, **kwargs)
+    #     if processo:
+    #         self.fields['processo'].initial =processo
 
 
 

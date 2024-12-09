@@ -22,34 +22,36 @@
         {% if arquivos %}
                 <ul>
                     {% for tipo, tipo_arquivos in arquivos.items %}<br>
-                        <li>
-                        <b>{{ tipo }}</b>
-                        <ul>
-                            {% for arquivo in tipo_arquivos %}
-                                <p>Processo: {{ contrato.processo.pk }}</p>
-                                <p>Contrato: {{ contrato.pk }}</p>
-                                <a
-                             href="{{ MEDIA_URL }}processos/{{ contrato.processo.pk }}/contratos/{{ contrato.pk }}/{{ tipo }}/{{ arquivo }}" download>
+                        {% if tipo != "pedidos" %}
+                            <li>
+                            <b>{{ tipo }}</b>
+                            <ul>
+                                {% for arquivo in tipo_arquivos %}
+                                    <p>Processo: {{ contrato.processo.pk }}</p>
+                                    <p>Contrato: {{ contrato.pk }}</p>
+                                    <a
+                                 href="{{ MEDIA_URL }}processos/{{ contrato.processo.pk }}/contratos/{{ contrato.pk }}/{{ tipo }}/{{ arquivo }}" download>
 
-                                <li>{{ arquivo}}</li>
-                                </a>
-                                <form action="{% url 'processos:deletefilescontract' contrato.processo.pk  contrato.pk  %}"
-                                      method="POST" style="display:inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="acao" value="deletar">
-                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
-                                <input type="hidden" name="tipo" value="{{ tipo }}">
-                                <button type="submit"
-                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
-                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
-                                        background-color: #007bff;
-                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
-                                >
-                                    Deletar</button>
-                            </form>
-                            {% endfor %}
-                        </ul>
-                        </li>
+                                    <li>{{ arquivo}}</li>
+                                    </a>
+                                    <form action="{% url 'processos:deletefilescontract' contrato.processo.pk  contrato.pk  %}"
+                                          method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="acao" value="deletar">
+                                    <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                    <input type="hidden" name="tipo" value="{{ tipo }}">
+                                    <button type="submit"
+                                            class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                            style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                            background-color: #007bff;
+                                            color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                    >
+                                        Deletar</button>
+                                </form>
+                                {% endfor %}
+                            </ul>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul><br>
             {% else %}
@@ -86,7 +88,7 @@
                     </button>
                 </form>
 
-            <form method="post" action="{% url 'processos:listarcontratos' %}" style="margin: 0;
+            <form method="post" action="{% url 'processos:criarpedido' contrato.pk %}" style="margin: 0;
             flex: 1;"><!-- AQUI VAI inserir pedido-->
                 {% csrf_token %}
                 <button type="submit"
@@ -133,7 +135,7 @@
             {% for pedido in pedidos %}
             <tr class="table-row">
                 <td class="table-cel" style="text-align: center">
-                    <a href="{% url 'processos:detalhe_pedido' pedido.pk %}">
+                    <a href="{% url 'processos:detalhe_pedido' contrato.pk pedido.pk %}">
                                 {{ pedido.pk }}
                     </a>
                 </td>

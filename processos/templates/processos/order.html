@@ -4,7 +4,7 @@
     <div class="single-contact">
     <h1 class="single-contact-name"> Informaçoes do pedido</h1><p><b></b></p>
       <p><b>Id do pedidoo</b> {{ pedido.pk }} </p>
-      <p><b>Contrato</b> {{pedido.contato}} </p>
+      <p><b>Contrato</b> {{pedido.contrato}} </p>
       <p><b>Numero do Pedido</b> {{pedido.numero}} </p>
       <p><b>Contratante</b> {{pedido.contratante}} </p>
       <p><b>Empenho</b> {{pedido.empenho}} </p>
@@ -13,9 +13,100 @@
       <p><b>Objeto</b> {{pedido.objeto}} </p>
       <p><b>Unidade de fornecimento</b> {{pedido.unidade_fornecimento}} </p>
       <p><b>Coordenador Responsavel</b> {{pedido.coordenador}} </p>
-        <p><b>STATUS DO PEDIDO</b> {{pedido.status}} </p>
+      <p><b>STATUS DO PEDIDO</b> {{pedido.status}} </p>
+
+
+    <p><b>processo pai do contrato pai do pedido</b> {{pedido.contrato.processo.pk}} </p>
+
+    <p><b>contrato pai do pedido</b> {{pedido.contrato.pk}} </p>
+    <p><b>pedido em si </b> {{pedido.pk}} </p>
+
 
     </div>
+    <div>
+    <h3> Documentos Disponiveis</h3>
+        {% if arquivos %}
+                <ul>
+                    {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                            <p>Processo: {{ pedido.contrato.processo.pk }}</p>
+                                    <p>contrato: {{ pedido.contrato.pk }}</p>
+                                    <p>pedido: {{ pedido.pk }}</p>
+                            <li>
+                            <b>{{ tipo }}</b>
+                            <ul>
+                                {% for arquivo in tipo_arquivos %}
+
+                                    <a
+                                 href="{{ MEDIA_URL }}processos/{{ pedido.contrato.processo.pk}}/contratos/{{ pedido.contrato.pk }}/pedidos/{{pedido.pk}}/{{ tipo }}/{{ arquivo }}" download>
+
+                                    <li>{{ arquivo}}</li>
+                                    <form action="{% url 'processos:deletearquivospedido' pedido.contrato.processo.pk  pedido.contrato.pk pedido.pk  %}"
+                                          method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="acao" value="deletar">
+                                    <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                    <input type="hidden" name="tipo" value="{{ tipo }}">
+                                    <button type="submit"
+                                            class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                            style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                            background-color: #007bff;
+                                            color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                    >
+                                        Deletar</button>
+                                </form>
+                                {% endfor %}
+                            </ul>
+                            </li>
+
+                    {% endfor %}
+                </ul><br>
+            {% else %}
+                <p>Nenhum arquivo disponivel para este processo</p>
+        {% endif %}
+
+
+    </div><br>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; align-items: stretch;">
+                <form method="post" action=""
+                      style="margin: 0; flex: 1;"><!-- AQUI VAI ATUALIZAÇÃO DO PEDIDO-->
+                        {% csrf_token %}
+                        <a href="{% url 'processos:atualizarpedido' pedido.pk  %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                ATUALIZAR PEDIDO
+                        </a>
+                </form>
+
+                <form
+                 method="post"
+                 action="{% url 'processos:delete_pedido' pedido.contrato.processo.pk pedido.contrato.pk pedido.pk %}"
+                 style="margin: 0; flex: 1;">
+                    {% csrf_token %}
+                    <button
+                        style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="return confirm('Ao apagar o processo, ' +
+                         'Pedido e todos os arquivos serao apagados ')">
+                        Excluir
+                    </button>
+                </form>
+
+       <a href="{% url 'processos:listarpedidos' %}"
+            style="flex: 1; height: 50px;width: 50%; text-align: center; display: flex; align-items:
+            center; justify-content: center; background-color: #007bff; color: #fff;
+            text-decoration: none; border-radius: 5px; cursor: pointer;">
+            Retornar
+        </a>
+
+
+</div><br>
+
+
+
 
 
 {% endblock %}

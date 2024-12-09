@@ -69,6 +69,14 @@ class Processo(models.Model):
         return tools_utils.formata_preco(self.valor_total)
     valor_formatado.short_description='Valor'
 
+    # def save(self, *args, **kwargs):
+    #     #is_new=self.pk is None
+    #     # aqui salva e cria o pk antes de salvar o
+    #     # arquivo, vou ter de adaptar ja no template ,
+    #     # forms e  viewsa antes de testar
+    #     super().save(*args, **kwargs)
+
+
 class Contratos (models.Model):
     processo = models.ForeignKey(Processo, on_delete=models.CASCADE, related_name='contratos')
     contratante=models.CharField(max_length=50,blank=False,null=False,verbose_name='Contratante')
@@ -121,6 +129,13 @@ class Contratos (models.Model):
         executavel= self.valor_total-self.executado()
         return executavel
 
+    # def save(self, *args, **kwargs):
+    #     #is_new=self.pk is None
+    #     # aqui salva e cria o pk antes de salvar o
+    #     # arquivo, vou ter de adaptar ja no template ,
+    #     # forms e  viewsa antes de testar
+    #     super().save(*args, **kwargs)
+
 class Pedidos(models.Model):
     contrato = models.ForeignKey(Contratos, on_delete=models.CASCADE, related_name='pedidos')
     numero=models.CharField(max_length=100)
@@ -154,7 +169,8 @@ class Pedidos(models.Model):
         ('NF PAGA', 'CLIENTE PAGOU'),
         ('FINALIZADO', 'PEDIDO FINALIZADO'),
     ))
-    tipo_documento = models.CharField(default='PEDIDO', max_length=25, choices=(
+    tipo_documento = models.CharField(default='', max_length=25, choices=(
+        ('', ''),
         ('RELATORIOS', 'RELATORIOS'),
         ('PEDIDO', 'PEDIDO'),
         ('NOTAS REEMBOLSO', 'NOTAS DE REEMBOLSO'),
@@ -162,7 +178,7 @@ class Pedidos(models.Model):
         ('ACEITE', 'ACEITES'),
         ('DIVERSOS', 'ACEITES'),
 
-    ))
+    ),blank=True)
     documentos = models.FileField(
         blank=True,
         upload_to=tools_utils.pedido_upload_path,
@@ -224,11 +240,13 @@ class Pedidos(models.Model):
             except Exception as e:
                 name = f'Pedido_nº{self.numero}_contrato:{self.contrato}'
                 print(f"Erro na planilha: {e}, pedido {name} nao  se nao puder fazer a planilha ")
-# f'processos/{processo_nome}/contratos/{contrato_nome}/pedidos/{pedido_nome}/{tipo_documento}',
+
 
     def save(self, *args, **kwargs):
-        is_new=self.pk is None
-# aqui salva e cria o pk antes de salvar o arquivo, vou ter de adaptar ja no template , forms e  viewsa antes de testar
+        #is_new=self.pk is None
+        # aqui salva e cria o pk antes de salvar o
+        # arquivo, vou ter de adaptar ja no template ,
+        # forms e  viewsa antes de testar
         super().save(*args, **kwargs)
         self.criar_planilha()
 

@@ -73,10 +73,10 @@ class ProcessForm(forms.ModelForm):
             return 'DIVERSOS'
         return tipo_documento
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        if self.instance and self.instance.data_disputa:
-            self.fields['data_disputa'].initial = localtime(self.instance.data_disputa).strftime('%Y-%m-%dT%H:%M')
+    # def __init__(self,*args,**kwargs):
+    #     super().__init__(*args,**kwargs)
+    #     if self.instance and self.instance.data_disputa:
+    #         self.fields['data_disputa'].initial = localtime(self.instance.data_disputa).strftime('%Y-%m-%dT%H:%M')
 
 
 
