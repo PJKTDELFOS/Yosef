@@ -1,46 +1,8 @@
-SOLUÇÃO DE PROBLEMAS ENCONTRAD
+processo finalizado(fazer testes adicionais antes da apresentação
 
-ligação do processo com contrato feito(tem que melhorar)
-fazer ainda  update, delete, pedidos pelo contrato, logica dos arquivos, com vizualiação por subpasta, e download
- e deleçao(nesse caso so do arquivo mesmo) tanto para contrato quanto para pedidos, tentar ja por ate domingo tudo ,
- inclusive documentos, ja com suas respectivas templates
- ver questoes de segurar datas , opção default nos dropdowns
- para os pedidos devo definir um slug
- preciso de uma maneira de captirar o pk do processo que to acessando e do contrato
+segunda dia : 19 12/2024
 
- a partir de segunda dia 02/12
- começar o rh e logins com redirecionamento.
-
- para fazer depois do principal de todas as partes
-
- passar os filtros refinados, para uma div especifica menos os de ordenaçao
-
-
- a fazer agora
- 1-clean do seguro e seguradora pra criar e atualizar fazer aida
- 2-documentos dos contratos fazer agora finalizado
- 3-template fianlizado o do processo, e do contrato, creio que amanha ja termino tudo do comercial, (documentos é fora
- parte)
- 4- filtros finalizando contrato, mais tarde fazer os pedidos ja
-
-atualização dos contratos feitos
-
-fase pedidos
-decidir aonde péga o arquivo excel
-1 rever os models
-problemas encontrantodos:
-
-
-
-2: criar o forms
-
-3 ja fazer a views, para pegar logo os arquivos, ja aproveito e  faço o delete dos arquivos, e as urls
-
-captura do contrato no pedido igual do processo no contrato
-
-buscas e templates, decidir sob que maneiras e variaveis sera a busca
-
-
+começar rh
 
 
 
