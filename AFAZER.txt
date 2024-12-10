@@ -3,6 +3,27 @@ processo finalizado(fazer testes adicionais antes da apresentação
 segunda dia : 19 12/2024
 
 começar rh
+ refazer o models em cima da ficha
+as permissoes deverao ser feitas, depois de o sistema estar completo
+
+para o perfil funcionario, e a fecha, criar modelo dependente para irpf, tal como processo contrato
+
+escolaridade( fundamental, medio,superior, pos, mestrado, doutorado, e phd todos completo ou imcompleto
+pode incluir um formçao, como uma foreign key(talvez
+todos os campos de opção seram select, com lançamento unico
+inclusao de condiçoes de saude????
+listar uniformes e epis
+ksutar cargo, função
+definir permissoes  pelos grupos
+adicionar automaticamente o funcionario ao grupo correspondente via forms ou models
+definir para que usuarios sem permisao para uma informaçao vejam asteriscos
+imqagefied para foto do funcionario, no campo da ficha
+nome da pasta vai ser o id, e o cpf do funcionario, que devera ser unico na base de dados
+nos campos de ensino por no forms placeholders
+conjuge e dependente vao enttrar como inlines, mais dentro da planilha do funcionario
+as classes beenficios, conjuge,dependente, e uniformes, vao enviar os dados para planilha de base cadastro
+o usuario vai ser criado pelo cadastro do colaborador
+
 
 
 
