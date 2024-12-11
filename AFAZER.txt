@@ -2,6 +2,8 @@ processo finalizado(fazer testes adicionais antes da apresentação
 
 segunda dia : 19 12/2024
 
+sera criado um app de login que sera o responsavel pelo redirecionamento do login ao setor correspondente
+
 começar rh
  refazer o models em cima da ficha
 as permissoes deverao ser feitas, depois de o sistema estar completo
@@ -23,6 +25,9 @@ nos campos de ensino por no forms placeholders
 conjuge e dependente vao enttrar como inlines, mais dentro da planilha do funcionario
 as classes beenficios, conjuge,dependente, e uniformes, vao enviar os dados para planilha de base cadastro
 o usuario vai ser criado pelo cadastro do colaborador
+fazer dependentes. beneficios
+linkar tudo, e se der ja passar pra planilha
+ver questoes de caminho
 
 
 

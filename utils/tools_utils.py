@@ -90,7 +90,7 @@ def pedido_upload_path(instance, filename):
 # settings.MEDIA_ROOT, 'processos', processo_nome, 'contratos', contrato_nome, 'pedidos', pedido_nome, tipo_documento, filename
 
 def docs_rh_load_path(instance, filename):
-    funcionario_arquivos = (f'{instance.pk or "novo"}')
+    funcionario_arquivos = (f'{instance.cpf or "novo"}')
     tipo_documento = sanitize_name(instance.tipo_documento)
 
     return os.path.join(f'rh/{funcionario_arquivos}/{tipo_documento}', filename)

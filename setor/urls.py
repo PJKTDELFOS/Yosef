@@ -18,11 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
+from processos.views.process_views import login
 
-
+#adicionar na url de entrada o setor
 urlpatterns = [
-    path('', include('processos.urls')),
+    path('comercial/', include('processos.urls')),
     path('admin/', admin.site.urls),
+    path('', login),
 
 ]
 
