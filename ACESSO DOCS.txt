@@ -29,3 +29,9 @@ metodo para salvamento de datas
 self.data_hora_att.astimezone(br_tz).strftime('%d/%m/%Y %H:%M:%S') if self.data_hora_att else ''
 pip install pytz
 import pytz
+
+<li class="menu-item">
+                <a href="{% url 'processos:processo' %}" class="menu-link">
+                    <b>INSERIR contrato</b>
+                </a>
+            </li>
