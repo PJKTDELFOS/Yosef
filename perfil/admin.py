@@ -19,27 +19,20 @@ class uniformes_EPIinline(admin.TabularInline):
 
 
 
+class usuarios_inline(admin.TabularInline):
+    model = models.Usuario_sistema
+    extra = 0
+    fields = 'id','funcionario','usuario','senha'
+
+
+
 
 @admin.register(models.cadastrofuncionario)
 class cadastrofuncionarioadmin(admin.ModelAdmin):
-    list_display= ('id','nomecompleto','idade','usuario')
+    list_display= ('id','nomecompleto','idade',)
     list_display_links = ('id',)
     search_fields = 'nomecompleto','cpf,',
-    inlines = [dependenteinline,uniformes_EPIinline,]
-    @admin.action(description='vincular usuario a funcionario')
-    def vincular_funcionario(self,request,queryset):
-        for funcionario in queryset:
-            if not funcionario.usuario:
-                user=User.objects.create_user(
-                    username=funcionario.email,
-                    email=funcionario.email,
-                    password=f'{funcionario.cpf[0:4]}'
-                )
-                funcionario.usuario=user
-                funcionario.save()
-            else:
-                self.message_user(request, f"O funcionário {funcionario.nome} "
-                                           f"já possui um usuário vinculado.")
+    inlines = [dependenteinline,uniformes_EPIinline,usuarios_inline]
 
 
 

@@ -128,7 +128,7 @@ class cadastrofuncionario(models.Model):
 
     vale_transporte=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,max_digits=10)
     vale_alimentacao=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,max_digits=10)
-    usuario=models.OneToOneField(User,on_delete=models.CASCADE,related_name='perfil',blank=True,null=True,default=None)
+
 
     def idade(self):
         atual=datetime.now()
@@ -168,6 +168,13 @@ class cadastrofuncionario(models.Model):
 
 
 
+class Usuario_sistema(models.Model):
+    class Meta:
+        verbose_name='Usuario'
+        verbose_name_plural='Usuarios'
+    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,)
+    usuario=models.CharField(max_length=100,blank=True,)
+    senha=models.CharField(max_length=12,)
 
 
 class uniformes_EPI(models.Model):

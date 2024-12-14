@@ -9,6 +9,15 @@ views
 templates
 EXCLUIR A DESCRIÇÃO ESPECIFICA
 o usuario v ai ser criado do funcionario
+usuario a principio feito, amanha começar forms ,e views, e terminar ate domingo, inclusive as templates
+fazer forms e views para
+funcionario
+no detalhe funcionario, ele vai receber o context os dabaixo caso uniforme e dependente
+uniforme
+dependente
+e usuario
+
+na view de login
 
 
 

@@ -427,12 +427,6 @@ class listarpedidos(ListView):
         return context
 
 
-
-
-
-
-
-
 class CriarPedido(CreateView):
     model = models.Pedidos
     template_name = 'processos/criar_pedido.html'

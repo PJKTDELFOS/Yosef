@@ -23,6 +23,7 @@ from processos.views.process_views import login
 #adicionar na url de entrada o setor
 urlpatterns = [
     path('comercial/', include('processos.urls')),
+    path('rh/', include('perfil.urls')),
     path('admin/', admin.site.urls),
     path('', login),
 
