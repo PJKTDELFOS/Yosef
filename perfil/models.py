@@ -19,7 +19,7 @@ import os
 from django.conf import settings
 
 class cadastrofuncionario(models.Model):
-    nomecompleto=models.CharField(max_length=50,blank=False)#transformar em charfiede
+    nomecompleto=models.CharField(max_length=50,blank=False,verbose_name='Nome completo')#transformar em charfiede
     data_nascimento=models.DateField()
     endereco = models.CharField(max_length=250, null=True,blank=True)
     n_residencial=models.CharField(max_length=250, null=True,blank=True)
@@ -172,7 +172,7 @@ class Usuario_sistema(models.Model):
     class Meta:
         verbose_name='Usuario'
         verbose_name_plural='Usuarios'
-    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,)
+    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='usuario_sistema')
     usuario=models.CharField(max_length=100,blank=True,)
     senha=models.CharField(max_length=12,)
 
@@ -183,7 +183,7 @@ class uniformes_EPI(models.Model):
         verbose_name='Uniforme'
         verbose_name_plural='Uniformes'
 
-    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE)
+    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='uniformes_epi')
     tipo=models.CharField(default=None, max_length=250, null=True,blank=True,choices=(
         ('uniforme','uniforme'),
         ('EPI','EPI')
@@ -215,7 +215,7 @@ class uniformes_EPI(models.Model):
 
 
 class dependente(models.Model):
-    funcionario = models.OneToOneField(cadastrofuncionario, on_delete=models.CASCADE)
+    funcionario = models.OneToOneField(cadastrofuncionario, on_delete=models.CASCADE,related_name='dependente')
     nome_dependente = models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Nome dependente')
     cpf_dependente=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='CPF_dependente')
     grau_relacional=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Grau relacional',

@@ -16,28 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from processos import views
+from . import views
 
 
 app_name='perfil'
 
 urlpatterns = [
-    path('index',views.index,name='index'),
-     #teste
-    path('login/',views.login,name='login'),
+
+    path('login/',views.login_perfil,name='login'),
     #crud processo
-    path('processos/',views.listarprocessos.as_view(),name='processo'),
-    #crud contrato
-    path('contratos/',views.listarcontratos.as_view(),name='listarcontratos'),
-    #crud pedido
-    path('',views.listarpedidos.as_view(),name='listarpedidos'),
-    #detalhe
 
-    ###############################################################################################
-
-    #slugs
-    path('processos/<int:pk>/',views.DetalharProcesso.as_view(),name='detalhe'),
-    path('contratos/<int:pk>/',views.DetalharContrato.as_view(),name='detalhe_contrato'),
-    path('pedidos/<int:pk>/',views.DetalharPedido.as_view(),name='detalhe_pedido'),
 
 ]
