@@ -3,26 +3,28 @@ processo finalizado(fazer testes adicionais antes da apresentação
 
 recursos humanos:
 
-models feito, fazer depois revisao
-fazer forms
+paginas ordem
+1-listar rh (ja ocm filtros)
+preparar forms
+2-detalhar funcionari(com documentos,e beneficios e login)
+3-montar login com rotas
+
+
 views
-templates
-EXCLUIR A DESCRIÇÃO ESPECIFICA
-o usuario v ai ser criado do funcionario
-usuario a principio feito, amanha começar forms ,e views, e terminar ate domingo, inclusive as templates
-fazer forms e views para
-funcionario
-no detalhe funcionario, ele vai receber o context os dabaixo caso uniforme e dependente
-uniforme
-dependente
-e usuario
+1 list view funcionarios
+2-detalhe funcionario(ja com a parte de dependente, uniforme, )
+3-cadastro, atualizaçao, e deleção
+4-arquivos do funcionario
 
-na view de login
+5 view de cadastro,visualização,  atualização e deleçao de dependente
+6 view de cadastro,visualização,  atualização e deleçao de dependente
 
 
 
 
-
-
-
-
+<div>
+        {% block searchprocesso %}{% endblock %}
+        {% block searchcontrato %}{% endblock %}
+        {% block searchpedidos %}{% endblock %}
+        {% block searchrh %}{% endblock %}
+</div>

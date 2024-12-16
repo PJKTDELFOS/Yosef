@@ -200,6 +200,7 @@ class listarcontratos(ListView):
     model=models.Contratos
     template_name = 'processos/contrato.html'
     context_object_name = 'contratos'
+    paginate_by = 10
     def get_queryset(self):
         queryset = models.Contratos.objects.filter(show=True).order_by('-id')
         search_query = self.request.GET.get('q', '')

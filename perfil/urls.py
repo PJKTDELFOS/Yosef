@@ -24,6 +24,7 @@ app_name='perfil'
 urlpatterns = [
 
     path('login/',views.login_perfil,name='login'),
+    path('listarh/',views.Listar_colaboradores.as_view(),name='tabelarh'),
     #crud processo
 
 

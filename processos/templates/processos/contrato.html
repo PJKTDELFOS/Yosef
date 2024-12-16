@@ -2,7 +2,7 @@
 {% load alfilters %}
 
 {% block searchcontrato %}
-<div class="search">
+    <div class="search">
         <form action="{% url 'processos:listarcontratos' %}" method="get">
             <input
                 type="text"
@@ -14,15 +14,16 @@
                 style="background: slategray"
             >
         </form>
-</div>
+    </div>
 {% endblock %}
+
 
 {% block content_contratos %}
 <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
     <div class="responsive-table">
     <table class="contacts-table">
         <caption class="table-caption">
-                <h1>CONTRATOS</h1>
+                <h1 style="text-align: center">CONTRATOS</h1>
         </caption>
         <thead>
            <tr class="table-row table-row-header">

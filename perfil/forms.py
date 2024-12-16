@@ -7,8 +7,14 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model=models.cadastrofuncionario
         fields='__all__'
+        labels={
+            field.name: field.verbose_name.title() 
+            for field in models.cadastrofuncionario._meta.get_fields()
+            if hasattr(field, 'verbose_name')
+        }
+        widgets={
 
-
+        }
 
 
 class Dependenteform(forms.ModelForm):
@@ -22,7 +28,12 @@ class Dependenteform(forms.ModelForm):
     class Meta:
         model=models.dependente
         fields='__all__'
-        exclude=['funcionario']
+        exclude=['funcionario',]
+        labels = {
+            field.name: field.verbose_name.title()
+            for field in models.dependente._meta.get_fields()
+            if hasattr(field, 'verbose_name')
+        }
 
 
 class Uniformes_epi_form(forms.ModelForm):
@@ -36,6 +47,11 @@ class Uniformes_epi_form(forms.ModelForm):
     class Meta:
         model=models.uniformes_EPI
         fields='__all__'
-        exclude = ['funcionario']
+        exclude = ['funcionario',]
+        labels = {
+            field.name: field.verbose_name.title()
+            for field in models.uniformes_EPI._meta.get_fields()
+            if hasattr(field, 'verbose_name')
+        }
 
 

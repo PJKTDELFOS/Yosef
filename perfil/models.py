@@ -1,30 +1,21 @@
 
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
-# from datetime import date
-from django.forms import ValidationError
-# Create your models here.
 import re
-from datetime import datetime
-from utils import tools_utils
 from django.db import models
-from django.utils import timezone
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User  # para o user que vai cadastrar e operar o sistema
-import pytz
-from utils import tools_utils
+from django.forms import ValidationError
 from datetime import datetime
-from openpyxl import load_workbook
-import os
-from django.conf import settings
+from utils import tools_utils
+# Create your models here.
+
 
 class cadastrofuncionario(models.Model):
     nomecompleto=models.CharField(max_length=50,blank=False,verbose_name='Nome completo')#transformar em charfiede
     data_nascimento=models.DateField()
-    endereco = models.CharField(max_length=250, null=True,blank=True)
-    n_residencial=models.CharField(max_length=250, null=True,blank=True)
-    bairro=models.CharField(max_length=250, null=True,blank=True)
-    cidade=models.CharField(max_length=250, null=True,blank=True)
+    endereco = models.CharField(max_length=250, null=True,blank=True,verbose_name='endereço')
+    n_residencial=models.CharField(max_length=250, null=True,blank=True,verbose_name='numero residencial')
+    bairro=models.CharField(max_length=250, null=True,blank=True,verbose_name='bairro')
+    cidade=models.CharField(max_length=250, null=True,blank=True,verbose_name='cidade')
     UF = models.CharField(default=None, max_length=2, choices=(
         ('AC', 'Acre'),('AL', 'Alagoas'),  ('AP', 'Amapá'),  ('AM', 'Amazonas'), ('BA', 'Bahia'),
         ('CE', 'Ceará'),('DF', 'Distrito Federal'),  ('ES', 'Espírito Santo'),  ('GO', 'Goiás'),
@@ -32,108 +23,76 @@ class cadastrofuncionario(models.Model):
         ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'),('RJ', 'Rio de Janeiro'),
         ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'),('RR', 'Roraima'),
         ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),('TO', 'Tocantins'),
-    ))
-    complemento=models.CharField(max_length=250, null=True,blank=True)
-    cep=models.CharField(max_length=9,)
-    documento = models.CharField(default='diversos', max_length=100, choices=(
-        ('CNH', 'CNH'), ('CTPS', 'CARTEIRA DE TRABALHO'), ('RG', 'RG'),
-        ('CPF', 'CPF'), (' TITULO-ELEITOR', 'TITULO ELEITOR'),
-        ('CERTIFICADO RESERVISTA', 'CAM'), ('CERTIFICADOS', 'CERTIFICADOS'),
-
-    ), blank=True, )
-    cpf=models.CharField(max_length=12,)
-    naturalidade=models.CharField(max_length=250,null=True,blank=True)
-    rg=models.CharField(max_length=12,)
-    orgao_expedidor_rg=models.CharField(max_length=12,)
-    uf_rg=models.CharField(default=None, max_length=2, choices=(
-        ('AC', 'Acre'),('AL', 'Alagoas'),  ('AP', 'Amapá'),  ('AM', 'Amazonas'), ('BA', 'Bahia'),
-        ('CE', 'Ceará'),('DF', 'Distrito Federal'),  ('ES', 'Espírito Santo'),  ('GO', 'Goiás'),
-        ('MA', 'Maranhão'),  ('MT', 'Mato Grosso'),  ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
-        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'),('RJ', 'Rio de Janeiro'),
-        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'),('RR', 'Roraima'),
-        ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),('TO', 'Tocantins'),
-    ))
-    data_emissao_rg=models.DateField()
-    n_titulo_eleitor=models.CharField(max_length=12,)
-    zona_eleitor=models.CharField(max_length=12,)
-    secao=models.CharField(max_length=12,)
+    ),verbose_name='Estado')
+    complemento=models.CharField(max_length=250, null=True,blank=True,verbose_name='complemento')
+    cep=models.CharField(max_length=9,verbose_name='cep',null=True,blank=True)
+    cpf=models.CharField(max_length=12,verbose_name='cpf',null=True,blank=True)
+    naturalidade=models.CharField(max_length=250,null=True,blank=True,verbose_name='naturalidade')
+    rg=models.CharField(max_length=12,verbose_name='rg',null=True,blank=True)
+    orgao_expedidor_rg=models.CharField(max_length=12,verbose_name='orgao expedidor rg',null=True,blank=True)
+    data_emissao_rg=models.DateField(verbose_name='data emissao rg',)
+    n_titulo_eleitor=models.CharField(max_length=12,verbose_name='Titulo de eleitor')
     setor = models.CharField(default=None, max_length=5, choices=(
         ('ADM', 'ADMINISTRAÇÃO'),('COM', 'COMERCIAL'),
         ('OPR', 'OPERACIONAL'),('RH',  'RECURSOS HUMANOS'),
         ('FIN', 'FINANCEIRO'),
-    ))
-    n_cnh=models.CharField(max_length=50,)
-    categoria_cnh=models.CharField(max_length=50,)
-    vencimento_cnh=models.DateField()
-    reservista=models.BooleanField(default=False,verbose_name='Reservista')
-    n_cam=models.CharField(max_length=50,)
-
-    nacional=models.CharField(default=None, max_length=25, choices=(
-        ('Nacional', 'Brasileiro'),
-        ('Estrangeiro', 'Estrangeiro'),
-    ))
-    cargo = models.CharField(max_length=100, )
-    documento = models.CharField(default='diversos', max_length=100, choices=(
-        ('', ''), ('CTPS', 'CARTEIRA DE TRABALHO'), ('RG', 'RG'),
-        ('CPF', 'CPF'), (' TITULO-ELEITOR', 'TITULO ELEITOR'),
-        ('CERTIFICADO RESERVISTA', 'CAM'), ('CERTIFICADOS', 'CERTIFICADOS'),
-    ), blank=True, )
+    ),verbose_name='Setor')
+    cargo = models.CharField(max_length=100, verbose_name='cargo')
+    n_cnh=models.CharField(max_length=50,verbose_name='numero CNH')
+    categoria_cnh=models.CharField(max_length=50,verbose_name='categoria CNH',)
+    vencimento_cnh=models.DateField(verbose_name='vencimento CNH',)
     tipo_documento = models.CharField(default='diversos', max_length=125, choices=(
         ('', ''), ('REGISTRO','REGISTRO'),('COMPROVANTES', 'COMPROVANTES'),
         ('REEMBOLSO', 'NOTAS DE REEMBOLSO'),(' SAUDE', 'DOCS MEDICOS'),
-        ('ADVERTENCIAS', 'ADVS E MULTAS'), ('JUDICIAIS', 'DOCS JUDICIAIS'),
-    ),blank=True,)
+        ('ADVERTENCIAS', 'ADVS E MULTAS'), ('JUDICIAIS', 'DOCS JUDICIAIS'),('CERTIFICADOS', 'CERTIFICADOS'),
+        ('Documentos dependente', 'Documentos dependente'),
+    ),blank=True,verbose_name='Tipo de documento')
     arquivos = models.FileField(
         blank=True,
         upload_to=tools_utils.docs_rh_load_path,
-        verbose_name="Documentos ", max_length=255, null=True)
-    ocorrencias = models.TextField(blank=True, max_length=5000, default='')
-    nome_mae=models.CharField(default=None, max_length=250, null=True,blank=True)
-    nome_pais=models.CharField(default=None, max_length=250, null=True,blank=True)
-    telefone=models.CharField(default=None, max_length=250, null=True,blank=True)
-    celular=models.CharField(default=None, max_length=250, null=True,blank=True)
-    email=models.EmailField(default=None, max_length=250, null=True,blank=True)
+        verbose_name="Documentos ", max_length=255, null=True,)
+    ocorrencias = models.TextField(blank=True, max_length=5000, default='',verbose_name='ocorrencias')
+    nome_mae=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Nome da mãe')
+    nome_pais=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Nome do pai')
+    telefone=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Telefone')
+    celular=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Celular')
+    email=models.EmailField(default=None, max_length=250, null=True,blank=True,verbose_name='Email')
+    sexo=models.CharField(default=None, max_length=250, null=True,blank=True,choices=(
+        ('masculino','masculino'),('feminino','feminino'),('Nao Binario(a)(e)','Nao Binario(a)(e)'),
+        ('Nao identificar', 'Nao Identificar'),
+    ),verbose_name='Sexo')
+    nacionalidade=models.CharField(default=None, max_length=250, null=True,blank=True,choices=(
+        ('Brasileiro','Brasileiro'),('Estrangeiro','Estrangeiro'),
+    ),verbose_name='nacionalidade')
     estado_civil=models.CharField(default=None, max_length=250, null=True,choices=(
         ('solteiro(a)','solteiro(a)'), ('casado(a)','casado(a)'), ('divorciado(a)','divorciado(a)'),
         ('viuvo(a)','viuvo(a)'),('nao informado','nao informado'),
-    ))
+    ),verbose_name='estado civil')
     formacao_academica=models.CharField(default=None, max_length=250, null=True,choices=(
         ('fundamental incompleto','fundamental inccompleto'),('fundamental completo','fundamental completo'),
         ('Ensino Medio incompleto','Ensino Medio inccompleto'), ('Ensino medio Completo','Ensino medio Completo'),
         ('Gradução superior incompleta','Graduação superior inccompleto'), ('Bacharelado','Bacharelado'),
         ('Pos/especialização', 'pos/especialização'),
-    ))
-    curso_superior=models.CharField(default=None, max_length=250, null=True,blank=True)
-    pos_especializacao=models.CharField(default=None, max_length=250, null=True,blank=True)#somente se  formaçao corresponder
-    ctps=models.CharField(default=None, max_length=250, null=True,blank=True)
-    serie=models.CharField(default=None, max_length=250, null=True,blank=True)
-
-    uf_emissao_ctps=models.CharField(default=None, max_length=2, choices=(
-        ('AC', 'Acre'),('AL', 'Alagoas'),  ('AP', 'Amapá'),  ('AM', 'Amazonas'), ('BA', 'Bahia'),
-        ('CE', 'Ceará'),('DF', 'Distrito Federal'),  ('ES', 'Espírito Santo'),  ('GO', 'Goiás'),
-        ('MA', 'Maranhão'),  ('MT', 'Mato Grosso'),  ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
-        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'),('RJ', 'Rio de Janeiro'),
-        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'),('RR', 'Roraima'),
-        ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),('TO', 'Tocantins'),
-    ))
-    pis=models.CharField(default=None, max_length=250, null=True,blank=True)
-    banco=models.CharField(default=None, max_length=250, null=True,blank=True)
-    agencia=models.CharField(default=None, max_length=250, null=True,blank=True)
+    ),verbose_name='Escolaridade')
+    curso_formacao=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Formaçao')
+    ctps=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='CTPS')
+    serie=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Serie')
+    pis=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Pis')
+    banco=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Banco')
+    agencia=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Agencia')
     n_conta_banco=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Numero da conta')
-    salario=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,max_digits=10)
-    nome_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
-    cpf_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
-    rg_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
-    data_nascimento_conjuge = models.DateField()
-
-    vale_transporte=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,max_digits=10)
-    vale_alimentacao=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,max_digits=10)
-
+    salario=models.DecimalField(default=0.00, null=True,blank=True,decimal_places=2,
+                                max_digits=10,verbose_name='Salario')
+    vale_transporte=models.DecimalField(default=0.00, null=True,blank=True,
+                                        decimal_places=2,max_digits=10,verbose_name='Vale transporte')
+    modal_transporte = models.TextField(blank=True, max_length=5000, default='',verbose_name='Modalidade de transporte')
+    vale_alimentacao=models.DecimalField(default=0.00, null=True,blank=True,
+                                         decimal_places=2,max_digits=10,verbose_name='Vale Alimentação')
 
     def idade(self):
         atual=datetime.now()
         idade=atual.year - self.data_nascimento.year
-        return idade
+        return f'{idade} anos'
 
     def __str__(self):
         return f'funcionario CPF {self.cpf} nome completo {self.nomecompleto}'
@@ -167,23 +126,24 @@ class cadastrofuncionario(models.Model):
         verbose_name_plural='Recursos Humanos'
 
 
-
 class Usuario_sistema(models.Model):
     class Meta:
         verbose_name='Usuario'
         verbose_name_plural='Usuarios'
-    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='usuario_sistema')
-    usuario=models.CharField(max_length=100,blank=True,)
-    senha=models.CharField(max_length=12,)
+    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,
+                                     related_name='colaborador',verbose_name='Funcionario')
+    usuario=models.OneToOneField(User,on_delete=models.CASCADE,related_name='usuario',verbose_name='Usuario')
+
+    def __str__(self):
+        return f'{self.funcionario.nomecompleto}-{self.usuario.username}'
 
 
 class uniformes_EPI(models.Model):
-
     class Meta:
         verbose_name='Uniforme'
         verbose_name_plural='Uniformes'
 
-    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='uniformes_epi')
+    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='uniforme_epi')
     tipo=models.CharField(default=None, max_length=250, null=True,blank=True,choices=(
         ('uniforme','uniforme'),
         ('EPI','EPI')
@@ -218,7 +178,7 @@ class dependente(models.Model):
     funcionario = models.OneToOneField(cadastrofuncionario, on_delete=models.CASCADE,related_name='dependente')
     nome_dependente = models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Nome dependente')
     cpf_dependente=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='CPF_dependente')
-    grau_relacional=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Grau relacional',
+    grau_relacional=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Relação',
                                      choices=(
                                          ('filho', 'filho'),
                                          ('genitor', 'genitor'),
@@ -227,13 +187,45 @@ class dependente(models.Model):
                                          ('bisavos', 'bisavos'),
                                      ))
 
-
-
-
-
 '''
 quando usar o one to one field 
 lembrar de se usar User, 
 no self.xxxx do def str
 retornar o username
+from utils import tools_utils
+from datetime import datetime
+from openpyxl import load_workbook
+import os
+from django.conf import settings
+import pytz
+from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
+documento = models.CharField(default='diversos', max_length=100, choices=(
+        ('CNH', 'CNH'), ('CTPS', 'CARTEIRA DE TRABALHO'), ('RG', 'RG'),
+        ('CPF', 'CPF'), (' TITULO-ELEITOR', 'TITULO ELEITOR'),
+        ('CERTIFICADO RESERVISTA', 'CAM'), 
+
+    ), blank=True, )
+    
+    uf_emissao_ctps=models.CharField(default=None, max_length=2, choices=(
+        ('AC', 'Acre'),('AL', 'Alagoas'),  ('AP', 'Amapá'),  ('AM', 'Amazonas'), ('BA', 'Bahia'),
+        ('CE', 'Ceará'),('DF', 'Distrito Federal'),  ('ES', 'Espírito Santo'),  ('GO', 'Goiás'),
+        ('MA', 'Maranhão'),  ('MT', 'Mato Grosso'),  ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
+        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'),('RJ', 'Rio de Janeiro'),
+        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'),('RR', 'Roraima'),
+        ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),('TO', 'Tocantins'),
+    ))
+    
+    documento = models.CharField(default='diversos', max_length=100, choices=(
+        ('', ''), ('CTPS', 'CARTEIRA DE TRABALHO'), ('RG', 'RG'),
+        ('CPF', 'CPF'), (' TITULO-ELEITOR', 'TITULO ELEITOR'),
+        ('CERTIFICADO RESERVISTA', 'CAM'), ('CERTIFICADOS', 'CERTIFICADOS'),
+    ), blank=True, )
+    
+     nome_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
+    cpf_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
+    rg_conjuge=models.CharField(default=None, max_length=250, null=True,blank=True)
+    data_nascimento_conjuge = models.DateField()
+
 '''

@@ -1,12 +1,9 @@
 {% extends "global/base.html" %}
-{% block content_processos %}
-
 {% load alfilters %}
 
 
 {% block searchprocesso %}
-
-<div class="search">
+    <div class="search">
         <form action="{% url 'processos:processo' %}" method="get">
             <input
                 type="text"
@@ -18,9 +15,15 @@
                 style="background: slategray"
             >
         </form>
-</div>
-
+    </div>
 {% endblock %}
+
+
+
+
+{% block content_processos %}
+
+
     <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
    <div class="responsive-table">
     <table class="contacts-table">
@@ -164,7 +167,4 @@
 
 
     </div>
-
-
-
 {% endblock  %}

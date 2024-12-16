@@ -4,20 +4,26 @@
 <head>
    {% include "global/partials/_head.html" %}
 
-    
+
 </head>
+
 <body>
+
+
     {% include "global/partials/_header.html" %}
     {% include "global/partials/_messages.html" %}
     {% include "global/partials/_pagination.html" %}
+       <div>
+        {% block searchprocesso %}{% endblock %}
+        {% block searchcontrato %}{% endblock %}
+        {% block searchpedidos %}{% endblock %}
+        {% block searchrh %}{% endblock %}
+    </div>
 
     <main class="content">
-     {% block searchcontrato %}
-<!-- LOGICA DO SEARCH -->
-    {% endblock %}
-    {% block searchpedidos %}
-<!-- LOGICA DO SEARCH -->
-    {% endblock %}
+
+
+
 
         {% block content_pedidos %}{% endblock content_pedidos %}
 

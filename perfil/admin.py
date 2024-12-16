@@ -19,20 +19,13 @@ class uniformes_EPIinline(admin.TabularInline):
 
 
 
-class usuarios_inline(admin.TabularInline):
-    model = models.Usuario_sistema
-    extra = 0
-    fields = 'id','funcionario','usuario','senha'
-
-
-
 
 @admin.register(models.cadastrofuncionario)
 class cadastrofuncionarioadmin(admin.ModelAdmin):
     list_display= ('id','nomecompleto','idade',)
     list_display_links = ('id',)
     search_fields = 'nomecompleto','cpf,',
-    inlines = [dependenteinline,uniformes_EPIinline,usuarios_inline]
+    inlines = [dependenteinline,uniformes_EPIinline,]
 
 
 
