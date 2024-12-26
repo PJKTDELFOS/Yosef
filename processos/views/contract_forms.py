@@ -5,13 +5,8 @@ from processos import models
 
 
 class ContractForm(forms.ModelForm):
-    processo=forms.ModelChoiceField(
-        queryset=models.Processo.objects.all(),
-        label='Processo de origem',
-        required=False,
-        empty_label=None,
-        disabled=True,
-    )
+    processo_de_origem = forms.CharField(label='Processo de origem',
+                                       widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     class Meta:
         model=models.Contratos
         fields=['contratante','objeto','numero'
@@ -20,7 +15,6 @@ class ContractForm(forms.ModelForm):
                 'vigencia','fim_contrato','valor_total'
                 ,'observacoes',]
         labels={
-            'processo':'processo de origem',
             'contratante':'Contratante',
             'objeto':'Objeto',
             'numero':'Numero do contrato',
@@ -54,6 +48,19 @@ class ContractForm(forms.ModelForm):
 
 
             }
+    def __init__(self,*args,**kwargs):
+        processo_obj=kwargs.pop('processo_de_origem',None)
+        super().__init__(*args,**kwargs)
+        if processo_obj:
+            self.fields['processo_de_origem'].initial=processo_obj.numero_processo
+            self.instance.processo=processo_obj
+            self.fields['processo_de_origem'].label='Processo de origem'
+        else:
+            self.instance.processo=None
+            self.fields['processo_de_origem'].initial='Nenhum processo selecionado'
+
+
+
 
 
 

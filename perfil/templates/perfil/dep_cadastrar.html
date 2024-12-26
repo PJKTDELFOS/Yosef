@@ -15,7 +15,7 @@
         enctype="multipart/form-data">
         <h1>PROCESSO</h1>
         {% csrf_token %}
-        {{form|crispy}}
+        {{cadastrar_dependente_form|crispy}}
         <div style="display: grid; gap: 10px; flex-wrap: wrap; align-items: stretch;">
             <button type="submit" style="flex: 1; height: 50px;width: 20%; text-align: center; padding: 10px;
             background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"><b>INSERIR</b></button>

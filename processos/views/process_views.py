@@ -18,6 +18,8 @@ import os
 from django.conf import settings
 import shutil
 
+from ..models import Processo
+
 
 # Create your views here.
 
@@ -250,29 +252,31 @@ class Criarcontrato(CreateView):
     success_url = reverse_lazy('processos:listarcontratos')
 
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.numero_processo=models.Processo.objects.get(pk=self.kwargs['pk'])
+            print('processo recuperado no dispatch')
+        except Processo.DoesNotExist:
+            messages.error(request, "Funcionário não encontrado.")
+            return redirect('processos:processo')  # substitua 'nome_da_sua_view_de_erro' pela sua view de erro
+        return super().dispatch(request, *args, **kwargs)
+
+
+
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['create_contract_form'] = context['form']
+        context['create_contract_form'] = ContractForm(processo_de_origem=self.numero_processo)
+        context['processo'] = self.numero_processo
         return context
 
-    # def get_form_kwargs(self):
-    #     kwargs=super().get_form_kwargs()
-    #     pk_processo=self.kwargs.get('pk')
-    #     processo=get_object_or_404(models.Processo, pk=pk_processo)
-    #     kwargs['processo']=processo
-    #     return kwargs
+
 
     def form_valid(self, create_contract_form,):
-        pk_processo=self.kwargs.get('pk')
-        processo=get_object_or_404(models.Processo, pk=pk_processo)
-        create_contract_form.instance.processo=processo
-        if create_contract_form.is_valid():
-            print(create_contract_form.cleaned_data)
-            create_contract_form.save(commit=False)
-            messages.success(self.request, f'Contrato criado com sucesso')
-            return super().form_valid(create_contract_form)
-        else:
-            messages.error(self.request, f'Existem campos a serem preenchidos')
+       create_contract_form.instance.processo = self.numero_processo
+       messages.success(self.request, 'Dependente cadastrado com sucesso!')
+       return super().form_valid(create_contract_form)
+
 
 #numero_processo=self.kwargs['numero_processo']
     def form_invalid(self, create_contract_form):

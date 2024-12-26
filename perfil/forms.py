@@ -29,7 +29,7 @@ class Dependenteform(forms.ModelForm):
         fields = ['nome_funcionario', 'nome_dependente', 'cpf_dependente', 'grau_relacional']
 
     def __init__(self, *args, **kwargs):
-        funcionario_obj = kwargs.pop('funcionario', None)
+        funcionario_obj = kwargs.pop('nome_funcionario', None)
         super().__init__(*args, **kwargs)
         if funcionario_obj:
             self.fields['nome_funcionario'].initial = funcionario_obj.nomecompleto

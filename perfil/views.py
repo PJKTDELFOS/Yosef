@@ -190,7 +190,6 @@ class Deletar_colaborador(DeleteView):
                 print(f"Erro ao deletar o arquivo: {e}")
         else:
             print("Parâmetros inválidos enviados na requisição.")
-
         return redirect('perfil:tabelarh')
 
 
@@ -203,21 +202,22 @@ class Cadastrardependente(CreateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.funcionario = models.cadastrofuncionario.objects.get(pk=kwargs['pk'])
-            print(f"Funcionário recuperado no dispatch: {self.funcionario}") #debug
+            #print(f"Funcionário recuperado no dispatch: {self.funcionario}")
         except models.cadastrofuncionario.DoesNotExist:
             messages.error(request, "Funcionário não encontrado.")
-            return redirect('nome_da_sua_view_de_erro') # substitua 'nome_da_sua_view_de_erro' pela sua view de erro
+            return redirect('perfil:tabelarh')
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = forms.Dependenteform(funcionario=self.funcionario)
-        print(f"Formulário instanciado com funcionario: {context['form'].instance.funcionario}") #debug
+        context['cadastrar_dependente_form'] = context['form']
+        context['cadastrar_dependente_form'] = forms.Dependenteform(nome_funcionario=self.funcionario,)
+        #print(f"Formulário instanciado com funcionario: {context['cadastrar_dependente_form'].instance.funcionario}")
         context['funcionario'] = self.funcionario
         return context
 
     def form_valid(self, form):
-        form.instance.funcionario=self.funcionario
+        form.instance.funcionario = self.funcionario
         messages.success(self.request, 'Dependente cadastrado com sucesso!')
         return super().form_valid(form)
 
