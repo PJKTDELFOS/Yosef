@@ -54,20 +54,6 @@ class ContractForm(forms.ModelForm):
 
 
             }
-    # def __init__(self, *args, **kwargs):
-    #     processo = kwargs.pop('processo',None)
-    #     super().__init__(*args, **kwargs)
-    #     if processo:
-    #         self.fields['processo'].initial =processo
-
-
-
-    # def get_initial_for_field(self, field, field_name):
-    #     field=models.Processo.objects.get(numero_processo=Processo.numero_processo)
-    #     field_name='processo'
-    #     value=getattr(field, field_name)
-    #     return value
-
 
 
 

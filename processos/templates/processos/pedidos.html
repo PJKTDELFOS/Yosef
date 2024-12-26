@@ -1,6 +1,10 @@
 {% extends "global/base.html" %}
 {% load alfilters %}
 
+{% block header_processos %}
+{% include "processos/menu.html" %}
+{% endblock %}
+
 {% block searchpedidos %}
 <div class="search">
         <form action="{% url 'processos:listarpedidos' %}" method="get">

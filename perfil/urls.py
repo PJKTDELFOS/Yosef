@@ -25,6 +25,17 @@ urlpatterns = [
 
     path('login/',views.login_perfil,name='login'),
     path('listarh/',views.Listar_colaboradores.as_view(),name='tabelarh'),
+    path('listarrh/<int:pk>/',views.Colaborador.as_view(),name='detalhe_colaborador'),
+
+    path('listarrh/<int:colab_pk>/delete',views.delete_arquivos_colab,name='deletar_arquivo'),
+    path('listarrh/cadastrar_colaborador',views.Cadastrar_colaborador.as_view(),name='cadastrar_colaborador'),
+    path('listarrh/atualizar_colaborador/<int:pk>',views.Atualizar_colaborador.as_view(),name='atualizar_colaborador'),
+    path('listarrh/<int:pk>/deletar',views.Deletar_colaborador.as_view(),name='deletar_colaborador'),
+    path('listarrh/<int:pk>/cadastrardependente/',views.Cadastrardependente.as_view(),name='cadastrardependente'),
+
+
+
+
     #crud processo
 
 

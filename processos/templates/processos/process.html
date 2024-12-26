@@ -1,5 +1,8 @@
 {% extends "global/base.html" %}
 {% load alfilters %}
+{% block header_processos %}
+{% include "processos/menu.html" %}
+{% endblock %}
 {% block content_processos %}
 {% load crispy_forms_tags %}
   <div class="single-contact">
@@ -101,8 +104,7 @@
 
 
     <h2> Contratos deste processo</h2>
-
-       <div class="responsive-table">
+      <div class="responsive-table">
     <table class="contacts-table">
         <caption class="table-caption">
             <h1>contratos</h1>

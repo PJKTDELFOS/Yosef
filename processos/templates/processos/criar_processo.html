@@ -1,5 +1,8 @@
-{% extends "global/base.html" %}
 
+{% extends "global/base.html" %}
+{% block header_processos %}
+{% include "processos/menu.html" %}
+{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content_processos %}

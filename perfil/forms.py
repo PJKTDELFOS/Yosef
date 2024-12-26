@@ -1,56 +1,59 @@
 from django import forms
-from perfil import models
-
-#fazer os widgets, e labels, e todo resto necessario amanha domingo
+from perfil.models import dependente,cadastrofuncionario,uniformes_EPI
 
 class PerfilForm(forms.ModelForm):
     class Meta:
-        model=models.cadastrofuncionario
+        model=cadastrofuncionario
         fields='__all__'
         labels={
             field.name: field.verbose_name.title() 
-            for field in models.cadastrofuncionario._meta.get_fields()
+            for field in cadastrofuncionario._meta.get_fields()
             if hasattr(field, 'verbose_name')
         }
         widgets={
-
+            'data_nascimento':forms.DateInput(format='%Y-%m-%d',attrs={'type':'date'}),
+            'sexo':forms.Select(),
+            'nacionalidade':forms.Select(),
+            'estado_civil':forms.Select(),
+            'formacao':forms.Select(),
+            'setor':forms.Select(),
+            'uf':forms.Select(),
+            'ocorrencias':forms.Textarea(attrs={'rows':3}),
         }
 
 
 class Dependenteform(forms.ModelForm):
-    funcionario=forms.ModelChoiceField(
-        queryset=models.cadastrofuncionario.objects.all(),
-        label="Funcionario",
-        required=False,
-        empty_label=None,
-        disabled=True,
-    )
+    nome_funcionario = forms.CharField(label="Funcionário", widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     class Meta:
-        model=models.dependente
-        fields='__all__'
-        exclude=['funcionario',]
-        labels = {
-            field.name: field.verbose_name.title()
-            for field in models.dependente._meta.get_fields()
-            if hasattr(field, 'verbose_name')
-        }
+        model = dependente
+        fields = ['nome_funcionario', 'nome_dependente', 'cpf_dependente', 'grau_relacional']
 
+    def __init__(self, *args, **kwargs):
+        funcionario_obj = kwargs.pop('funcionario', None)
+        super().__init__(*args, **kwargs)
+        if funcionario_obj:
+            self.fields['nome_funcionario'].initial = funcionario_obj.nomecompleto
+            self.instance.funcionario = funcionario_obj # ***ESSA LINHA É CRUCIAL***
+            self.fields['nome_funcionario'].label = "Funcionário"
+        else:
+            self.instance.funcionario = None  # Tratamento para quando funcionario_obj é None
+            self.fields['nome_funcionario'].initial = "Nenhum funcionário selecionado"
 
 class Uniformes_epi_form(forms.ModelForm):
     funcionario = forms.ModelChoiceField(
-        queryset=models.cadastrofuncionario.objects.all(),
+        queryset=cadastrofuncionario.objects.all(),
         label="Funcionario",
         required=False,
         empty_label=None,
         disabled=True,
     )
     class Meta:
-        model=models.uniformes_EPI
+        model=uniformes_EPI
         fields='__all__'
         exclude = ['funcionario',]
         labels = {
             field.name: field.verbose_name.title()
-            for field in models.uniformes_EPI._meta.get_fields()
+            for field in uniformes_EPI._meta.get_fields()
             if hasattr(field, 'verbose_name')
         }
 

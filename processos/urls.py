@@ -27,9 +27,9 @@ from django.urls import path,include
 app_name='processos'
 
 urlpatterns = [
-    path('index',views.index,name='index'),
+    #path('index',views.index,name='index'),
      #teste
-    path('login/',views.login,name='login'),
+    #path('login/',views.login,name='login'),
     #crud processo
     path('processos/',views.listarprocessos.as_view(),name='processo'),
     path('processos/adicionarprocesso/',views.CriarProcesso.as_view(),name='inserirprocesso'),

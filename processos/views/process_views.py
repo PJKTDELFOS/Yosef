@@ -259,7 +259,7 @@ class Criarcontrato(CreateView):
     #     kwargs=super().get_form_kwargs()
     #     pk_processo=self.kwargs.get('pk')
     #     processo=get_object_or_404(models.Processo, pk=pk_processo)
-    #     kwargs['processo2']=processo
+    #     kwargs['processo']=processo
     #     return kwargs
 
     def form_valid(self, create_contract_form,):

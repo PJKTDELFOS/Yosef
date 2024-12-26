@@ -42,3 +42,7 @@ e ajustas os templates sabado comercial estara pronto
 
 processo finalizado
 
+quando usar onetoone, nao usar for, e sim if, e ja mandar direto o que precisa
+
+
+context['uniformes_EPI']nome do model = funcionario.uniforme_epi.all()-capturar do campo que faz a ligação

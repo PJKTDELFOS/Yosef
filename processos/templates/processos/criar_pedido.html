@@ -1,6 +1,8 @@
 {% extends "global/base.html" %}
 {% load crispy_forms_tags %}
-
+{% block header_processos %}
+{% include "processos/menu.html" %}
+{% endblock %}
 {% block content_pedidos %}
 <div class="form-wrapper">
     <!-- O atributo action usa a mesma URL associada à view -->

@@ -11,10 +11,11 @@ preparar forms
 
 
 views
-1 list view funcionarios
-2-detalhe funcionario(ja com a parte de dependente, uniforme, )
-3-cadastro, atualizaçao, e deleção
-4-arquivos do funcionario
+1 list view funcionarios feito
+2-detalhe funcionario(ja com a parte de dependente, uniforme, ) feito
+3-cadastro, atualizaçao, e deleção fazer amanha
+4-arquivos do funcionario feito
+
 
 5 view de cadastro,visualização,  atualização e deleçao de dependente
 6 view de cadastro,visualização,  atualização e deleçao de dependente
@@ -22,9 +23,13 @@ views
 
 
 
-<div>
-        {% block searchprocesso %}{% endblock %}
-        {% block searchcontrato %}{% endblock %}
-        {% block searchpedidos %}{% endblock %}
-        {% block searchrh %}{% endblock %}
-</div>
+
+testar
+from django.urls import reverse
+
+class Contrato(models.Model):
+    processo = models.ForeignKey('Processo', on_delete=models.CASCADE)
+    # Outros campos...
+
+    def get_absolute_url(self):
+        return reverse('app:name', args=[self.processo.pk, self.pk])

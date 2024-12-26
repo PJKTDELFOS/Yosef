@@ -11,4 +11,6 @@ def criar_usuario(sender,instance,created,**kwargs):
         usuario=User.objects.create_user(username=instance.nomecompleto,password=instance.cpf)
         Usuario_sistema.objects.create(funcionario=instance,usuario=usuario)
 
+
+
 #a,manha definir aqui a rota do grupo para onde  vai

@@ -1,6 +1,11 @@
 {% extends "global/base.html" %}
 {% load alfilters_rh %}
 
+{% block header_rh %}
+{% include "perfil/menu_rh.html" %}
+{% endblock %}
+
+
 {% block searchrh %}
     <div class="search">
             <form action="{% url 'perfil:tabelarh' %}" method="get">
@@ -27,7 +32,21 @@
         <thead>
            <tr class="table-row table-row-header">
                <th class="table-header" style="text-align: center">Id colaborador</th>
-               <th class="table-header" style="text-align: center">Nome Completo</th>
+
+
+               <th class="table-header" style="text-align: center">
+                    <a href="?q={{ request.GET.q }}&sort={% if request.GET.sort == 'nome_completo' %}nome_completo_asc{% else %}nome_completo{% endif %}">
+                        Nome Completo
+                        {% if request.GET.sort == 'nome_completo' %}
+                            <span>&#9650;</span> <!-- Ícone de ordenação crescente -->
+                        {% elif request.GET.sort == 'nome_completo_asc' %}
+                            <span>&#9660;</span> <!-- Ícone de ordenação decrescente -->
+                        {% else %}
+                            <span>&#9651;</span> <!-- Ícone neutro quando sem ordenação -->
+                        {% endif %}
+                    </a>
+
+                </th>
                <th class="table-header" style="text-align: center">Data de nascimento</th>
                <th class="table-header" style="text-align: center">CPF</th>
                <th class="table-header" style="text-align: center">RG</th>
@@ -43,10 +62,76 @@
                         {% endif %}
                     </a>
                 </th>
-             <th class="table-header" style="text-align: center">setor</th>
-            <th class="table-header" style="text-align: center">cargo</th>
-           <th class="table-header" style="text-align: center">escolaridade</th>
 
+           <!--setor -->
+             <th class="table-header" style="text-align: center">
+                    setor
+              <form  action="{% url 'perfil:tabelarh' %}" method="get" >
+
+                  {% for key , value  in request.GET.items %}
+                      {% if key != "setor" %}<!--campo a ser capturado -->
+                          <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                {% endif %}
+                            {% endfor %}
+                            <select name="setor" onchange="this.form.submit()" id=""><!--campo a ser capturado -->
+                                <option value="" {% if not request.GET.setor %}selected{% endif %}>
+                                    SELECIONE
+                                </option>
+                                {% for setor in setores %}
+                                    <option value="{{ setor }}" {% if request.GET.setor == setor %}selected {% endif %}><!--variavel de iterançao -->
+                                        {{setor}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </th>
+
+           <!--cargo -->
+            <th class="table-header" style="text-align: center">
+                    cargo
+              <form  action="{% url 'perfil:tabelarh' %}" method="get" >
+
+                  {% for key , value  in request.GET.items %}
+                      {% if key != "cargo" %}<!--campo a ser capturado -->
+                          <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                {% endif %}
+                            {% endfor %}
+                            <select name="cargo" onchange="this.form.submit()" id=""><!--campo a ser capturado -->
+                                <option value="" {% if not request.GET.cargo %}selected{% endif %}>
+                                    SELECIONE
+                                </option>
+                                {% for cargo in cargos %}
+                                    <option value="{{ cargo }}" {% if request.GET.cargo == cargo %}selected {% endif %}><!--variavel de iterançao -->
+                                        {{cargo}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </th>
+
+
+
+          <th class="table-header" style="text-align: center">
+            escolaridade
+              <form  action="{% url 'perfil:tabelarh' %}" method="get" >
+
+                  {% for key , value  in request.GET.items %}
+                      {% if key != "formacao_academica" %}<!--campo a ser capturado -->
+                          <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                {% endif %}
+                            {% endfor %}
+                            <select name="formacao_academica" onchange="this.form.submit()" id=""><!--campo a ser capturado -->
+                                <option value="" {% if not request.GET.formacao_academica %}selected{% endif %}>
+                                    SELECIONE
+                                </option>
+                                {% for escolaridade in formacao_academica %}
+                                    <option value="{{ escolaridade }}" {% if request.GET.formacao_academica == escolaridade %}selected {% endif %}><!--variavel de iterançao -->
+                                        {{escolaridade}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </th>
            </tr>
         </thead>
 
@@ -54,16 +139,18 @@
         {% for colaborador in colaboradores %}
             <tr class="table-row">
                 <td class="table-cel" style="text-align: center">
-                    {{ colaborador.pk }}
+                    <a href="{% url 'perfil:detalhe_colaborador' colaborador.pk %}">
+                                {{ colaborador.pk }}
+                    </a>
                 </td>
                 <td class="table-cel" style="text-align: center">{{colaborador.nomecompleto}}</td>
                 <td class="table-cel" style="text-align: center">{{colaborador.data_nascimento}}</td>
             <td class="table-cel" style="text-align: center">{{colaborador.cpf}}</td>
-            <td class="table-cel" style="text-align: center">{{colaborador.rg}}</td>]
+            <td class="table-cel" style="text-align: center">{{colaborador.rg}}</td>
             <td class="table-cel" style="text-align: center">{{colaborador.salario|formata_preco}}</td>
             <td class="table-cel" style="text-align: center">{{colaborador.setor}}</td>
             <td class="table-cel" style="text-align: center">{{colaborador.cargo}}</td>
-            <td class="table-cel" style="text-align: center">{{colaborador.escolaridade}}</td>
+            <td class="table-cel" style="text-align: center">{{colaborador.formacao_academica}}</td>
 
             </tr>
 

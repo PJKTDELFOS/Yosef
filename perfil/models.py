@@ -143,7 +143,7 @@ class uniformes_EPI(models.Model):
         verbose_name='Uniforme'
         verbose_name_plural='Uniformes'
 
-    funcionario=models.OneToOneField(cadastrofuncionario,on_delete=models.CASCADE,related_name='uniforme_epi')
+    funcionario=models.ForeignKey(cadastrofuncionario,on_delete=models.CASCADE,related_name='uniforme_epi')
     tipo=models.CharField(default=None, max_length=250, null=True,blank=True,choices=(
         ('uniforme','uniforme'),
         ('EPI','EPI')
@@ -175,8 +175,8 @@ class uniformes_EPI(models.Model):
 
 
 class dependente(models.Model):
-    funcionario = models.OneToOneField(cadastrofuncionario, on_delete=models.CASCADE,related_name='dependente')
-    nome_dependente = models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Nome dependente')
+    funcionario = models.ForeignKey(cadastrofuncionario, on_delete=models.CASCADE,related_name='dependente')
+    nome_dependente = models.CharField(default=None, max_length=250, null=True,blank=False,verbose_name='Nome dependente')
     cpf_dependente=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='CPF_dependente')
     grau_relacional=models.CharField(default=None, max_length=250, null=True,blank=True,verbose_name='Relação',
                                      choices=(
