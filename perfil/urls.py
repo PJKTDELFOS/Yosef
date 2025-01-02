@@ -23,15 +23,35 @@ app_name='perfil'
 
 urlpatterns = [
 
-    path('login/',views.login_perfil,name='login'),
-    path('listarh/',views.Listar_colaboradores.as_view(),name='tabelarh'),
-    path('listarrh/<int:pk>/',views.Colaborador.as_view(),name='detalhe_colaborador'),
+    #path('login/',views.login_perfil,name='login'),
+    path('',views.Listar_colaboradores.as_view(),name='tabelarh'),
+    path('listarrh/<int:colab_pk>/',views.Colaborador.as_view(),name='detalhe_colaborador'),
 
     path('listarrh/<int:colab_pk>/delete',views.delete_arquivos_colab,name='deletar_arquivo'),
     path('listarrh/cadastrar_colaborador',views.Cadastrar_colaborador.as_view(),name='cadastrar_colaborador'),
-    path('listarrh/atualizar_colaborador/<int:pk>',views.Atualizar_colaborador.as_view(),name='atualizar_colaborador'),
-    path('listarrh/<int:pk>/deletar',views.Deletar_colaborador.as_view(),name='deletar_colaborador'),
-    path('listarrh/<int:pk>/cadastrardependente/',views.Cadastrardependente.as_view(),name='cadastrardependente'),
+    path('listarrh/atualizar_colaborador/<int:colab_pk>',views.Atualizar_colaborador.as_view(),name='atualizar_colaborador'),
+    path('listarrh/<int:colab_pk>/deletar',views.Deletar_colaborador.as_view(),name='deletar_colaborador'),
+
+
+    path('listarrh/<int:colab_pk>/cadastrardependente/',views.Cadastrardependente.as_view(),name='cadastrardependente'),
+
+    path('listarrh/<int:colab_pk>/dependente/<int:dep_pk>',views.Detalhedependente.as_view(),name='detalhedependente'),
+    path('listarrh/<int:colab_pk>/dependente/<int:dep_pk>/atualizar/',views.Atualizardependente.as_view(),name='atualizardependente'),
+    path('listarrh/<int:colab_pk>/dependente/<int:dep_pk>/deletar/',views.Deletardependente.as_view(),name='deletardependente'),
+
+
+
+    path('listarrh/<int:colab_pk>/uniforme/<int:uniforme_pk>',views.Detalhe_uniforme_epi.as_view(),name='detalheuniforme'),
+    path('listarrh/<int:colab_pk>/cadastraruniforme/',views.Cadastrar_uniforme_epi.as_view(),name='cadastraruniforme'),
+
+    path('listarrh/<int:colab_pk>/uniforme/<int:uniforme_pk>/deletar/', views.Deletear_uniforme_epi.as_view(),
+         name='deletaruniforme'),
+    path('listarrh/<int:colab_pk>/uniforme/<int:uniforme_pk>/atualizar/',views.Atualizar_uniforme_epi.as_view(),
+         name='atualizaruniforme'),
+
+
+
+
 
 
 

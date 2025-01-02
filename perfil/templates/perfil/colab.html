@@ -95,7 +95,7 @@
             </button>
         </form>
 
-        <form method="post" action="" style="margin: 0;
+        <form method="post" action="{% url 'perfil:cadastraruniforme' colaborador.pk %}" style="margin: 0;
         flex: 1;">
             {% csrf_token %}
             <button type="submit"
@@ -131,7 +131,11 @@
         {% for dependente in dependentes %}
             <tr class="table-row">
 
-                <td class="table-cel" style="text-align: center">{{dependente.pk}}</td>
+                <td class="table-cel" style="text-align: center">
+                <a href="{% url 'perfil:detalhedependente' colaborador.pk dependente.pk %}">
+                                {{ dependente.pk }}</a>
+                </td>
+
                 <td class="table-cel" style="text-align: center">{{dependente.nome_dependente}}</td>
 
          {% endfor %}
@@ -151,7 +155,7 @@
         </caption>
         <thead>
            <tr class="table-row table-row-header">
-                <th class="table-header" style="text-align: center">funcionarioe </th>
+                <th class="table-header" style="text-align: center">funcionario </th>
                 <th class="table-header" style="text-align: center">Id uniforme </th>
                 <th class="table-header" style="text-align: center">Uniforme </th>
            </tr>
@@ -162,7 +166,12 @@
         {% for uniforme in uniformes_EPI %}
         <tr class="table-row">
             <td class="table-cel" style="text-align: center">{{ uniforme.funcionario.nomecompleto }}</td>
-            <td class="table-cel" style="text-align: center">{{ uniforme.pk }}</td>
+
+            <td class="table-cel" style="text-align: center">
+                <a href="{% url 'perfil:detalheuniforme' colaborador.pk uniforme.pk %}">
+                                {{ uniforme.pk }}</a>
+            </td>
+
             <td class="table-cel" style="text-align: center">{{ uniforme.tipo }}</td>
         </tr>
         {% endfor %}

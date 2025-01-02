@@ -121,6 +121,16 @@ class cadastrofuncionario(models.Model):
         if not re.search(r'[^0-9]',self.cep) or len(self.cep)<8:
             error_messages['cep'] = 'Dgite um cep valido'
 
+    def save(self, *args, **kwargs):
+        is_new=self.pk is None
+        if is_new and self.arquivos:
+            temp_docs=self.arquivos
+            self.arquivos=None
+            super().save(*args, **kwargs)
+            self.arquivos=temp_docs
+        super().save(*args, **kwargs)
+
+
     class Meta:
         verbose_name='Colaborador'
         verbose_name_plural='Recursos Humanos'

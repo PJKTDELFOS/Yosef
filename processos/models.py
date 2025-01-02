@@ -69,12 +69,14 @@ class Processo(models.Model):
         return tools_utils.formata_preco(self.valor_total)
     valor_formatado.short_description='Valor'
 
-    # def save(self, *args, **kwargs):
-    #     #is_new=self.pk is None
-    #     # aqui salva e cria o pk antes de salvar o
-    #     # arquivo, vou ter de adaptar ja no template ,
-    #     # forms e  viewsa antes de testar
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        if is_new and self.documentos:
+            temp_doc=self.documentos
+            self.documentos=None
+            super().save(*args, **kwargs)
+            self.documentos=temp_doc
+        super().save(*args, **kwargs)
 
 
 class Contratos (models.Model):
@@ -129,12 +131,14 @@ class Contratos (models.Model):
         executavel= self.valor_total-self.executado()
         return executavel
 
-    # def save(self, *args, **kwargs):
-    #     #is_new=self.pk is None
-    #     # aqui salva e cria o pk antes de salvar o
-    #     # arquivo, vou ter de adaptar ja no template ,
-    #     # forms e  viewsa antes de testar
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        if is_new and self.documentos:
+            temp_doc = self.documentos
+            self.documentos = None
+            super().save(*args, **kwargs)
+            self.documentos = temp_doc
+        super().save(*args, **kwargs)
 
 class Pedidos(models.Model):
     contrato = models.ForeignKey(Contratos, on_delete=models.CASCADE, related_name='pedidos')
@@ -241,15 +245,15 @@ class Pedidos(models.Model):
                 name = f'Pedido_nº{self.numero}_contrato:{self.contrato}'
                 print(f"Erro na planilha: {e}, pedido {name} nao  se nao puder fazer a planilha ")
 
-
     def save(self, *args, **kwargs):
-        #is_new=self.pk is None
-        # aqui salva e cria o pk antes de salvar o
-        # arquivo, vou ter de adaptar ja no template ,
-        # forms e  viewsa antes de testar
+        is_new = self.pk is None
+        if is_new and self.documentos:
+            temp_doc = self.documentos
+            self.documentos = None
+            super().save(*args, **kwargs)
+            self.documentos = temp_doc
         super().save(*args, **kwargs)
         self.criar_planilha()
-
 
 
 

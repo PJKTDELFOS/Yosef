@@ -1,0 +1,49 @@
+{% extends "global/base.html" %}
+{% load alfilters_rh %}
+{% load crispy_forms_tags %}
+{% block header_rh %}
+{% include "perfil/menu_rh.html" %}
+{% endblock %}
+
+
+{% block content_rh %}
+
+    <h1> dependente </h1>
+
+    <div class="container">
+    <p class="table-cel" ><b>id Dependente</b> {{dependente.pk}}</p>
+        <p class="table-cel" ><b>id colaborador</b> {{dependente.funcionario.pk}}</p>
+    <p class="table-cel" ><b>Funcionario</b> {{dependente.funcionario.nomecompleto}}</p>
+     <p class="table-cel" ><b>Funcionario cargo</b> {{dependente.funcionario.cargo}}</p>
+
+    <p class="table-cel" ><b>Nome</b> {{dependente.nome_dependente}}</p>
+    <p class="table-cel" ><b>Cpf</b> {{dependente.cpf_dependente}}</p>
+    <p class="table-cel" ><b>Grau de Relação</b> {{dependente.grau_relacional}}</p>
+    </div>
+
+    <div class="container">
+
+    <form method="post" action="{% url 'perfil:atualizardependente' dependente.funcionario.pk  dependente.pk %}"
+                      style="margin: 0; flex: 1;">
+        {% csrf_token %}
+        <a href="{% url 'perfil:atualizardependente'   dependente.funcionario.pk  dependente.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                Editar dependente
+        </a>
+
+    </form>
+    <form method="post" action="{% url 'perfil:deletardependente' dependente.funcionario.pk  dependente.pk %}" style="margin: 0; flex: 1;">
+        {% csrf_token %}
+        <button style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                onclick="return confirm('Ao apagar o processo, contratos e pedidos associados serão perdidos')"
+        >
+            Excluir
+        </button>
+    </form>
+
+    </div>
+{% endblock content_rh %}

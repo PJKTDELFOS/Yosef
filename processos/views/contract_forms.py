@@ -31,7 +31,7 @@ class ContractForm(forms.ModelForm):
             'total_executado':'Total Executado',
             'executavel':'Valor executavel',
 
-            # TEM QUE SER O EQUIVALENTE NO MODELS PARA DATEFIELD
+
         }
         widgets={
             'inicio':forms.DateInput(format='%Y-%m-%d',attrs={'type':'date'}),

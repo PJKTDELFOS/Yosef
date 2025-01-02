@@ -46,3 +46,15 @@ quando usar onetoone, nao usar for, e sim if, e ja mandar direto o que precisa
 
 
 context['uniformes_EPI']nome do model = funcionario.uniforme_epi.all()-capturar do campo que faz a ligação
+
+
+    def get_success_url(self):
+    ver em kd kwargs se tem o argumento da url
+        if 'processo_pk'in self.kwargs and  'pk'in self.kwargs and 'pedido_pk' in self.kwargs: ver em kd kwargs se tem o argumento da url
+            return reverse_lazy('processos:detalhe_pedido_via_contrato', kwargs={'pedido_pk':self.object.pk,'processo_pk':self.kwargs['processo_pk'],'pk':self.kwargs['pk']})
+        else:
+            return reverse_lazy('processos:detalhe_pedido_tabela', kwargs={'pedido_pk':self.object.pk})
+
+
+
+href="http://127.0.0.1:8000/admin/login/?next=/admin/"

@@ -1,0 +1,54 @@
+{% extends "global/base.html" %}
+{% load alfilters_rh %}
+{% load crispy_forms_tags %}
+
+{% block header_rh %}
+{% include "perfil/menu_rh.html" %}
+{% endblock %}
+
+
+{% block content_rh %}
+
+    <h1> dependente </h1>
+
+    <div class="container">
+    <p class="table-cel" ><b>id uniforme</b> {{uniforme.pk}}</p>
+        <p class="table-cel" ><b>id colaborador</b> {{uniforme.funcionario.pk}}</p>
+    <p class="table-cel" ><b>Funcionario</b> {{uniforme.funcionario.nomecompleto}}</p>
+     <p class="table-cel" ><b>Funcionario cargo</b> {{uniforme.funcionario.cargo}}</p>
+
+    <p class="table-cel" ><b>TIPO</b> {{uniforme.tipo}}</p>
+    <p class="table-cel" ><b>peça superior</b> {{uniforme.peca_superior}}</p>
+    <p class="table-cel" ><b> tamanho peça superior</b> {{uniforme.tamanho_pecasuperior}}</p>
+    <p class="table-cel" ><b>peça inferior</b> {{uniforme.peca_inferior}}</p>
+    <p class="table-cel" ><b> tamanho peça superior</b> {{uniforme.tamanho_pecasupinferior}}</p>
+
+
+    </div>
+
+    <div class="container">
+
+    <form method="post" action="{% url 'perfil:atualizaruniforme' uniforme.funcionario.pk  uniforme.pk %}"
+                      style="margin: 0; flex: 1;">
+        {% csrf_token %}
+        <a href="{% url 'perfil:atualizaruniforme' uniforme.funcionario.pk  uniforme.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                Editar uniforme
+        </a>
+
+    </form>
+    <form method="post" action="{% url 'perfil:deletaruniforme' uniforme.funcionario.pk  uniforme.pk %}" style="margin: 0; flex: 1;">
+        {% csrf_token %}
+        <button style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                onclick="return confirm('Ao apagar o processo, contratos e pedidos associados serão perdidos')"
+        >
+            Excluir
+        </button>
+    </form>
+
+    </div>
+{% endblock content_rh %}

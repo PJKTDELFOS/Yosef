@@ -74,7 +74,7 @@
             {% for contrato in contratos %}
             <tr class="table-row">
                 <td class="table-cel" style="text-align: center">
-                    <a href="{% url 'processos:detalhe_contrato' contrato.pk %}">
+                    <a href="{% url 'processos:detalhe_contrato_via_tabela' contrato.pk %}">
                                 {{ contrato.pk }}
                     </a>
                 </td>

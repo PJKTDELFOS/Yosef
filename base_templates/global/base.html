@@ -14,6 +14,8 @@
     {% block searchcontrato %}{% endblock %}
     {% block searchpedidos %}{% endblock %}
     {% block searchrh %}{% endblock %}
+    {% block content_menu_inicial %}{% endblock content_menu_inicial %}
+
 </header>
 
 <div>
@@ -21,6 +23,7 @@
 </div>
 
     <main class="content">
+
         {% block content_pedidos %}{% endblock content_pedidos %}
         {% block content_processos %}{% endblock content_processos %}
         {% block content_contratos %}{% endblock content_contratos %}

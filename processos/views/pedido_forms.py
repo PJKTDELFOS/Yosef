@@ -3,19 +3,13 @@ from processos import models
 
 
 class PedidoForms(forms.ModelForm):
-    contrato=forms.ModelChoiceField(
-        queryset=models.Contratos.objects.all(),
-        label="Contrato",
-        required=False,
-        empty_label=None,
-        disabled=True,
-    )
+    contrato_de_origem=forms.CharField(label='Contrato de origem',
+                                       widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     class Meta:
         model=models.Pedidos
         fields='__all__'
-        exclude=['contrato','data_hora_att']
+        exclude=['contrato','data_hora_att',]
         labels={
-            'contrato':'Contrato',
             'numero':'numero do pedido',
             'valor':'valor do pedido',
             'data_origem':'Data de origem',
@@ -63,10 +57,15 @@ class PedidoForms(forms.ModelForm):
         return tipo_documento
 
     def __init__(self, *args, **kwargs):
-        contrato = kwargs.pop('contrato',None)
+        contrato_obj = kwargs.pop('contrato_de_origem', None)
         super().__init__(*args, **kwargs)
-        if contrato:
-            self.fields['contrato'].initial =contrato
+        if contrato_obj:
+            self.fields['contrato_de_origem'].initial = contrato_obj.numero
+            self.instance.contrato = contrato_obj
+            self.fields['contrato_de_origem'].label = 'Contrato de origem'
+        else:
+            self.instance.processo = None
+            self.fields['contrato_de_origem'].initial = 'Nenhum contrato selecionado'
 
 
 
