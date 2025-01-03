@@ -126,9 +126,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-# LOGIN_URL='/login/'
-# LOGIN_REDIRECT_URL='/'
-# LOGOUT_REDIRECT_URL='/'
+LOGIN_URL='perfil:login'
+LOGIN_REDIRECT_URL='perfil:menuinicial'
+LOGOUT_REDIRECT_URL='perfil:login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

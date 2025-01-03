@@ -19,12 +19,18 @@ from django.urls import path,include
 from . import views
 
 
+
 app_name='perfil'
 
 urlpatterns = [
 
-    #path('login/',views.login_perfil,name='login'),
-    path('',views.Listar_colaboradores.as_view(),name='tabelarh'),
+    path('', views.Login.as_view(),
+         name='login'),
+    path('menuinicial', views.menu_inicial,
+         name='menuinicial'),
+    path('logout', views.Logout.as_view(),name='logout'),
+
+    path('tabelarh',views.Listar_colaboradores.as_view(),name='tabelarh'),
     path('listarrh/<int:colab_pk>/',views.Colaborador.as_view(),name='detalhe_colaborador'),
 
     path('listarrh/<int:colab_pk>/delete',views.delete_arquivos_colab,name='deletar_arquivo'),
@@ -48,6 +54,7 @@ urlpatterns = [
          name='deletaruniforme'),
     path('listarrh/<int:colab_pk>/uniforme/<int:uniforme_pk>/atualizar/',views.Atualizar_uniforme_epi.as_view(),
          name='atualizaruniforme'),
+
 
 
 

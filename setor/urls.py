@@ -23,11 +23,11 @@ from perfil.views import menu_inicial
 
 #adicionar na url de entrada o setor
 urlpatterns = [
-    #path('comercial/', include('processos.urls')),
-    path('rh/', include('perfil.urls')),
+    #path('rh/', include('perfil.urls')),
+    path('', include('perfil.urls')),
     path('admin/', admin.site.urls,name='index'),
     path('comercial', include('processos.urls')),
-    path('',menu_inicial,name='login'),
+
 
 ]
 

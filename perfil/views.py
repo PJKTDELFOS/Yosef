@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView,LogoutView
-from django.views.generic.list import ListView
+from django.views.generic.list import ListView,View
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404,redirect,render,HttpResponse
 from . import models
@@ -17,22 +17,27 @@ from django.contrib import messages
 from .models import cadastrofuncionario,dependente,uniformes_EPI,Usuario_sistema
 from .forms import Dependenteform,Uniformes_epi_form
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
-
+@login_required
 def menu_inicial(request):
     return  render(request, 'perfil/menuinicial.html')
-#
+
 
 class Login(LoginView):
     template_name = 'perfil/menuinicial.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('perfil:menuinicial')
     redirect_authenticated_user = True
 
     def get_success_url(self):
         return self.success_url
 
 
+class Logout(View):
+    def get(self,*args,**kwargs):
+        logout(self.request)
+        return redirect('perfil:menuinicial')
 
 
 class Listar_colaboradores(LoginRequiredMixin,ListView):
