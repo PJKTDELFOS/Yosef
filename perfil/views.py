@@ -26,7 +26,7 @@ def menu_inicial(request):
 
 
 class Login(LoginView):
-    template_name = 'perfil/menuinicial.html'
+    template_name = 'perfil/login.html'
     success_url = reverse_lazy('perfil:menuinicial')
     redirect_authenticated_user = True
 

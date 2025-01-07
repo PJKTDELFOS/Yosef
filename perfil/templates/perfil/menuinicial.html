@@ -1,15 +1,13 @@
-
 {% extends "global/base.html" %}
 {% load crispy_forms_tags %}
 {% block content_menu_inicial %}
 <h1 class="header-heading">
-    <a href="/static" class="header-link">
+    <a href="{% url 'perfil:login' %}" class="header-link">
         SISTEMA YOSEF
     </a>
 </h1>
 
 {% if user.is_authenticated %}
-
     <nav class="menu">
         <ul class="menu-list">
             <li class="menu-item">
@@ -24,21 +22,17 @@
             </li>
             <li class="menu-item">
                 <a href="{% url 'admin:index' %}" class="menu-link" target="_blank">
-                    <b>admin</b>
+                    <b>ADMIN</b>
                 </a>
             </li>
             <li class="menu-item">
                 <a href="{% url 'perfil:logout' %}" class="menu-link" >
-                    <b>logout</b>
+                    <b>LOGOUT</b>
                 </a>
             </li>
         </ul>
     </nav>
-{% else %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy}}
-        <button type="submit">Login</button>
-    </form>
+
 {% endif %}
+
 {% endblock content_menu_inicial %}

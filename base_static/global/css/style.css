@@ -53,6 +53,22 @@ svg {
   display: block;
   max-width: 100%;
 }
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Altura total da viewport */
+    background-color: #f4f4f4; /* Cor de fundo opcional */
+}
+
+.login {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
 
 .header {
   background: var(--clr-black);

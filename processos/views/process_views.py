@@ -226,7 +226,7 @@ class Criarcontrato(CreateView):
             self.numero_processo=models.Processo.objects.get(pk=self.kwargs['pk'])
             print('processo recuperado no dispatch')
         except Processo.DoesNotExist:
-            messages.error(request, "Funcionário não encontrado.")
+            messages.error(request, "PROCESSO não encontrado.")
             return redirect('processos:processo')
         return super().dispatch(request, *args, **kwargs)
 
@@ -239,7 +239,7 @@ class Criarcontrato(CreateView):
 
     def form_valid(self, create_contract_form,):
        create_contract_form.instance.processo = self.numero_processo
-       messages.success(self.request, 'Dependente cadastrado com sucesso!')
+       messages.success(self.request, 'CONTRATO cadastrado com sucesso!')
        return super().form_valid(create_contract_form)
 
     def form_invalid(self, create_contract_form):
@@ -539,12 +539,11 @@ class DetalharPedido(DetailView):
             context['arquivos'] = tipo_arquivos
         return context
 
-    def get_object(self, **kwargs):#talvez precisar retornar somente ao self, ja estava funcionando mesmo
-        return get_object_or_404(models.Pedidos, id=self.kwargs['pedido_pk'])#apenas trocar pelo que o
+    def get_object(self, **kwargs):
+        return get_object_or_404(models.Pedidos, id=self.kwargs['pedido_pk'])
 
 def delete_arquivos_pedido(request,processo_pk,pk,pedido_pk):
     if request.method == 'POST':
-        # muito mais facil fazer desse jeito para delete, meu Deus, quase acertei, dq pouco faço so
         processo_nome=str(processo_pk)
         print(processo_nome,'processo_nome no contrato do post')
         contrato_nome=str(pk)

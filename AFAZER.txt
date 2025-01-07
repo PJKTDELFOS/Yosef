@@ -17,8 +17,10 @@ views
 4-arquivos do funcionario feito
 
 
-5 view de cadastro,visualização,  atualização e deleçao de dependente
-6 view de cadastro,visualização,  atualização e deleçao de dependente
+5 view de cadastro,visualização,  atualização e deleçao de dependente feito
+6 view de cadastro,visualização,  atualização e deleçao de uniforme feito
+7-login feito
+8- começar financeiro
 
 
 
