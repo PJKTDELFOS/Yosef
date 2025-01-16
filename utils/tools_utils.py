@@ -51,8 +51,6 @@ def valida_cpf(cpf):
     else:
         return False
 
-
-
 import os
 
 def sanitize_name(value):
@@ -96,8 +94,9 @@ def docs_rh_load_path(instance, filename):
     return os.path.join(f'rh/{funcionario_arquivos}/{tipo_documento}', filename)
 
 
-
-
+def docs_finan_load_path(instance,filename):
+    vencimento = instance.vencimento
+    return os.path.join(f'financeiro/pagamento/{vencimento}',filename )
 
 
 def criar_pedido(instance,filename):

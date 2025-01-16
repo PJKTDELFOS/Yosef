@@ -1,0 +1,41 @@
+<h1 class="header-heading">
+    <a href="/" class="header-link">
+        SISTEMA YOSEF
+    </a>
+</h1>
+
+<nav class="menu">
+        <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="{% url 'financeiro:cadastrar_pagamento' %}" class="menu-link">
+                        <b>INSERIR CONTA A PAGAR</b>
+                    </a>
+                </li>
+                 <li class="menu-item">
+                    <a href="" class="menu-link">
+                        <b>INSERIR CONTA A RECEBER</b>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="" class="menu-link">
+                        CRIAR CENTRO DE CUSTO
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="{% url 'financeiro:listacontasapagar' %}" class="menu-link">
+                       CONTAS A PAGAR
+                    </a>
+                </li>
+             <li class="menu-item">
+                    <a href="{% url 'financeiro:listacontasareceber' %}" class="menu-link">
+                       CONTAS A RECEBER
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'perfil:logout' %}" class="menu-link">
+                        Logout
+                    </a>
+                </li>
+        </ul>
+    </nav>

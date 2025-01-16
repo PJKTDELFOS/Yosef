@@ -1,37 +1,13 @@
 processo finalizado(fazer testes adicionais antes da apresentação
+perfil finalizado-retocar
 
+financeiro:
+o que por?
 
-recursos humanos:
-
-paginas ordem
-1-listar rh (ja ocm filtros)
-preparar forms
-2-detalhar funcionari(com documentos,e beneficios e login)
-3-montar login com rotas
-
-
-views
-1 list view funcionarios feito
-2-detalhe funcionario(ja com a parte de dependente, uniforme, ) feito
-3-cadastro, atualizaçao, e deleção fazer amanha
-4-arquivos do funcionario feito
-
-
-5 view de cadastro,visualização,  atualização e deleçao de dependente feito
-6 view de cadastro,visualização,  atualização e deleçao de uniforme feito
-7-login feito
-8- começar financeiro
-
-
-
-
-
-testar
-from django.urls import reverse
-
-class Contrato(models.Model):
-    processo = models.ForeignKey('Processo', on_delete=models.CASCADE)
-    # Outros campos...
-
-    def get_absolute_url(self):
-        return reverse('app:name', args=[self.processo.pk, self.pk])
+nos templates e view, poder  filtrar e baixar as contas do dia direto ja como uma pasta zipada com o nome do dia mes e ano
+ja esta feito o salvamento por data de vencimento
+filtrar por :centro de custo,  credor, vencimento. e para todas poder ter o total personalizadoPYTHO
+fazer o menu, fazer o include, para
+fazer a tabela de centro de custos, com filtragem reversa, de quais contas estao em cada centro de custo
+fazer o contas a receber, acessar o pedido
+definri mais objetivos

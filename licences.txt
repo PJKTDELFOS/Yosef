@@ -4,3 +4,172 @@ distribuidos sob qualquer natureza, emprestados, e ou copiados  de nenhuma forma
 legais
 
 
+<p class="table-cel" ><b>CPF</b> {{colaborador.cpf}}</p>
+      <p class="table-cel" ><b>RG</b> {{colaborador.rg}}</p>
+      <p class="table-cel" ><b>Salario</b> {{colaborador.salario|formata_preco}}</p>
+      <p class="table-cel" ><b>Setor</b> {{colaborador.setor}}</p>
+      <p class="table-cel" ><b>Cargo</b> {{colaborador.cargo}}</p>
+      <p class="table-cel" ><b>Escolaridade</b> {{colaborador.formacao_academica}}</p>
+
+     <h3> Documentos Disponiveis</h3>
+            {% if arquivos %}
+                <ul>
+                        {% for tipo, tipo_arquivos in arquivos.items %}<br>
+                            {% if tipo != "dependente" %}
+                                        <li>
+                                        <b>{{ tipo }}</b>
+                                        <ul>
+                                            {% for arquivo in tipo_arquivos %}
+                                                <a
+                                                href="{{ MEDIA_URL }}rh/{{ colaborador.cpf }}/{{ tipo }}/{{ arquivo}}" download>
+
+                                                <li>{{ arquivo}}</li>
+                                                </a>
+                                                <form action="{% url 'perfil:deletar_arquivo' colaborador.pk %}" method="POST" style="display:inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="acao" value="deletar">
+                                                <input type="hidden" name="arquivo" value="{{ arquivo }}">
+                                                <input type="hidden" name="tipo" value="{{ tipo }}">
+
+                                                <button type="submit"
+                                                        class="btn btn-danger" onclick="return confirm('Deseja deletar este arquivo?')"
+                                                        style="flex: 1; height: 25px;width: 25%; text-align: center; padding: 10px;
+                                                        background-color: #007bff;
+                                                        color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                                                >
+                                                    Deletar</button><br>
+                                            </form>
+                                            {% endfor %}
+                                        </ul>
+                                        </li>
+                            {% endif %}
+                        {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum arquivo disponivel para este processo</p>
+            {% endif %}
+
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; align-items: stretch;">
+                <form method="post" action="{% url 'perfil:atualizar_colaborador' colaborador.pk %}"
+                      style="margin: 0; flex: 1;">
+                        {% csrf_token %}
+
+                        <a href="{% url 'perfil:atualizar_colaborador' colaborador.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                Editar colaborador
+                        </a>
+                </form>
+
+                <form method="post" action="{% url 'perfil:deletar_colaborador' colaborador.pk %}" style="margin: 0; flex: 1;">
+                    {% csrf_token %}
+                    <button
+                        style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="return confirm('Ao apagar o processo, contratos e pedidos associados serão perdidos')"
+                    >
+                        Excluir
+                    </button>
+                </form>
+        <form method="post" action="{% url 'perfil:cadastrardependente' colaborador.pk %}" style="margin: 0;
+        flex: 1;">
+            {% csrf_token %}
+            <button type="submit"
+                style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                 background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+                Inserir dependente
+            </button>
+        </form>
+
+        <form method="post" action="{% url 'perfil:cadastraruniforme' colaborador.pk %}" style="margin: 0;
+        flex: 1;">
+            {% csrf_token %}
+            <button type="submit"
+                style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                 background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+                Inserir uniforme
+            </button>
+        </form>
+
+       <a href="{% url 'perfil:tabelarh' %}"
+            style="flex: 1; height: 50px;width: 50%; text-align: center; display: flex; align-items:
+            center; justify-content: center; background-color: #007bff; color: #fff;
+            text-decoration: none; border-radius: 5px; cursor: pointer;">
+            Retornar
+        </a>
+    </div>
+
+
+  <div class="responsive-table">
+    <table class="contacts-table">
+        <caption class="table-caption">
+            <h1>dependente</h1>
+        </caption>
+        <thead>
+           <tr class="table-row table-row-header">
+                <th class="table-header" style="text-align: center">Id dependente </th>
+                <th class="table-header" style="text-align: center">nome do dependente </th>
+           </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    {% if dependentes %}
+        {% for dependente in dependentes %}
+            <tr class="table-row">
+
+                <td class="table-cel" style="text-align: center">
+                <a href="{% url 'perfil:detalhedependente' colaborador.pk dependente.pk %}">
+                                {{ dependente.pk }}</a>
+                </td>
+
+                <td class="table-cel" style="text-align: center">{{dependente.nome_dependente}}</td>
+
+         {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="2" style="text-align: center">Nenhum dependente cadastrado.</td>
+            </tr>
+        {% endif %}
+    </table>
+   </div>
+
+
+    <div class="responsive-table">
+    <table class="contacts-table">
+        <caption class="table-caption">
+            <h1>Uniformes e EPI</h1>
+        </caption>
+        <thead>
+           <tr class="table-row table-row-header">
+                <th class="table-header" style="text-align: center">funcionario </th>
+                <th class="table-header" style="text-align: center">Id uniforme </th>
+                <th class="table-header" style="text-align: center">Uniforme </th>
+           </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        {% if uniformes_EPI %}
+        {% for uniforme in uniformes_EPI %}
+        <tr class="table-row">
+            <td class="table-cel" style="text-align: center">{{ uniforme.funcionario.nomecompleto }}</td>
+
+            <td class="table-cel" style="text-align: center">
+                <a href="{% url 'perfil:detalheuniforme' colaborador.pk uniforme.pk %}">
+                                {{ uniforme.pk }}</a>
+            </td>
+
+            <td class="table-cel" style="text-align: center">{{ uniforme.tipo }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+    <tr>
+        <td colspan="3" style="text-align: center">Nenhum uniforme cadastrado.</td>
+    </tr>
+        {% endif %}
+    </table>
+   </div>
+

@@ -1,0 +1,21 @@
+{% extends "global/base.html" %}
+{% load alfilters_rh %}
+{% load crispy_forms_tags %}
+
+{% block header_rh %}
+{% include "financeiro/menu_financeiro.html" %}
+{% endblock %}
+
+
+{% block content_finan %}
+
+
+<h1>Conta a pagar</h1>
+ <div class="single-contact">
+    <p class="table-cel" ><b>id pagamento</b> {{pagamento.pk}}</p>
+      <p class="table-cel" ><b>Cento de Custo</b> {{pagamento.Centrodecusto.nome}}</p>
+    <p class="table-cel" ><b>Data de vencimento</b> {pagamento.vencimento}}</p>
+
+</div>
+
+{% endblock content_finan %}

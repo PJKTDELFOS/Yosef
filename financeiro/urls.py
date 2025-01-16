@@ -14,27 +14,35 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
-from perfil.views import menu_inicial
+from . import views
 
 
-#adicionar na url de entrada o setor
+
+app_name='financeiro'
+
 urlpatterns = [
-    #path('rh/', include('perfil.urls')),
-    path('', include('perfil.urls')),
-    path('admin/', admin.site.urls,name='index'),
-    path('comercial', include('processos.urls')),
-    path('financeiro', include('financeiro.urls')),
 
+    path('contasapagar', views.Lista_Contas_a_Pagar.as_view(),
+         name='listacontasapagar'),
+
+    path('contasapagar/<int:pgto_pk>', views.Conta_a_pagar.as_view(),
+         name='conta_a_pagar'),
+
+path('contasapagar/criar_conta', views.Criar_Pagamento.as_view(),
+         name='cadastrar_pagamento'),
+
+
+
+
+    path('contasareceber', views.Lista_Contas_a_Receber.as_view(),
+         name='listacontasareceber'),
+
+    # path('contasareceber', views.Contas_a_Receber.as_view(),
+    #      name='listacontasareceber'),
+
+    #crud processo
 
 
 ]
-
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

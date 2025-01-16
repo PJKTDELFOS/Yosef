@@ -1,0 +1,29 @@
+{% extends "global/base.html" %}
+{% load alfilters_rh %}
+
+{% block header_financeiro %}
+{% include "financeiro/menu_financeiro.html" %}
+{% endblock %}
+
+{% block searchfinan %}
+    <div class="search">
+            <form action="" method="get">
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="CONTAS A RECEBER"
+                    name="q"
+                    id="search"
+                    value="{{ request.GET.q }}"
+                    style="background: slategray"
+                >
+            </form>
+    </div>
+{% endblock %}
+
+{% block content_finan %}
+
+
+
+
+{% endblock content_finan %}
