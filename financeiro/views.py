@@ -75,6 +75,55 @@ class Criar_Pagamento(LoginRequiredMixin,CreateView):
         return response
 
 
+class Atualizar_Pgto(LoginRequiredMixin,UpdateView):
+    model = Contas_a_pagar
+    form_class = forms.Contas_a_pagar_form
+    pk_url_kwarg = 'pgto_pk'
+    template_name ='financeiro/att_pgto.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['att_pgto_form']=context['form']
+
+
+    def form_valid(self, att_pgto_form):
+        response=super().form_valid(att_pgto_form)
+        messages.success(self.request, 'Pagamento atualizado com sucesso!')
+        return response
+
+    def form_invalid(self, att_pgto_form):
+        response = super().form_invalid(att_pgto_form)
+        messages.warning(self.request, 'Operação nao efetuada!')
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy('financeiro:conta_a_pagar',kwargs={'pgto_pk':self.object.pk})
+
+
+
+class Atualizar_Rcbmto(LoginRequiredMixin,UpdateView):
+    model = Contas_a_receber
+    form_class = forms.Contas_a_receber_form
+    pk_url_kwarg = 'recebinenbto_pk'
+    template_name ='financeiro/att_rcbmt.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['att_recebimento_form']=context['form']
+
+
+    def form_valid(self, att_recebimento_form):
+        response=super().form_valid(att_recebimento_form)
+        messages.success(self.request, 'recebimento atualizado com sucesso!')
+        return response
+
+    def form_invalid(self, att_recebimento_form):
+        response = super().form_invalid(att_recebimento_form)
+        messages.warning(self.request, 'Operação nao efetuada!')
+        return response
+#fazer o conta  receber
+    # def get_success_url(self):
+    #     return reverse_lazy('financeiro:conta_a_pagar',kwargs={'pgto_pk':self.object.pk})
 
 
 
