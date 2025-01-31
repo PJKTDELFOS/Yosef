@@ -20,7 +20,8 @@ from .models import Centro_de_custo,Contas_a_pagar,Contas_a_receber
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-# Create your views here.
+# Create your views here.falta fazer a injeção de arquivos, terminar os templates,
+
 
 
 class Lista_Contas_a_Pagar(LoginRequiredMixin,ListView):
@@ -30,29 +31,11 @@ class Lista_Contas_a_Pagar(LoginRequiredMixin,ListView):
     paginate_by = 2
 
     #fazer o restante da logica
-
-
-class Lista_Contas_a_Receber(LoginRequiredMixin,ListView):
-    model = Contas_a_pagar
-    template_name = 'financeiro/lista_contas_a_receber.html'
-    context_object_name = 'recebimentos'
-    paginate_by = 2
-
-    #fazer o restante da logica
-
 class Conta_a_pagar(LoginRequiredMixin,DetailView):
     model = Contas_a_pagar
     template_name = 'financeiro/pagamento.html'
     context_object_name = 'pagamento'
     pk_url_kwarg = 'pgto_pk'
-
-class Conta_a_receber(LoginRequiredMixin,DetailView):
-    model = Contas_a_receber
-    template_name = 'financeiro/recebimento.html'
-    context_object_name = 'recebimento'
-    pk_url_kwarg = 'recebimento_pk'
-
-
 class Criar_Pagamento(LoginRequiredMixin,CreateView):
     model = Contas_a_pagar
     template_name = 'financeiro/novo_pgto.html'
@@ -73,8 +56,6 @@ class Criar_Pagamento(LoginRequiredMixin,CreateView):
         response=super().form_invalid(cadastrar_pgto_form)
         messages.success(self.request, 'Pagamento nao cadastrado!')
         return response
-
-
 class Atualizar_Pgto(LoginRequiredMixin,UpdateView):
     model = Contas_a_pagar
     form_class = forms.Contas_a_pagar_form
@@ -84,6 +65,7 @@ class Atualizar_Pgto(LoginRequiredMixin,UpdateView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['att_pgto_form']=context['form']
+        return context
 
 
     def form_valid(self, att_pgto_form):
@@ -98,8 +80,50 @@ class Atualizar_Pgto(LoginRequiredMixin,UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('financeiro:conta_a_pagar',kwargs={'pgto_pk':self.object.pk})
+class Deletepgt(LoginRequiredMixin,DeleteView):
+    model = Contas_a_pagar
+    success_url = reverse_lazy('financeiro:listacontasapagar')
+    pk_url_kwarg = 'pgto_pk'
+
+    def post(self, request, *args, **kwargs):
+        messages.success(self.request,'pagamento deletado com sucesso!')
 
 
+
+class Lista_Contas_a_Receber(LoginRequiredMixin,ListView):
+    model = Contas_a_pagar
+    template_name = 'financeiro/lista_contas_a_receber.html'
+    context_object_name = 'recebimentos'
+    paginate_by = 2
+
+    #fazer o restante da logica
+
+class Conta_a_receber(LoginRequiredMixin,DetailView):
+    model = Contas_a_receber
+    template_name = 'financeiro/recebimento.html'
+    context_object_name = 'recebimento'
+    pk_url_kwarg = 'recebimento_pk'
+
+class Criar_Recebimento(LoginRequiredMixin,CreateView):
+    model = Contas_a_receber
+    template_name = 'financeiro/novo_pgto.html'
+    form_class = forms.Contas_a_receber_form
+    success_url = reverse_lazy('financeiro:listacontasareceber')
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['cadastrar_rcbm_form']=context['form']
+        return context
+
+    def form_valid(self, cadastrar_rcbm_form):
+        response=super().form_valid(cadastrar_rcbm_form)
+        messages.success(self.request, 'Recebimento cadastrado com sucesso!')
+        return response
+
+    def form_invalid(self, cadastrar_rcbm_form):
+        response=super().form_invalid(cadastrar_rcbm_form)
+        messages.success(self.request, 'Recebimento nao cadastrado!')
+        return response
 
 class Atualizar_Rcbmto(LoginRequiredMixin,UpdateView):
     model = Contas_a_receber
@@ -111,7 +135,6 @@ class Atualizar_Rcbmto(LoginRequiredMixin,UpdateView):
         context=super().get_context_data(**kwargs)
         context['att_recebimento_form']=context['form']
 
-
     def form_valid(self, att_recebimento_form):
         response=super().form_valid(att_recebimento_form)
         messages.success(self.request, 'recebimento atualizado com sucesso!')
@@ -121,12 +144,10 @@ class Atualizar_Rcbmto(LoginRequiredMixin,UpdateView):
         response = super().form_invalid(att_recebimento_form)
         messages.warning(self.request, 'Operação nao efetuada!')
         return response
-#fazer o conta  receber
-    # def get_success_url(self):
-    #     return reverse_lazy('financeiro:conta_a_pagar',kwargs={'pgto_pk':self.object.pk})
 
+class DeleteRcbmt(LoginRequiredMixin,DeleteView):
+    model = Contas_a_receber
+    success_url = reverse_lazy('financeiro:listacontasareceber')
 
-
-
-
-
+    def post(self, request, *args, **kwargs):
+        messages.success(self.request,'recebimento deletado com sucesso!')

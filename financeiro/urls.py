@@ -26,13 +26,17 @@ urlpatterns = [
 
     path('contasapagar', views.Lista_Contas_a_Pagar.as_view(),
          name='listacontasapagar'),
-
     path('contasapagar/<int:pgto_pk>', views.Conta_a_pagar.as_view(),
          name='conta_a_pagar'),
-
-path('contasapagar/criar_conta', views.Criar_Pagamento.as_view(),
+    path('contasapagar/criar_conta', views.Criar_Pagamento.as_view(),
          name='cadastrar_pagamento'),
+    path('contasapagar/atualizarpagamento/<int:pgto_pk>', views.Atualizar_Pgto.as_view(),
+         name='atualizar_pagamento'),
+    path('contasapagar/<int:pgto_pk>/deletarpagamento', views.Deletepgt.as_view(),
+         name='delete_pagamento'),
 
+
+#recebimentos
 
 
 

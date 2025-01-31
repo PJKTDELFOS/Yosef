@@ -2,33 +2,7 @@ from django.db import models
 from processos.models import Pedidos
 from utils import tools_utils
 # Create your models here.
-'''
-contas a pagar
-centro_de_custo(deve ser uma foreign key)
-vencimento(ordenar os arquivos das pastas)
-valor(deve ser um decimal)
-credor
-origem
-data_de_criacao
-descricao
-nota_fiscal_compra
-numero de parcelas(se parcelado, se nao a vista)
-valor das parcelas(total  caso seja a vista)
-status
-ocorrencias
-------------------------------------------
-contas a receber
-origem(pedido)
-contrato(contrato origem do pedido
-nota fiscal(pedido)
-valor total do pedido
-descrição
-data_cobrança
-data_pgto
-status
-tipo_documento
-arquivos
-'''
+
 class Centro_de_custo(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()

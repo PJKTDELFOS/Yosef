@@ -16,6 +16,41 @@
       <p class="table-cel" ><b>Cento de Custo</b> {{pagamento.Centrodecusto.nome}}</p>
     <p class="table-cel" ><b>Data de vencimento</b> {pagamento.vencimento}}</p>
 
+ <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; align-items: stretch;">
+                <form method="post" action="{% url 'financeiro:atualizar_pagamento' pagamento.pk %}"
+                      style="margin: 0; flex: 1;">
+                        {% csrf_token %}
+
+                        <a href="{% url 'financeiro:atualizar_pagamento' pagamento.pk %}" style="flex: 1;
+                        height: 50px;width: 50%;
+                        text-align: center;
+                        display: flex; align-items:center; justify-content: center; background-color: #007bff;
+                        color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                                Editar pagameno
+                        </a>
+                </form>
+
+                <form method="post" action="{% url 'financeiro:delete_pagamento' pagamento.pk %}" style="margin: 0; flex: 1;">
+                    {% csrf_token %}
+                    <button
+                        style="flex: 1; height: 50px;width: 50%; text-align: center; padding: 10px;
+                        background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="return confirm('Ao apagar o processo, contratos e pedidos associados serão perdidos')"
+                    >
+                        Excluir
+                    </button>
+                </form>
+       <a href="{% url 'financeiro:listacontasapagar' %}"
+            style="flex: 1; height: 50px;width: 50%; text-align: center; display: flex; align-items:
+            center; justify-content: center; background-color: #007bff; color: #fff;
+            text-decoration: none; border-radius: 5px; cursor: pointer;">
+            Retornar
+        </a>
+    </div>
+
 </div>
+
+
 
 {% endblock content_finan %}
