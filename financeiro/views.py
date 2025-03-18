@@ -106,9 +106,10 @@ class Conta_a_receber(LoginRequiredMixin,DetailView):
 
 class Criar_Recebimento(LoginRequiredMixin,CreateView):
     model = Contas_a_receber
-    template_name = 'financeiro/novo_pgto.html'
+    template_name = 'financeiro/new_recebimento.html'
     form_class = forms.Contas_a_receber_form
-    success_url = reverse_lazy('financeiro:listacontasareceber')
+    pk_url_kwarg = 'recebimento_pk'
+
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
@@ -124,6 +125,9 @@ class Criar_Recebimento(LoginRequiredMixin,CreateView):
         response=super().form_invalid(cadastrar_rcbm_form)
         messages.success(self.request, 'Recebimento nao cadastrado!')
         return response
+
+    def get_success_url(self):
+        return reverse_lazy('financeiro:conta_a_receber',kwargs={'recebimento_pk':self.object.pk})
 
 class Atualizar_Rcbmto(LoginRequiredMixin,UpdateView):
     model = Contas_a_receber

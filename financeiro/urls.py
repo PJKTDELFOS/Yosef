@@ -43,10 +43,19 @@ urlpatterns = [
     path('contasareceber', views.Lista_Contas_a_Receber.as_view(),
          name='listacontasareceber'),
 
-    # path('contasareceber', views.Contas_a_Receber.as_view(),
-    #      name='listacontasareceber'),
+    path('contasareceber/<int:recebimento_pk>',views.Conta_a_receber.as_view(),name='conta_a_receber'),
 
-    #crud processo
+    path('contasareceber/criar_recebimento', views.Criar_Recebimento.as_view(),
+         name='novorecebimento'),
+
+    path('contasareceber/atualizarrecebimento/<int:recebimento_pk>',
+         views.Atualizar_Rcbmto.as_view(),name='att_conta_a_receber'),
+
+
+    path('contasareceber/<int:recebimento_pk>/deletarrecebimento/',
+         views.DeleteRcbmt.as_view(),name='delete_conta_a_receber'),
+
+
 
 
 ]

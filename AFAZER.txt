@@ -11,3 +11,11 @@ fazer o menu, fazer o include, para
 fazer a tabela de centro de custos, com filtragem reversa, de quais contas estao em cada centro de custo
 fazer o contas a receber, acessar o pedido
 definri mais objetivos
+
+fazer form att rcbm
+fazer novo recebimento  template
+fazer recebimento
+e as logicas por traz
+fazer att recebimento template
+fazer cadastro de centros de custo
+formatar a data {{ objeto.data|localtime|date:"d/m/Y H:i" }}
