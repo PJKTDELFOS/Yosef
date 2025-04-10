@@ -13,8 +13,25 @@
 <h1>Conta a pagar</h1>
  <div class="single-contact">
     <p class="table-cel" ><b>id pagamento</b> {{pagamento.pk}}</p>
-      <p class="table-cel" ><b>Cento de Custo</b> {{pagamento.Centrodecusto.nome}}</p>
-    <p class="table-cel" ><b>Data de vencimento</b> {pagamento.vencimento}}</p>
+     <p class="table-cel" ><b>Cento de Custo</b> {{pagamento.Centrodecusto.nome}}</p>
+     <p class="table-cel" ><b>Data de vencimento</b> {{pagamento.vencimento}}</p>
+    <p class="table-cel" ><b>Nome</b> {{pagamento.conta}}</p>
+
+     <div>
+        <h3>Documentos disponíveis</h3>
+            {% if arquivos %}
+                <ul>
+                    {% for arquivo in arquivos %}
+                    <li>
+                         <a href="{{ MEDIA_URL }}financeiro/pagamento/{{ pagamento.vencimento|urlencode }}/{{ pagamento.pk }}/{{ arquivo }}" download>{{ arquivo }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            <p>Nenhum documento disponível.</p>
+            {% endif %}
+    </div>
+
 
  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px; align-items: stretch;">

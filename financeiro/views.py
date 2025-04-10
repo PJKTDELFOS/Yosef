@@ -36,6 +36,35 @@ class Conta_a_pagar(LoginRequiredMixin,DetailView):
     template_name = 'financeiro/pagamento.html'
     context_object_name = 'pagamento'
     pk_url_kwarg = 'pgto_pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        arquivo=self.object.vencimento
+        subpasta=self.object.pk
+        caminho_base = os.path.join(settings.MEDIA_ROOT, f'financeiro/pagamento/{arquivo}/{subpasta}')
+
+        print(f'Verificando caminho: {caminho_base}')
+
+        arquivos = {}
+
+        if os.path.exists(caminho_base) and os.path.isdir(caminho_base):
+            print("Diretório existe!")
+            lista_arquivos = os.listdir(caminho_base)
+
+            if lista_arquivos:
+                print("Arquivos encontrados:")
+                for arquivo in lista_arquivos:
+                    print(f" arquivo achado - {arquivo}")
+                    arquivos[arquivo] = os.path.join(caminho_base, arquivo)
+            else:
+                print("Nenhum arquivo encontrado no diretório.")
+        else:
+            print("O diretório não existe ou não é um diretório válido.")
+
+        context['arquivos'] = arquivos
+        return context
+
+
 class Criar_Pagamento(LoginRequiredMixin,CreateView):
     model = Contas_a_pagar
     template_name = 'financeiro/novo_pgto.html'
@@ -155,3 +184,4 @@ class DeleteRcbmt(LoginRequiredMixin,DeleteView):
 
     def post(self, request, *args, **kwargs):
         messages.success(self.request,'recebimento deletado com sucesso!')
+

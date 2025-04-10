@@ -1,8 +1,10 @@
+import unicodedata
 from django.template import Library
 from openpyxl import load_workbook
 from django import template
 import os
 from django.conf import settings
+import unidecode
 
 register=Library()
 @register.filter
@@ -96,7 +98,10 @@ def docs_rh_load_path(instance, filename):
 
 def docs_finan_load_path(instance,filename):
     vencimento = instance.vencimento
-    return os.path.join(f'financeiro/pagamento/{vencimento}',filename )
+    subpasta=instance.pk
+    arquivo=instance.documentos
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'financeiro/pagamento/{vencimento}/{subpasta}/',filename )
 
 
 def criar_pedido(instance,filename):

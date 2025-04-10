@@ -23,15 +23,6 @@ from ..models import Processo
 
 # Create your views here.
 
-#trocar nome no fim
-
-
-
-
-
-
-
-
 #PROCESSOS
 class listarprocessos(ListView):
     model = models.Processo
@@ -360,7 +351,7 @@ def delete_arquivos_contrato(request,pk,processo_pk):
                     print(f"Erro ao deletar o arquivo: {e}")
             else:
                 print("Parâmetros inválidos enviados na requisição.")
-    return redirect('processos:detalhe_contrato',pk=pk)
+    return redirect('processos:detalhe_contrato_via_tabela',pk=pk)
 
 class listarpedidos(ListView):
     model=models.Pedidos

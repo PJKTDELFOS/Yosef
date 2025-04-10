@@ -55,15 +55,5 @@ urlpatterns = [
     path('listarrh/<int:colab_pk>/uniforme/<int:uniforme_pk>/atualizar/',views.Atualizar_uniforme_epi.as_view(),
          name='atualizaruniforme'),
 
-
-
-
-
-
-
-
-
-    #crud processo
-
-
+    #crud process
 ]

@@ -1,30 +1,30 @@
 {% extends "global/base.html" %}
 {% load crispy_forms_tags %}
 {% block header_processos %}
-{% include "processos/menu.html" %}
+    {% include "processos/menu.html" %}
 {% endblock %}
 {% block content_contratos %}
-<div class="form-wrapper">
-    <!-- O atributo action usa a mesma URL associada à view -->
-    <form
-        action=""
-        method="post"
-        enctype="multipart/form-data"> <!-- Necessário se houver upload de arquivos -->
-        <h1>contrato</h1>
+    <div class="form-wrapper">
+        <!-- O atributo action usa a mesma URL associada à view -->
+        <form
+                action=""
+                method="post"
+                enctype="multipart/form-data"> <!-- Necessário se houver upload de arquivos -->
+            <h1>contrato</h1>
 
-        {% csrf_token %} <!-- Proteção contra ataques CSRF -->
+            {% csrf_token %} <!-- Proteção contra ataques CSRF -->
 
-        <!-- Renderiza o formulário com estilo do Crispy Forms -->
-        {{ create_contract_form|crispy}}
+            <!-- Renderiza o formulário com estilo do Crispy Forms -->
+            {{ create_contract_form|crispy }}
 
-        <!-- Botões de submissão -->
-        <div class="d-flex justify-content-between">
-              <button type="submit" class="btn btn-primary">
+            <!-- Botões de submissão -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">
                     <b>INSERIR</b>
                 </button>
 
                 <a href="{% url 'processos:processo' %}" class="btn btn-secondary">RETORNAR</a>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

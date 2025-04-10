@@ -19,3 +19,7 @@ e as logicas por traz
 fazer att recebimento template
 fazer cadastro de centros de custo
 formatar a data {{ objeto.data|localtime|date:"d/m/Y H:i" }}
+
+adicionar aos dias os pagamentos, e dentro as subpastas
+
+fazer widgets

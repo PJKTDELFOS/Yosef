@@ -1,6 +1,7 @@
 from django.db import models
 from processos.models import Pedidos
 from utils import tools_utils
+from django.utils import timezone
 # Create your models here.
 
 class Centro_de_custo(models.Model):
@@ -18,7 +19,7 @@ class Contas_a_pagar(models.Model):
     conta=models.CharField(max_length=100)
     Centrodecusto = models.ForeignKey(
         Centro_de_custo, on_delete=models.CASCADE,related_name='centrodecusto',verbose_name='Centro de Custo')
-    vencimento = models.DateField()
+    vencimento = models.DateField(default=timezone.now,blank=True,null=True)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     credor = models.CharField(max_length=100)
     origem = models.CharField(max_length=100)

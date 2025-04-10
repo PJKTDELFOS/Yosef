@@ -2,20 +2,20 @@
 {% load alfilters %}
 
 {% block header_processos %}
-{% include "processos/menu.html" %}
+    {% include "processos/menu.html" %}
 {% endblock %}
 
 {% block searchprocesso %}
     <div class="search">
         <form action="{% url 'processos:processo' %}" method="get">
             <input
-                type="text"
-                class="search-input"
-                placeholder="SEARCH"
-                name="q"
-                id="search"
-                value="{{ request.GET.q }}"
-                style="background: slategray"
+                    type="text"
+                    class="search-input"
+                    placeholder="SEARCH"
+                    name="q"
+                    id="search"
+                    value="{{ request.GET.q }}"
+                    style="background: slategray"
             >
         </form>
     </div>
@@ -28,13 +28,13 @@
 
 
     <h1 class="table-header" style="text-align: center">COMERCIAL</h1>
-   <div class="responsive-table">
-    <table class="contacts-table">
-        <caption class="table-caption">
-            <h1>PROCESSOS</h1>
-        </caption>
-        <thead>
-           <tr class="table-row table-row-header">
+    <div class="responsive-table">
+        <table class="contacts-table">
+            <caption class="table-caption">
+                <h1>PROCESSOS</h1>
+            </caption>
+            <thead>
+            <tr class="table-row table-row-header">
                 <th class="table-header" style="text-align: center">Id do Processo</th>
                 <th class="table-header" style="text-align: center">Nº Processo</th>
                 <th class="table-header" style="text-align: center">Nº licitação</th>
@@ -42,22 +42,23 @@
 
                 <th class="table-header" style="text-align: center">
                     Modalidade
-                    <form  action="{% url 'processos:processo' %}" method="get" >
+                    <form action="{% url 'processos:processo' %}" method="get">
 
                         {% for key , value  in request.GET.items %}
                             {% if key != modalidade %}
-                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
                             {% endif %}
                         {% endfor %}
-                        
+
                         <select name="modalidade" onchange="this.form.submit()" id="">
                             <option value="" {% if not request.GET.modalidade %}selected{% endif %}>
                                 SELECIONE
                             </option>
 
                             {% for modalidade in modalidades %}
-                                <option value="{{ modalidade }}" {% if request.GET.modalidade == modalidade %}selected {% endif %}>
-                                    {{modalidade}}
+                                <option value="{{ modalidade }}"
+                                        {% if request.GET.modalidade == modalidade %}selected {% endif %}>
+                                    {{ modalidade }}
                                 </option>
                             {% endfor %}
                         </select>
@@ -81,54 +82,23 @@
 
                 <th class="table-header" style="text-align: center">
                     TIPO
-                    <form  action="" method="get" >
+                    <form action="" method="get">
                         {% for key , value  in request.GET.items %}
                             {% if key != tipo %}
-                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
                             {% endif %}
                         {% endfor %}
 
-                        
-                            <select name="tipo" onchange="this.form.submit()" id="">
 
-                                <option value="" {% if not request.GET.tipo %}selected{% endif %}>
-                                    SELECIONE
-                                </option>
+                        <select name="tipo" onchange="this.form.submit()" id="">
 
-                                {% for tipo in tipos %}
-                                    <option value="{{ tipo}}" {% if request.GET.tipo == tipo %}selected{% endif %}>
-                                        {{tipo}}
-                                    </option>
-                                {% endfor %}
-
-                            </select>
-
-                    </form>
-                </th>
-
-
-                <th class="table-header" style="text-align: center">Valor total</th>
-
-
-
-
-                <th class="table-header" style="text-align: center">
-                    status
-                    <form  action="{% url 'processos:processo' %}" method="get" >
-                        {% for key , value  in request.GET.items %}
-                            {% if key != status %}
-                            <input type="hidden" name="{{ key }}" value="{{ value }}">
-                            {% endif %}
-                        {% endfor %}
-
-                        <select name="status" onchange="this.form.submit()" id="">
-
-                            <option value="" {% if not request.GET.status %}selected{% endif %}>
-                            SELECIONE
+                            <option value="" {% if not request.GET.tipo %}selected{% endif %}>
+                                SELECIONE
                             </option>
-                            {% for status in situacao %}
-                                <option value="{{ status}}" {% if request.GET.status == status %}selected{% endif %}>
-                                    {{status}}
+
+                            {% for tipo in tipos %}
+                                <option value="{{ tipo }}" {% if request.GET.tipo == tipo %}selected{% endif %}>
+                                    {{ tipo }}
                                 </option>
                             {% endfor %}
 
@@ -138,36 +108,65 @@
                 </th>
 
 
-           </tr>
-        </thead>
-        <tbody>
+                <th class="table-header" style="text-align: center">Valor total</th>
 
-        </tbody>
+
+                <th class="table-header" style="text-align: center">
+                    status
+                    <form action="{% url 'processos:processo' %}" method="get">
+                        {% for key , value  in request.GET.items %}
+                            {% if key != status %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+
+                        <select name="status" onchange="this.form.submit()" id="">
+
+                            <option value="" {% if not request.GET.status %}selected{% endif %}>
+                                SELECIONE
+                            </option>
+                            {% for status in situacao %}
+                                <option value="{{ status }}" {% if request.GET.status == status %}selected{% endif %}>
+                                    {{ status }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </form>
+                </th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
             {% for processo in processos %}
                 <tr class="table-row">
                     <td class="table-cel" style="text-align: center">
-                    <a href="{% url 'processos:detalhe' processo.pk %}">
-                                {{ processo.pk }}
-                    </a>
+                        <a href="{% url 'processos:detalhe' processo.pk %}">
+                            {{ processo.pk }}
+                        </a>
                     </td>
-                    <td class="table-cel" style="text-align: center">{{processo.numero_processo}}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.numero_processo }}</td>
 
-                    <td class="table-cel" style="text-align: center">{{processo.numero_licitacao}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.contratante}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.modalidade}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.data_disputa}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.tipo}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.valor_total|formata_preco}}</td>
-                    <td class="table-cel" style="text-align: center">{{processo.status}}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.numero_licitacao }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.contratante }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.modalidade }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.data_disputa }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.tipo }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.valor_total|formata_preco }}</td>
+                    <td class="table-cel" style="text-align: center">{{ processo.status }}</td>
                 </tr>
 
             {% endfor %}
 
-    </table>
-   </div>
+        </table>
+    </div>
 
     <div>
 
 
     </div>
-{% endblock  %}
+{% endblock %}
