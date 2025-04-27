@@ -103,6 +103,12 @@ def docs_finan_load_path(instance,filename):
     filename=unidecode.unidecode(filename.replace(" ", "_"))
     return os.path.join(f'financeiro/pagamento/{vencimento}/{subpasta}/',filename )
 
+def docs_finan_load_path_rcbm(instance,filename):
+    data_pgto = instance.data_pgto
+    subpasta=instance.origem
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'financeiro/recebimento/{data_pgto}/{subpasta}/',filename )
+
 
 def criar_pedido(instance,filename):
     template_form = 'modelo_pedido.xlsx'

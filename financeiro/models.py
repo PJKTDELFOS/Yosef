@@ -66,7 +66,7 @@ class Contas_a_receber(models.Model):
         ('enviado','enviado'),('Vencida','Vencida'),('pago','pago'),
     ),verbose_name='status')
     tipo_documento = models.CharField(max_length=100)
-    arquivos = models.FileField(upload_to='A_receber/%Y/%m/%d',null=True,blank=True)
+    arquivos = models.FileField(upload_to=tools_utils.docs_finan_load_path_rcbm,null=True,blank=True)
 
     def __str__(self):
         return self.cobrança

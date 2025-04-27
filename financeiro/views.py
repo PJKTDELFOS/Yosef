@@ -64,7 +64,6 @@ class Conta_a_pagar(LoginRequiredMixin,DetailView):
         context['arquivos'] = arquivos
         return context
 
-
 class Criar_Pagamento(LoginRequiredMixin,CreateView):
     model = Contas_a_pagar
     template_name = 'financeiro/novo_pgto.html'
@@ -116,8 +115,6 @@ class Deletepgt(LoginRequiredMixin,DeleteView):
 
     def post(self, request, *args, **kwargs):
         messages.success(self.request,'pagamento deletado com sucesso!')
-
-
 
 class Lista_Contas_a_Receber(LoginRequiredMixin,ListView):
     model = Contas_a_pagar
@@ -184,4 +181,28 @@ class DeleteRcbmt(LoginRequiredMixin,DeleteView):
 
     def post(self, request, *args, **kwargs):
         messages.success(self.request,'recebimento deletado com sucesso!')
+
+class Criar_Centro_de_Custo(LoginRequiredMixin,CreateView):
+    model = Centro_de_custo
+    template_name = 'financeiro/new_centro_custo.html'
+    form_class = forms.Centro_de_custo_form
+    success_url = reverse_lazy('financeiro:listacontasapagar')
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['centro_de_custo_form']=context['form']
+        return context
+
+    def form_valid(self, centro_de_custo_form):
+        response=super().form_valid(centro_de_custo_form)
+        messages.success(self.request, 'Centro de custo criado com sucesso!')
+        return response
+
+    def form_invalid(self, centro_de_custo_form):
+        response=super().form_invalid(centro_de_custo_form)
+        messages.warning(self.request,'Falha na criação do centro de custo')
+        return response
+
+
+
 

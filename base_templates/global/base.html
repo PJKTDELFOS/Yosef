@@ -34,24 +34,23 @@
         {% block content_contratos %}{% endblock content_contratos %}
         {% block content_rh %}{% endblock content_rh %}
         {% block content_finan %}{% endblock content_finan %}
-
-
     </main>
 <div>
     {% include "global/partials/_pagination.html" %}
 </div>
-    <!-- script para  limpar o campo de filtagem e retornar a pagina inicial, por enquanto precisa remover -->
+
  <script>
         document.querySelectorAll('select').forEach(select => {
             select.addEventListener('change', function () {
-                // Verifica se algum <select> tem o valor vazio, ou seja, um <option> vazio foi selecionado
-                const isAnySelectOptionEmpty = Array.from(select.options).some(option => option.value === "" && option.selected);
+
+                const isAnySelectOptionEmpty = Array.from(select.options).
+                some(option => option.value === "" && option.selected);
 
                 if (isAnySelectOptionEmpty) {
-                    // Remove o parâmetro do filtro se algum option vazio for selecionado
+
                     const url = new URL(window.location.href);
-                    url.searchParams.delete(this.name); // Remove o parâmetro do filtro
-                    window.location.href = url.toString(); // Atualiza a página sem o filtro
+                    url.searchParams.delete(this.name);
+                    window.location.href = url.toString();
                 }
             });
         });

@@ -59,6 +59,12 @@ urlpatterns = [
          views.DeleteRcbmt.as_view(),name='delete_conta_a_receber'),
 
 
+    path('centrodecusto/criar_centro_de_custo', views.Criar_Centro_de_Custo.as_view(),
+         name='novocentrodecusto'),
+
+
+
+
 
 
 ]
