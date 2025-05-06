@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from processos.models import Processo,Contratos,Pedidos
+from processos.models import Processo,Contratos,Pedidos,ItemAlocado
 from django.db import models
 
 
@@ -19,7 +19,14 @@ class Contratoinline(admin.TabularInline):
 class Pedidoinline(admin.TabularInline):
     model = Pedidos
     extra=1
-    fields = ('id',  'contratante', 'numero',)
+    fields = ('id',  'contratante', 'numero','custo_total')
+    readonly_fields = ('custo_total',)
+
+class Item_alocado_inline(admin.TabularInline):
+    model =ItemAlocado
+    extra=1
+    fields = ('id','item_alocado','quantidade','preco_unitario_medio_pedido_formatado','valor_total_alocado_formatado')
+    readonly_fields = ('valor_total_alocado_formatado','preco_unitario_medio_pedido_formatado')
 
 @admin.register(Processo)
 class processoAdmin(admin.ModelAdmin):
@@ -32,15 +39,14 @@ class processoAdmin(admin.ModelAdmin):
     list_editable = ('show',)
 
 
-
-
 @admin.register(Contratos)
 class ContratoAdmin(admin.ModelAdmin):
-    list_display = ('id','processo','contratante','numero',
+    list_display = ('id','processo','contratante','numero','custo_total_contrato',
                     'seguro','seguradora','valor_total','inicio',
-                    'vigencia','fim_contrato','executado','executavel')
+                    'vigencia','fim_contrato','executado','executavel',)
     ordering = ('-id',)
     inlines = [Pedidoinline]
+    readonly_fields = ('custo_total_contrato',)
     formfield_overrides = {
         models.CharField: {'widget': forms.TextInput(attrs={'disabled': False})},  # Corrigido o uso de CharField
     }
@@ -58,6 +64,8 @@ class Pedidoadmin(admin.ModelAdmin):
     list_display = ('id','contrato','numero','valor','data_entrega','show','data_hora_att',)
     ordering = ('-data_entrega',)
     list_editable = ('show',)
+    readonly_fields = ('custo_total',)
+    inlines = [Item_alocado_inline]
 
 
 

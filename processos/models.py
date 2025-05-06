@@ -1,13 +1,15 @@
-from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User  # para o user que vai cadastrar e operar o sistema
 import pytz
 from utils import tools_utils
-from datetime import datetime
 from openpyxl import load_workbook
 import os
 from django.conf import settings
+from django.db import models
+from operacional.models import Item_almoxarifado
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 # Create your models here
 def validade_pdf(value):
     if not value.name.endswith('.pdf'):
@@ -84,6 +86,8 @@ class Contratos (models.Model):
     contratante=models.CharField(max_length=50,blank=False,null=False,verbose_name='Contratante')
     objeto=models.TextField(max_length=1200,blank=False,verbose_name='Objeto',null=False)
     numero=models.CharField(max_length=50,blank=False,null=False,default='')
+    custo_total_contrato = models.DecimalField(max_digits=18, blank=False, decimal_places=2, null=False,
+                                               default=0.00, editable=False)
     seguro = models.CharField(default='',blank=True, max_length=25,null=False, choices=(
         ('', ''),
         ('SIM', 'POSSUI SEGURO'),
@@ -110,6 +114,7 @@ class Contratos (models.Model):
     valor_total = models.DecimalField(max_digits=18,blank=False, decimal_places=2,null=False,default=0.00,
                                       verbose_name="Valor Total")
     observacoes=models.TextField(max_length=1800,blank=False,null=False,default='')
+
     show=models.BooleanField(default=True,blank=False,)
 
 
@@ -189,9 +194,8 @@ class Pedidos(models.Model):
         verbose_name="Documentos ", max_length=255,)
     endereco_entrega=models.TextField(blank=True,default='',max_length=1800)
     observacoes=models.TextField(blank=True,default='',max_length=1800)
-    data_hora_att=models.DateTimeField(blank=True,null=True,auto_now=True,)
-
-
+    data_hora_att=models.DateTimeField(blank=True,null=True,auto_now=True,editable=False)
+    custo_total=models.DecimalField(max_digits=10, decimal_places=2,default=0,editable=False)
 
     class Meta:
         verbose_name = "pedido"
@@ -199,6 +203,9 @@ class Pedidos(models.Model):
 
     def __str__(self):
         return f' Pedido nº {self.numero}, Contrato {self.contrato}'
+
+
+
 
     def criar_planilha(self):
         template_form = os.path.join(settings.BASE_DIR, 'processos/templates/planilhas/modelo_pedido.xlsx')
@@ -254,6 +261,63 @@ class Pedidos(models.Model):
             self.documentos = temp_doc
         super().save(*args, **kwargs)
         self.criar_planilha()
+
+
+class ItemAlocado(models.Model):
+    pedido=models.ForeignKey(Pedidos,on_delete=models.CASCADE,verbose_name='Pedido',related_name='itens_alocados')
+    item_alocado=models.ForeignKey(Item_almoxarifado,on_delete=models.CASCADE,
+                                   verbose_name='Itens alocados',related_name='itens_alocados')
+    data_aloccado=models.DateField(blank=True,null=True,default=timezone.now)
+    quantidade=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2)
+    valor_total_alocado=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False,)
+    preco_unitario_medio_pedido=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False,)
+
+    @property
+    def preco_unitario_medio(self):
+        preco_unitario_medio=self.item_alocado.Preco_unitario_medio
+        return preco_unitario_medio
+
+
+    def preco_unitario_medio_pedido_formatado(self):
+        valor_unitario=self.preco_unitario_medio_pedido
+        if valor_unitario is None:
+            return  "R$ 0,00"
+        return tools_utils.formata_preco(self.preco_unitario_medio_pedido)
+    #aqui ponho a funçao que vai ser exibida
+    preco_unitario_medio_pedido_formatado.short_description = 'valor Unitario medio pedido '
+
+    @property
+    def Valor_total_alocado(self):
+        preco_unitario_item_alocado=self.item_alocado.Preco_unitario_medio
+        valor_total_gasto=preco_unitario_item_alocado*self.quantidade
+        return valor_total_gasto
+
+    def valor_total_alocado_formatado(self):
+        return tools_utils.formata_preco(self.Valor_total_alocado)
+    valor_total_alocado_formatado.short_description = 'Valor total gasto '
+
+    def __str__(self):
+        return f' {self.item_alocado.nome}'
+    class Meta:
+        verbose_name='Item alocado'
+        verbose_name_plural='Items alocados'
+
+    def  save(self, *args, **kwargs):
+        if self.quantidade:
+            super().save(*args, **kwargs)
+        else:
+            estoque=self.item_alocado.quantidade_total
+            falta=self.quantidade-estoque
+            raise ValueError(f'Estoque insuficiente. Faltam {falta} unidades.')
+
+
+        if self.preco_unitario_medio_pedido is None:
+            self.preco_unitario_medio_pedido=self.item_alocado.Preco_unitario_medio
+
+        else:
+            self.preco_unitario_medio_pedido = self.preco_unitario_medio_pedido
+
+        super().save(*args,**kwargs)
 
 
 

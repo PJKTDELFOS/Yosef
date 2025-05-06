@@ -9,7 +9,7 @@ import unidecode
 register=Library()
 @register.filter
 def formata_preco(val):
-    return f'R$:{val:.2f}'.replace('.',',')
+    return f'R$:{val:.4f}'.replace('.',',')
 
 
 
@@ -109,7 +109,41 @@ def docs_finan_load_path_rcbm(instance,filename):
     filename=unidecode.unidecode(filename.replace(" ", "_"))
     return os.path.join(f'financeiro/recebimento/{data_pgto}/{subpasta}/',filename )
 
+def documentos_load_path(instance,filename):
+    documento = instance.documento
+    setor=instance.pedido_origem
+    tipo=instance.tipo_documento
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'documentos/{setor}/{tipo}/{documento}/',filename )
 
+
+def documentos_frota_load_path(instance,filename):
+    placa=instance.placa
+    ativo = instance.Ativo
+    nome_ativo=f'{ativo}-{placa}'
+    tipo_ativo=instance.tipo.tipo_de_ativo
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'operacional/frota/{tipo_ativo}/{nome_ativo}/',filename )
+
+def documentos_manutencao_frota_load_path(instance,filename):
+    placa=instance.Ativo_em_manutencao.placa
+    ativo = instance.Ativo_em_manutencao.Ativo
+    nome_ativo=f'{ativo}-{placa}'
+    tipo_ativo=instance.Ativo_em_manutencao.tipo.tipo_de_ativo
+    operacao=instance.operacao
+    ordem=instance.pk
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'operacional/frota/{tipo_ativo}/{nome_ativo}/manutencao/{operacao}/Ordem nº{ordem}/',filename )
+
+def documentos_amoxarifado_load_path(instance,filename):
+    tipo=instance.item.tipo
+    nome=instance.item.nome
+    lote=instance.nota
+    filename=unidecode.unidecode(filename.replace(" ", "_"))
+    return os.path.join(f'operacional/almoxarifado/'
+                        f'{tipo}/{nome}/lotes/{lote}/',filename )
+
+# ser operacional/frota/ativo/tipo_ativo/nome_ativo/manutencao/tipo/ordem/filename
 def criar_pedido(instance,filename):
     template_form = 'modelo_pedido.xlsx'
     workbook = load_workbook(filename=template_form)
@@ -137,6 +171,18 @@ def criar_pedido(instance,filename):
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     workbook.save(filename=save_path)
     print(f"Planilha salva como '{name}.xlsx'.")
+
+
+
+class CalculadoraCustoTotal:
+    def __init__(self, instance):
+        self.instance=instance
+
+    def calcular_total_alocado(self):
+        return sum(
+            recurso_alocado.custo_total() for
+            recurso_alocado in
+            self.instance.recurso_alocados.all())
 
 
 

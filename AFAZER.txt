@@ -23,3 +23,6 @@ formatar a data {{ objeto.data|localtime|date:"d/m/Y H:i" }}
 adicionar aos dias os pagamentos, e dentro as subpastas
 
 fazer widgets
+
+nos documentos buscar seguir os principios solid, e na entrega dos documentos , fazer um funçao so pra isso
+
