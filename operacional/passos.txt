@@ -1,0 +1,37 @@
+o que posso fazer?
+
+suprimentos internos
+
+suprimentos externos
+
+frota
+manutenção na frota
+
+tipo vai ser um foreign-feito
+
+almoxarifado contem
+suprimentos internos
+suprimentos externos
+cotação(foreignkey)
+uso (sejam e pedidos ou interno)
+
+inventario
+contem o  imobilizado como palcos, geradores ou coisas do genero
+
+isumo pode ser um foreign
+
+
+os itens de inventario e os suprimentos usados ficaram visiveis nos pedidos e vao gerar um valor total de custo no
+pedido alem de mao de obra estimada indicando qual trabalhador esta alocado, no caso a equipe que esta alocada
+
+sera capturado no pedido
+
+ele devera atribuir itens para o pedido, que iram gerar um custo  cada item tera seu custo, e  a soma sera o custo do
+pedido
+
+
+função para calculo do custo nos pedidos
+  @property
+    def custo_total_pedido(self):
+        custo_total_pedido=sum(item.valor_total_alocado or 0 for item in self.itemalocado_set.all())
+        return  f' R$ {custo_total_pedido:.2f}'.replace('.',',')
