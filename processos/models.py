@@ -8,6 +8,7 @@ import os
 from django.conf import settings
 from django.db import models
 from operacional.models import Item_almoxarifado
+from decimal import Decimal
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 # Create your models here
@@ -281,16 +282,17 @@ class ItemAlocado(models.Model):
     def preco_unitario_medio_pedido_formatado(self):
         valor_unitario=self.preco_unitario_medio_pedido
         if valor_unitario is None:
-            return  "R$ 0,00"
+            return  Decimal('0.00')
         return tools_utils.formata_preco(self.preco_unitario_medio_pedido)
     #aqui ponho a funçao que vai ser exibida
     preco_unitario_medio_pedido_formatado.short_description = 'valor Unitario medio pedido '
 
     @property
     def Valor_total_alocado(self):
-        preco_unitario_item_alocado=self.item_alocado.Preco_unitario_medio
-        valor_total_gasto=preco_unitario_item_alocado*self.quantidade
-        return valor_total_gasto
+        preco_unitario_item_alocado = self.item_alocado.Preco_unitario_medio
+        if preco_unitario_item_alocado is None or self.quantidade is None:
+            return Decimal('0.00')
+        return preco_unitario_item_alocado * self.quantidade
 
     def valor_total_alocado_formatado(self):
         return tools_utils.formata_preco(self.Valor_total_alocado)
@@ -303,20 +305,15 @@ class ItemAlocado(models.Model):
         verbose_name_plural='Items alocados'
 
     def  save(self, *args, **kwargs):
-        if self.quantidade:
-            super().save(*args, **kwargs)
-        else:
-            estoque=self.item_alocado.quantidade_total
-            falta=self.quantidade-estoque
+        estoque_disponivel=self.item_alocado.quantidade_total
+        if self.quantidade > estoque_disponivel:
+            falta=self.quantidade-estoque_disponivel
             raise ValueError(f'Estoque insuficiente. Faltam {falta} unidades.')
-
 
         if self.preco_unitario_medio_pedido is None:
             self.preco_unitario_medio_pedido=self.item_alocado.Preco_unitario_medio
-
         else:
             self.preco_unitario_medio_pedido = self.preco_unitario_medio_pedido
-
         super().save(*args,**kwargs)
 
 

@@ -176,7 +176,9 @@ class lote(models.Model):
 
 
 
-
+# class Historico_almoxarifado(models.Model):
+#     item_almoxarifado=models.ForeignKey(Item_almoxarifado,on_delete=models.CASCADE,verbose_name='Itemalmoxarifado')
+#     pedido=models.
 
 # duvida o calculo dos custo deve ser feito pelo preço medio ou pelo preço atualk?
 #fazer na segunda ou terça a migraçaõ
