@@ -1,0 +1,2545 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "ADMINISTRATIVO",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "COMERCIAL",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "FINANCEIRO",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "RECURSOS HUMANOS",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "OPERACIONAL",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$XdVTZluH27EIiIUqAHfjNf$BjhMKxV9N/JSgRnRnZnVdeLH0bmDTwhNC+fj6XVpDlI=",
+    "last_login": "2025-06-18T02:43:28.361Z",
+    "is_superuser": true,
+    "username": "adminalbert",
+    "first_name": "",
+    "last_name": "",
+    "email": "albert.franca1992@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-01-06T15:16:10.952Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2janbqbjtjjduhgo29eb2emnupijrtz6",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1u6XnG:V5G3YgkWzXywsLy9b-gU2da8reeprgQqLZbc4Uw-ziw",
+    "expire_date": "2025-05-04T16:45:22.454Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8evlpmambopq44vcpte8ikin2y2y6wos",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1tVDEN:MIxP2RZoXNd8nk9WmqHPwGf5Zt0dnXG9bVAi9dXmQSo",
+    "expire_date": "2025-01-21T17:19:03.505Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c7huwkc142s5vw0kgdi5oxd9i7f6vrfj",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1txtfr:CpdBnrBVPaACKWZf3PS3_XMb-GwfbcTPvgrMNXnpuS8",
+    "expire_date": "2025-04-10T20:17:59.351Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dyyy36g0vxsjad74geobnvpdofsnjarv",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1tahDc:cWRopWW7_9NtmgsoS8NiUTlFJWbiXnbr2gnJa3gSQeg",
+    "expire_date": "2025-02-05T20:20:56.525Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "etzff9yoxp5wls731xpfy47o9tvyh3e0",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1uCKvG:sBeoifA6Qb68JJblIZvBEfasCEqsngPCNQp70dwi0f4",
+    "expire_date": "2025-05-20T16:13:34.801Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ihx7vd1ggenjebmlbtsnhn7g10otc7r3",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1tuLRG:OnIgNRtWRX00aE77XvlbdgbpEtB545SPI-zFMq0hsfU",
+    "expire_date": "2025-04-01T01:08:14.304Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "keyw92jf7olbwu29pw024vt9ljg7u4wl",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1tix9e:eSbheLa8Nfwdz0kfilSe9yb-y491JTL3vs0O29QmTX0",
+    "expire_date": "2025-02-28T14:58:58.560Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pkxkrzekkbx4my5ltg7rvbo8ng6a998d",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1uHlLA:sanJ9MOKjETSr3jk1yQywgM3dmgrZHhYrOnn71AomXM",
+    "expire_date": "2025-06-04T15:26:44.410Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "r9loblgixp6bbuly4vmorq7rvo3oj9n0",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1u07S5:Ad_9DTafxdJLKCDn_7o3sUJ3gJ8DDCLh0ZTCeKvUojs",
+    "expire_date": "2025-04-16T23:24:57.788Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "x9yjx4nptg4zrir1aut1snd0itpr9l1v",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pCCjAwu3fcMhGFAqgaS0q6Md7dNutDtf-_9t_BhXYpfe5r9xOIqlDj9bhTiM9Ud8CPUe5Ox1WWeSO6KPGiXY-P0uh3u30EJvWz1EJxSpEEnAiJnwQI7hWRCQkM2IwASDhs8s8mAF4gaXMqKc2ZCJT5f2wU4Fg:1uRils:oMQCAfrgyGCaAALKK2m4DT_uNsHhpYfsAykRpa0OsU0",
+    "expire_date": "2025-07-02T02:43:28.385Z"
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 1,
+  "fields": {
+    "numero_processo": "TUR-PRO-2024/00567",
+    "numero_licitacao": "90740/2024",
+    "contratante": "RIO TUR",
+    "modalidade": "PE",
+    "data_disputa": "2024-09-20T13:00:00Z",
+    "objeto": "LOCAÃAO DE VEICULOS SEM COMBUSTIVEL E SEM CONDUTOR",
+    "tipo": "ITEM",
+    "valor_total": "327600.00",
+    "status": "ASSINADO",
+    "ocorrencias": "ERRO NO APONTAMENTO DO SEGURO NO CONTRATO",
+    "tipo_documento": "EDITAL",
+    "documentos": "processos/1/EDITAL/Edital_PE_N║_90740_2024_LOCAÃ├O_VE═CULOS.pdf",
+    "show": true
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 2,
+  "fields": {
+    "numero_processo": "041/2024",
+    "numero_licitacao": "90007/2024",
+    "contratante": "CREF- UASG 927737",
+    "modalidade": "PE",
+    "data_disputa": "2025-01-07T13:00:00Z",
+    "objeto": "O objeto da presente licitaþÒo Ú a contrataþÒo de empresa especializada\r\npara prestaþÒo de serviþo continuado de locaþÒo de veÝculos automotores,\r\ndo tipo passeio, zero quil¶metro, sem combustÝvel e sem motorista, incluÝdo\r\nmanutenþÒo preventiva e corretiva, visando o atendimento das necessidades do Conselho Regional de EducaþÒo FÝsica da 1¬ RegiÒo, de acordo com as\r\ncondiþ§es, quantidades e exigÛncias estabelecidas no Termo de ReferÛncia",
+    "tipo": "GLOBAL",
+    "valor_total": "1071360.00",
+    "status": "CONTRA-RAZ├O",
+    "ocorrencias": "EMPRESA  HABILITADA, POREM PRIMEIRA COLOCADA, INABILITADA, ENTROU COM RECURSO, DATA LIMITE PARA RECURSO 15/01/2025",
+    "tipo_documento": "EDITAL",
+    "documentos": "processos/2/EDITAL/92773705900072024001_2.zip",
+    "show": true
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 3,
+  "fields": {
+    "numero_processo": "2024.0.000039382-0",
+    "numero_licitacao": "90001/2025",
+    "contratante": "TRE-RJ",
+    "modalidade": "PE",
+    "data_disputa": "2025-01-07T14:00:00Z",
+    "objeto": "registro de preþos para prestaþÒo de serviþos, fornecimento de materiais\r\ne locaþÒo de espaþo ou de equipamentos destinados para os eventos a serem organizados pelo TRE/RJ, c",
+    "tipo": "ITEM",
+    "valor_total": "3122800.00",
+    "status": "ACOMPANHAR",
+    "ocorrencias": "",
+    "tipo_documento": "EDITAL",
+    "documentos": "processos/3/EDITAL/07001705900012025000_1.zip",
+    "show": true
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 4,
+  "fields": {
+    "numero_processo": "7457/2024",
+    "numero_licitacao": "063/2024",
+    "contratante": "PREF PATY DO ALFERES",
+    "modalidade": "PE",
+    "data_disputa": "2025-01-06T14:00:00Z",
+    "objeto": "MATERIAL GRAFICO",
+    "tipo": "ITEM",
+    "valor_total": "1277489.00",
+    "status": "ACOMPANHAR",
+    "ocorrencias": "ACOMPANHAR HABILITAÃ├O",
+    "tipo_documento": "DIVERSOS",
+    "documentos": "",
+    "show": true
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 5,
+  "fields": {
+    "numero_processo": "570500243.000316/2024-38",
+    "numero_licitacao": "008/2024",
+    "contratante": "CRP RJ 5 REGIAO",
+    "modalidade": "PE",
+    "data_disputa": "2025-01-10T13:00:00Z",
+    "objeto": "o: ContrataþÒo de Espaþo e Infraestrutura para realizaþÒo do\r\nCongresso Regional de Psicologia do Estado do Rio de Janeiro em 2025 - 12║ COREPSIRJ",
+    "tipo": "GLOBAL",
+    "valor_total": "363721.00",
+    "status": "ACOMPANHAR",
+    "ocorrencias": "quarto colocado",
+    "tipo_documento": "EDITAL",
+    "documentos": "processos/5/EDITAL/92515905900012025000_1.zip",
+    "show": true
+  }
+},
+{
+  "model": "processos.processo",
+  "pk": 6,
+  "fields": {
+    "numero_processo": "01/2024",
+    "numero_licitacao": "01/2024",
+    "contratante": "SENAC RJ",
+    "modalidade": "PE",
+    "data_disputa": "2024-10-15T18:00:00Z",
+    "objeto": "CONTRATAÃ├O DE MAO DE OBRA PARA EVENTOS DO SENAC",
+    "tipo": "LOTE",
+    "valor_total": "919041.30",
+    "status": "ASSINADO",
+    "ocorrencias": "DIVERSOS RECALCULOS DO VALOR DOS ITENS",
+    "tipo_documento": "EDITAL",
+    "documentos": "processos/6/EDITAL/EDITALPE01.24.pdf",
+    "show": true
+  }
+},
+{
+  "model": "processos.contratos",
+  "pk": 1,
+  "fields": {
+    "processo": 1,
+    "contratante": "RIO TUR",
+    "objeto": "LOCAÃAO DE VEICULO SEM CONDUTOR E SEM COMBUSTIVEL",
+    "numero": "90740/2024",
+    "custo_total_contrato": "39666.67",
+    "seguro": "SIM",
+    "tipo_documento": "seg.boleto",
+    "documentos": "processos/1/contratos/1/seg_boleto/BOLETO_-_APËLICE_017412025000107750145209_-_EFATA_COMERCIO.pdf",
+    "seguradora": "BMG SEGUROS",
+    "apolice": "017412025000107750145209",
+    "inicio": "2025-01-06",
+    "vigencia": "24 MESES",
+    "fim_contrato": "2027-01-06",
+    "valor_total": "327600.00",
+    "observacoes": "MUDAR SEGURADORA, E APOLICE, BEM COMO NUMERO DO CONTRATO",
+    "show": true
+  }
+},
+{
+  "model": "processos.contratos",
+  "pk": 2,
+  "fields": {
+    "processo": 6,
+    "contratante": "SENAC RIO",
+    "objeto": "CONTRATAÃ├O DE MAO DE OBRA PARA EVENTOS",
+    "numero": "ARP 2024223 Efata",
+    "custo_total_contrato": "77371.57",
+    "seguro": "N├O",
+    "tipo_documento": "apolice",
+    "documentos": "processos/6/contratos/2/apolice/EDITALPE01.24_3.pdf",
+    "seguradora": "NA",
+    "apolice": "NA",
+    "inicio": "2025-01-10",
+    "vigencia": "12 meses",
+    "fim_contrato": "2026-01-10",
+    "valor_total": "919041.30",
+    "observacoes": "CONTRATO ASSINADO",
+    "show": true
+  }
+},
+{
+  "model": "processos.pedidos",
+  "pk": 5,
+  "fields": {
+    "contrato": 1,
+    "numero": "63",
+    "valor": "5000.00",
+    "data_origem": "2025-04-10",
+    "cnpj_contratante": "0000000000",
+    "contratante": "SENAC RIO",
+    "empenho": "0000",
+    "ordem_fornecimento": "0000",
+    "recebimento_empenho": "2025-05-06",
+    "contato": "ALBERT PIMENTEL FRANCA",
+    "telefone": "21977081928",
+    "email": "Silva.pamelakelly@gmail.com",
+    "objeto": "aaa",
+    "data_entrega": "2025-05-06T23:33:10Z",
+    "unidade_fornecimento": "aaaaa",
+    "qtde": "10.00",
+    "coordenador": "eu",
+    "show": true,
+    "status": "ENTREGUE",
+    "tipo_documento": "RELATORIOS",
+    "documentos": "",
+    "endereco_entrega": "aaaa",
+    "observacoes": "aa",
+    "data_hora_att": "2025-05-06T23:36:33.420Z",
+    "custo_total": "39666.67"
+  }
+},
+{
+  "model": "processos.pedidos",
+  "pk": 7,
+  "fields": {
+    "contrato": 2,
+    "numero": "0010",
+    "valor": "500.00",
+    "data_origem": "2025-05-06",
+    "cnpj_contratante": "0000000000",
+    "contratante": "empresa 1",
+    "empenho": "0000",
+    "ordem_fornecimento": "0000",
+    "recebimento_empenho": "2025-05-06",
+    "contato": "ALBERT PIMENTEL FRANCA",
+    "telefone": "21977081928",
+    "email": "Silva.pamelakelly@gmail.com",
+    "objeto": "aaa",
+    "data_entrega": "2025-05-07T01:20:15Z",
+    "unidade_fornecimento": "un",
+    "qtde": "50.00",
+    "coordenador": "eu",
+    "show": true,
+    "status": "RECEBIDO",
+    "tipo_documento": "NOTAS REEMBOLSO",
+    "documentos": "processos/6/contratos/2/pedidos/7/NOTAS_REEMBOLSO/Portal_de_Compras_P·blicas___Proposta_Registrada.pdf",
+    "endereco_entrega": "aaa",
+    "observacoes": "aaa",
+    "data_hora_att": "2025-05-07T01:20:41.495Z",
+    "custo_total": "28333.33"
+  }
+},
+{
+  "model": "processos.pedidos",
+  "pk": 8,
+  "fields": {
+    "contrato": 2,
+    "numero": "15",
+    "valor": "10.00",
+    "data_origem": "2025-05-21",
+    "cnpj_contratante": "0000000000",
+    "contratante": "SENAC RIO",
+    "empenho": "0000",
+    "ordem_fornecimento": "0000",
+    "recebimento_empenho": "2025-05-21",
+    "contato": "ALBERT PIMENTEL FRANCA",
+    "telefone": "21977081928",
+    "email": "Silva.pamelakelly@gmail.com",
+    "objeto": "aaa",
+    "data_entrega": "2025-05-21T15:39:20Z",
+    "unidade_fornecimento": "un",
+    "qtde": "0.05",
+    "coordenador": "eu",
+    "show": true,
+    "status": "RECEBIDO",
+    "tipo_documento": "RELATORIOS",
+    "documentos": "processos/6/contratos/2/pedidos/8/RELATORIOS/WhatsApp_Image_2025-05-19_at_14.59.44.jpeg",
+    "endereco_entrega": "aaa",
+    "observacoes": "aaa",
+    "data_hora_att": "2025-05-21T15:40:03.611Z",
+    "custo_total": "49038.24"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 16,
+  "fields": {
+    "pedido": 5,
+    "item_alocado": 2,
+    "data_aloccado": "2025-05-06",
+    "quantidade": "2500.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "5.00"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 17,
+  "fields": {
+    "pedido": 5,
+    "item_alocado": 2,
+    "data_aloccado": "2025-05-06",
+    "quantidade": "4500.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "5.67"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 19,
+  "fields": {
+    "pedido": 7,
+    "item_alocado": 2,
+    "data_aloccado": "2025-05-06",
+    "quantidade": "5000.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "5.67"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 20,
+  "fields": {
+    "pedido": 8,
+    "item_alocado": 2,
+    "data_aloccado": "2025-05-21",
+    "quantidade": "1500.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "7.30"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 21,
+  "fields": {
+    "pedido": 8,
+    "item_alocado": 3,
+    "data_aloccado": "2025-05-21",
+    "quantidade": "5000.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "5.62"
+  }
+},
+{
+  "model": "processos.itemalocado",
+  "pk": 22,
+  "fields": {
+    "pedido": 8,
+    "item_alocado": 4,
+    "data_aloccado": "2025-05-21",
+    "quantidade": "1000.00",
+    "valor_total_alocado": null,
+    "preco_unitario_medio_pedido": "10.00"
+  }
+},
+{
+  "model": "documentos.documentos",
+  "pk": 1,
+  "fields": {
+    "documento": "DeclaraþÒo",
+    "numero": "009",
+    "pedido_origem": "comercial",
+    "emissor": "eu",
+    "sitio_emissor": "eu.com",
+    "tipo_documento": "declraþÒo",
+    "data_emissao": "2025-04-28",
+    "data_vencimento": "2025-04-28",
+    "arquivo": "documentos/comercial/declraþÒo/DeclaraþÒo/HistoricoEscolarDigitalSimplesConferencia_2.pdf"
+  }
+},
+{
+  "model": "documentos.documentos",
+  "pk": 2,
+  "fields": {
+    "documento": "declaraþÒo 002",
+    "numero": "63",
+    "pedido_origem": "financeiro",
+    "emissor": "eu",
+    "sitio_emissor": "eu.com",
+    "tipo_documento": "certidao",
+    "data_emissao": "2025-04-28",
+    "data_vencimento": "2025-04-28",
+    "arquivo": "documentos/financeiro/certidao/declaraþÒo 002/EDITAL_BUFFET.pdf"
+  }
+},
+{
+  "model": "financeiro.centro_de_custo",
+  "pk": 1,
+  "fields": {
+    "nome": "licitacao",
+    "descricao": "licitacao ganhar"
+  }
+},
+{
+  "model": "financeiro.centro_de_custo",
+  "pk": 2,
+  "fields": {
+    "nome": "mecanicos",
+    "descricao": "serviþos mecanicos"
+  }
+},
+{
+  "model": "financeiro.contas_a_pagar",
+  "pk": 1,
+  "fields": {
+    "conta": "pagamento certidao",
+    "Centrodecusto": 1,
+    "vencimento": "2025-01-18",
+    "valor": "0.02",
+    "credor": "cartorio",
+    "origem": "certidao",
+    "data_de_criacao": "2025-01-09",
+    "descricao": "nada",
+    "nota_fiscal_compra": "00001",
+    "numero_de_parcelas": 1,
+    "valor_das_parcelas": "0.03",
+    "status": "A vencer",
+    "ocorrencias": "na",
+    "documentos": "financeiro/pagamento/2025-01-18/1/b61dff76-5f68-446f-b17e-2684b5950d39-3156-31560005957_1.pdf",
+    "banco": "0000000",
+    "agencia": "000000",
+    "conta_corrente": "000000"
+  }
+},
+{
+  "model": "financeiro.contas_a_pagar",
+  "pk": 4,
+  "fields": {
+    "conta": "TESTE DE CONTA",
+    "Centrodecusto": 1,
+    "vencimento": "2025-04-11",
+    "valor": "0.03",
+    "credor": "EU",
+    "origem": "EU",
+    "data_de_criacao": "2025-03-18",
+    "descricao": "EU",
+    "nota_fiscal_compra": "00000",
+    "numero_de_parcelas": 1,
+    "valor_das_parcelas": "0.03",
+    "status": "A vencer",
+    "ocorrencias": "NADA",
+    "documentos": "financeiro/pagamento/2025-03-18/4/Albert-Pimentel-Franca.pdf",
+    "banco": "00",
+    "agencia": "0000",
+    "conta_corrente": "000"
+  }
+},
+{
+  "model": "financeiro.contas_a_pagar",
+  "pk": 5,
+  "fields": {
+    "conta": "TESTE DE CONTA3",
+    "Centrodecusto": 1,
+    "vencimento": "2025-03-18",
+    "valor": "0.03",
+    "credor": "EU",
+    "origem": "EU",
+    "data_de_criacao": "2025-03-18",
+    "descricao": "NA",
+    "nota_fiscal_compra": "00000",
+    "numero_de_parcelas": 1,
+    "valor_das_parcelas": "0.03",
+    "status": "A vencer",
+    "ocorrencias": "AAAA",
+    "documentos": "financeiro/pagamento/2025-03-18/5/exame_de_sangue_albert_doacao.pdf",
+    "banco": "000",
+    "agencia": "000",
+    "conta_corrente": "000"
+  }
+},
+{
+  "model": "financeiro.contas_a_pagar",
+  "pk": 6,
+  "fields": {
+    "conta": "TESTE DE CONTA4",
+    "Centrodecusto": 1,
+    "vencimento": "2025-04-11",
+    "valor": "0.05",
+    "credor": "EU",
+    "origem": "EU",
+    "data_de_criacao": "2025-04-10",
+    "descricao": "aaaa",
+    "nota_fiscal_compra": "00000",
+    "numero_de_parcelas": 6,
+    "valor_das_parcelas": "1111.00",
+    "status": "A vencer",
+    "ocorrencias": "nada",
+    "documentos": "financeiro/pagamento/2025-04-11/6/tabela_z.py",
+    "banco": "00",
+    "agencia": "000",
+    "conta_corrente": "000"
+  }
+},
+{
+  "model": "financeiro.contas_a_pagar",
+  "pk": 7,
+  "fields": {
+    "conta": "TESTE DE CONTA5",
+    "Centrodecusto": 1,
+    "vencimento": "2025-04-17",
+    "valor": "0.01",
+    "credor": "EU",
+    "origem": "EU",
+    "data_de_criacao": "2025-04-10",
+    "descricao": "aaa",
+    "nota_fiscal_compra": "00000",
+    "numero_de_parcelas": 1,
+    "valor_das_parcelas": "0.02",
+    "status": "A vencer",
+    "ocorrencias": "aaa",
+    "documentos": "financeiro/pagamento/2025-04-17/7/98600105900822025001_1.zip",
+    "banco": "000",
+    "agencia": "0000",
+    "conta_corrente": "00000"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 1,
+  "fields": {
+    "tipo_de_ativo": "caminhao"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 2,
+  "fields": {
+    "tipo_de_ativo": "trator"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 3,
+  "fields": {
+    "tipo_de_ativo": "moto"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 4,
+  "fields": {
+    "tipo_de_ativo": "carro"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 5,
+  "fields": {
+    "tipo_de_ativo": "gerador"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 6,
+  "fields": {
+    "tipo_de_ativo": "pao"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 7,
+  "fields": {
+    "tipo_de_ativo": "arroz"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 8,
+  "fields": {
+    "tipo_de_ativo": "oleo de soja"
+  }
+},
+{
+  "model": "operacional.tipo_ativo",
+  "pk": 9,
+  "fields": {
+    "tipo_de_ativo": "farinha de trigo"
+  }
+},
+{
+  "model": "operacional.frota",
+  "pk": 1,
+  "fields": {
+    "Ativo": "CAMINHAO 15T",
+    "tipo": 1,
+    "placa": "RSY-8BAA",
+    "RENAVAN": "000000000",
+    "marca": "vw",
+    "modelo": "titran",
+    "ano": 2015,
+    "tipo_combustivel": "diesel",
+    "situacao": "Galpao",
+    "documento": "operacional/frota/caminhao/CAMINHAO 15T-RSY-8BAA/03-correcao-exercicios-fixacao_1.pdf"
+  }
+},
+{
+  "model": "operacional.frota",
+  "pk": 2,
+  "fields": {
+    "Ativo": "CAMINHAO 16T",
+    "tipo": 1,
+    "placa": "RSY-8BAB",
+    "RENAVAN": "000000000",
+    "marca": "vw",
+    "modelo": "titran",
+    "ano": 2020,
+    "tipo_combustivel": "diesel",
+    "situacao": "ManutenþÒo",
+    "documento": "operacional/frota/caminhao/CAMINHAO 16T-RSY-8BAB/cronograma_28.04.2025_2.pdf"
+  }
+},
+{
+  "model": "operacional.manutencao",
+  "pk": 3,
+  "fields": {
+    "Ativo_em_manutencao": 1,
+    "data_entrada_manutencao": "2025-04-30",
+    "motivo": "BATIDA",
+    "local_de_manutencao": "GALPAO",
+    "operacao": "TROCA DE CHASSSI",
+    "registro": "000000",
+    "custo_total": 25000.0,
+    "documentos": "operacional/frota/caminhao/CAMINHAO 15T-RSY-8BAA/manutencao/TROCA DE CHASSSI/Ordem n║3/E_vte54an.pdf"
+  }
+},
+{
+  "model": "operacional.item_almoxarifado",
+  "pk": 2,
+  "fields": {
+    "nome": "PAO PLUES VITA",
+    "tipo": 6
+  }
+},
+{
+  "model": "operacional.item_almoxarifado",
+  "pk": 3,
+  "fields": {
+    "nome": "farinha dada",
+    "tipo": 9
+  }
+},
+{
+  "model": "operacional.item_almoxarifado",
+  "pk": 4,
+  "fields": {
+    "nome": "soya",
+    "tipo": 8
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 5,
+  "fields": {
+    "item": 2,
+    "nota": "00541445",
+    "fornecedor": null,
+    "data_entrada": "2025-05-06",
+    "valor_unitario": "5.00",
+    "quantidade_entrada_nota": "5000.00",
+    "valor_total": "25000.00",
+    "Nf": "operacional/almoxarifado/pao/PAO PLUES VITA/lotes/00541445/fatura_e_limite___Banco_Itau.pdf"
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 6,
+  "fields": {
+    "item": 2,
+    "nota": "4161651568",
+    "fornecedor": null,
+    "data_entrada": "2025-05-06",
+    "valor_unitario": "6.00",
+    "quantidade_entrada_nota": "10000.00",
+    "valor_total": "60000.00",
+    "Nf": "operacional/almoxarifado/pao/PAO PLUES VITA/lotes/4161651568/fatura_e_limite___Banco_Itau.pdf"
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 7,
+  "fields": {
+    "item": 2,
+    "nota": "1984+854+54+9",
+    "fornecedor": null,
+    "data_entrada": "2025-05-07",
+    "valor_unitario": "8.00",
+    "quantidade_entrada_nota": "35000.00",
+    "valor_total": "280000.00",
+    "Nf": "operacional/almoxarifado/pao/PAO PLUES VITA/lotes/1984+854+54+9/fgts_maio_efata.pdf"
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 8,
+  "fields": {
+    "item": 3,
+    "nota": "00541445",
+    "fornecedor": null,
+    "data_entrada": "2025-05-21",
+    "valor_unitario": "5.00",
+    "quantidade_entrada_nota": "50000.00",
+    "valor_total": "250000.00",
+    "Nf": "operacional/almoxarifado/farinha de trigo/farinha dada/lotes/00541445/PicPay_Fatura_052025.pdf"
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 9,
+  "fields": {
+    "item": 3,
+    "nota": "4161651568",
+    "fornecedor": null,
+    "data_entrada": "2025-05-21",
+    "valor_unitario": "6.50",
+    "quantidade_entrada_nota": "35000.00",
+    "valor_total": "227500.00",
+    "Nf": "operacional/almoxarifado/farinha de trigo/farinha dada/lotes/4161651568/PicPay_Fatura_052025.pdf"
+  }
+},
+{
+  "model": "operacional.lote",
+  "pk": 10,
+  "fields": {
+    "item": 4,
+    "nota": "00541445",
+    "fornecedor": null,
+    "data_entrada": "2025-05-21",
+    "valor_unitario": "10.00",
+    "quantidade_entrada_nota": "5000.00",
+    "valor_total": "50000.00",
+    "Nf": "operacional/almoxarifado/oleo de soja/soya/lotes/00541445/PicPay_Fatura_052025.pdf"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-01-06T20:31:12.503Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "1",
+    "object_repr": "ADMINISTRATIVO",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-01-06T20:31:53.610Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "1",
+    "object_repr": "ADMINISTRATIVO",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-01-06T20:32:04.097Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "2",
+    "object_repr": "ADMINISTRATIVO",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-01-06T20:32:10.369Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "3",
+    "object_repr": "COMERCIAL",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-01-06T20:32:14.010Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "4",
+    "object_repr": "FINANCEIRO",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-01-06T20:32:18.859Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "5",
+    "object_repr": "RECURSOS HUMANOS",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-01-06T20:32:27.529Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "6",
+    "object_repr": "OPERACIONAL",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-01-09T17:59:11.354Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "centro_de_custo"
+    ],
+    "object_id": "1",
+    "object_repr": "licitacao",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-01-09T17:59:41.616Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "1",
+    "object_repr": "pagamento certidao",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-01-09T18:01:23.131Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "1",
+    "object_repr": "pagamento certidao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Documentos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-01-09T18:11:58.688Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "1",
+    "object_repr": "pagamento certidao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Vencimento\", \"Documentos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-01-09T18:12:21.290Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "1",
+    "object_repr": "pagamento certidao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Vencimento\", \"Documentos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-01-09T18:13:07.823Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "1",
+    "object_repr": "pagamento certidao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Documentos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-01-09T18:21:27.015Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "contas_a_pagar"
+    ],
+    "object_id": "2",
+    "object_repr": "pagamento certidao2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-01-14T20:19:20.428Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "financeiro",
+      "centro_de_custo"
+    ],
+    "object_id": "1",
+    "object_repr": "licitacao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Descricao\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-04-28T17:24:08.895Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "documentos",
+      "documentos"
+    ],
+    "object_id": "1",
+    "object_repr": "DeclaraþÒo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-04-28T17:24:26.794Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "documentos",
+      "documentos"
+    ],
+    "object_id": "1",
+    "object_repr": "DeclaraþÒo",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-04-28T17:24:49.817Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "documentos",
+      "documentos"
+    ],
+    "object_id": "2",
+    "object_repr": "declaraþÒo 002",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-04-28T17:25:14.211Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "documentos",
+      "documentos"
+    ],
+    "object_id": "2",
+    "object_repr": "declaraþÒo 002",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Arquivo\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-04-29T18:29:02.462Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "frota"
+    ],
+    "object_id": "1",
+    "object_repr": "Frota object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-04-29T19:00:45.546Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "1",
+    "object_repr": "Manutencao object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-04-29T19:01:19.165Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "1",
+    "object_repr": "Manutencao object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Operacao\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-04-29T19:01:49.200Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "1",
+    "object_repr": "Manutencao object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Documentos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-04-29T19:02:49.403Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "1",
+    "object_repr": "Manutencao object (1)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-04-29T19:03:14.173Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "1",
+    "object_repr": "Manutencao object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-04-29T19:03:42.615Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "2",
+    "object_repr": "Manutencao object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-04-30T18:25:22.821Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "1",
+    "object_repr": "caminhao",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-04-30T18:25:27.663Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "2",
+    "object_repr": "trator",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2025-04-30T18:25:30.294Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "3",
+    "object_repr": "moto",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2025-04-30T18:25:33.760Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "4",
+    "object_repr": "carro",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2025-04-30T18:25:37.805Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "5",
+    "object_repr": "gerador",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2025-04-30T18:26:57.953Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "frota"
+    ],
+    "object_id": "1",
+    "object_repr": " CAMINHAO 15T:RSY-8BAA",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2025-04-30T18:27:36.634Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "frota"
+    ],
+    "object_id": "2",
+    "object_repr": " CAMINHAO 16T:RSY-8BAB",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2025-04-30T18:29:00.724Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "manutencao"
+    ],
+    "object_id": "3",
+    "object_repr": "Manutencao object (3)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2025-05-06T16:14:14.775Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "6",
+    "object_repr": "pao",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2025-05-06T16:14:55.687Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " None",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Lote\", \"object\": \" lote None-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2025-05-06T16:16:14.692Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " pao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Nome\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2025-05-06T16:17:33.697Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " pao",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2025-05-06T16:32:15.998Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " pao",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Lote\", \"object\": \" lote None-None \", \"fields\": [\"Valor total\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2025-05-06T16:33:01.428Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " pao",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote None-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2025-05-06T16:48:05.226Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " pao",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2025-05-06T16:58:47.346Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Lote\", \"object\": \" lote 00541445-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-05-06T17:01:07.823Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 05448494-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-05-06T18:36:39.708Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-05-06T18:58:39.636Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2025-05-06T19:00:08.445Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2025-05-06T19:07:46.750Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "contratos"
+    ],
+    "object_id": "2",
+    "object_repr": "ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"pedido\", \"object\": \" Pedido n\\u00ba 0010, Contrato ARP 2024223 Efata\", \"fields\": [\"Contratante\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2025-05-06T19:11:15.470Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2025-05-06T19:20:33.173Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "contratos"
+    ],
+    "object_id": "2",
+    "object_repr": "ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"pedido\", \"object\": \" Pedido n\\u00ba 0010, Contrato ARP 2024223 Efata\", \"fields\": [\"Contratante\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2025-05-06T19:39:54.895Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2025-05-06T20:31:50.827Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2025-05-06T20:43:14.972Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2025-05-06T20:43:22.333Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2025-05-06T20:43:41.027Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2025-05-06T20:45:14.772Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2025-05-06T20:45:24.125Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2025-05-06T20:45:33.832Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2025-05-06T20:45:40.263Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2025-05-06T20:45:48.563Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2025-05-06T20:45:55.342Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2025-05-06T20:46:14.050Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}, {\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}, {\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}, {\"changed\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\", \"fields\": [\"Quantidade\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2025-05-06T20:46:59.393Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 65051614.496-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2025-05-06T20:47:17.568Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2025-05-06T20:48:10.727Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Lote\", \"object\": \" lote 00541445-None \", \"fields\": [\"Quantidade entrada nota\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2025-05-06T20:48:25.607Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2025-05-06T21:04:33.529Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2025-05-06T22:27:44.241Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2025-05-06T22:55:02.953Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2025-05-06T22:55:33.922Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2025-05-06T22:56:17.005Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "3",
+    "object_repr": " Pedido n║ 63, Contrato ARP 2024223 Efata",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2025-05-06T22:56:36.915Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "1",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2025-05-06T23:05:27.958Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2025-05-06T23:06:27.587Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"deleted\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2025-05-06T23:07:30.836Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2025-05-06T23:07:53.497Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2025-05-06T23:18:28.114Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2025-05-06T23:19:09.405Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 3156156185-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2025-05-06T23:22:40.033Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2025-05-06T23:31:43.523Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "4",
+    "object_repr": " Pedido n║ 001, Contrato 90740/2024",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2025-05-06T23:32:11.613Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "1",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2025-05-06T23:32:37.080Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "2",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Lote\", \"object\": \" lote 00541445-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2025-05-06T23:33:43.122Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "5",
+    "object_repr": " Pedido n║ 63, Contrato 90740/2024",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2025-05-06T23:34:16.349Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "2",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 4161651568-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2025-05-06T23:36:33.424Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "5",
+    "object_repr": " Pedido n║ 63, Contrato 90740/2024",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2025-05-07T01:10:59.367Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "6",
+    "object_repr": " Pedido n║ 010, Contrato ARP 2024223 Efata",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2025-05-07T01:11:44.579Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "6",
+    "object_repr": " Pedido n║ 010, Contrato ARP 2024223 Efata",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2025-05-07T01:20:41.499Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "7",
+    "object_repr": " Pedido n║ 0010, Contrato ARP 2024223 Efata",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2025-05-07T02:29:54.676Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "2",
+    "object_repr": " PAO PLUES VITA",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 1984+854+54+9-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2025-05-21T15:27:36.790Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "7",
+    "object_repr": "arroz",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2025-05-21T15:27:48.698Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "8",
+    "object_repr": "oleo de soja",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2025-05-21T15:27:53.337Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "tipo_ativo"
+    ],
+    "object_id": "9",
+    "object_repr": "farinha de trigo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2025-05-21T15:28:32.543Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "3",
+    "object_repr": " farinha dada",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Lote\", \"object\": \" lote 00541445-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2025-05-21T15:29:04.449Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "3",
+    "object_repr": " farinha dada",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Lote\", \"object\": \" lote 4161651568-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 94,
+  "fields": {
+    "action_time": "2025-05-21T15:38:50.899Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "operacional",
+      "item_almoxarifado"
+    ],
+    "object_id": "4",
+    "object_repr": " soya",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Lote\", \"object\": \" lote 00541445-None \"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 95,
+  "fields": {
+    "action_time": "2025-05-21T15:40:03.613Z",
+    "user": [
+      "adminalbert"
+    ],
+    "content_type": [
+      "processos",
+      "pedidos"
+    ],
+    "object_id": "8",
+    "object_repr": " Pedido n║ 15, Contrato ARP 2024223 Efata",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" PAO PLUES VITA\"}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" farinha dada\"}}, {\"added\": {\"name\": \"Item alocado\", \"object\": \" soya\"}}]"
+  }
+}
+]
