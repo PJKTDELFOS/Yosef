@@ -12,6 +12,8 @@ sqlite3
         'NAME': BASE_DIR / "db.sqlite3",
 
 
+
+
  dump data
  python manage.py dumpdata --exclude auth.permission --exclude contenttypes --indent 2 > dados.json
 
