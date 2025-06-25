@@ -16,7 +16,7 @@ class cadastrofuncionario(models.Model):
     n_residencial=models.CharField(max_length=250, null=True,blank=True,verbose_name='numero residencial')
     bairro=models.CharField(max_length=250, null=True,blank=True,verbose_name='bairro')
     cidade=models.CharField(max_length=250, null=True,blank=True,verbose_name='cidade')
-    UF = models.CharField(default=None, max_length=2, choices=(
+    UF = models.CharField(default=None, max_length=50, choices=(
         ('AC', 'Acre'),('AL', 'Alagoas'),  ('AP', 'Amapá'),  ('AM', 'Amazonas'), ('BA', 'Bahia'),
         ('CE', 'Ceará'),('DF', 'Distrito Federal'),  ('ES', 'Espírito Santo'),  ('GO', 'Goiás'),
         ('MA', 'Maranhão'),  ('MT', 'Mato Grosso'),  ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
@@ -26,13 +26,13 @@ class cadastrofuncionario(models.Model):
     ),verbose_name='Estado')
     complemento=models.CharField(max_length=250, null=True,blank=True,verbose_name='complemento')
     cep=models.CharField(max_length=9,verbose_name='cep',null=True,blank=True)
-    cpf=models.CharField(max_length=12,verbose_name='cpf',null=True,blank=True)
+    cpf=models.CharField(max_length=50,verbose_name='cpf',null=True,blank=True)
     naturalidade=models.CharField(max_length=250,null=True,blank=True,verbose_name='naturalidade')
-    rg=models.CharField(max_length=12,verbose_name='rg',null=True,blank=True)
-    orgao_expedidor_rg=models.CharField(max_length=12,verbose_name='orgao expedidor rg',null=True,blank=True)
+    rg=models.CharField(max_length=50,verbose_name='rg',null=True,blank=True)
+    orgao_expedidor_rg=models.CharField(max_length=50,verbose_name='orgao expedidor rg',null=True,blank=True)
     data_emissao_rg=models.DateField(verbose_name='data emissao rg',)
-    n_titulo_eleitor=models.CharField(max_length=12,verbose_name='Titulo de eleitor')
-    setor = models.CharField(default=None, max_length=5, choices=(
+    n_titulo_eleitor=models.CharField(max_length=50,verbose_name='Titulo de eleitor')
+    setor = models.CharField(default=None, max_length=50, choices=(
         ('ADM', 'ADMINISTRAÇÃO'),('COM', 'COMERCIAL'),
         ('OPR', 'OPERACIONAL'),('RH',  'RECURSOS HUMANOS'),
         ('FIN', 'FINANCEIRO'),

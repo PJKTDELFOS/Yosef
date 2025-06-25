@@ -10,8 +10,14 @@ setor/local_settiings.py
 obs.txt
 PROCESSOS.txt
 AFAZER.txt
-ACESSO DOCS.txt
+ACESSODOCS.txt
 erros.txt
+.env
+comentarios.txt
+anotacoesprocesso.txt
+
+
+
 
 
 # Backup files #

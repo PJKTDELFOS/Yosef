@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cadastrofuncionario',
             name='n_titulo_eleitor',
-            field=models.CharField(default=0, max_length=12),
+            field=models.CharField(default=0, max_length=50),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cadastrofuncionario',
             name='orgao_expedidor_rg',
-            field=models.CharField(default=0, max_length=12),
+            field=models.CharField(default=0, max_length=50),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cadastrofuncionario',
             name='secao',
-            field=models.CharField(default=0, max_length=12),
+            field=models.CharField(default=0, max_length=50),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -144,7 +144,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cadastrofuncionario',
             name='zona_eleitor',
-            field=models.CharField(default=django.utils.timezone.now, max_length=12),
+            field=models.CharField(default=django.utils.timezone.now, max_length=50),
             preserve_default=False,
         ),
         migrations.AlterField(
