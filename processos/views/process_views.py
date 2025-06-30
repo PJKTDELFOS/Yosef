@@ -517,7 +517,7 @@ class DetalharPedido(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
+        context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
         processo=self.get_object().contrato.processo#pegar o processo dentro do contrto dentro do pedido
         processo_nome=str(processo.pk) #lembrei ta pegando o pk da classe pela instancia , associaçao eu acho
         print(processo_nome,'processo_nome no contrato no get context do detalha pedido')
