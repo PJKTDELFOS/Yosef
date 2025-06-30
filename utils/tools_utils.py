@@ -84,7 +84,7 @@ def pedido_upload_path(instance, filename):
     tipo_documento = sanitize_name(instance.tipo_documento)
 
     return os.path.join(
-        settings.MEDIA_ROOT,'processos',processo_nome,'contratos',
+       'processos',processo_nome,'contratos',
         contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
     )
 
