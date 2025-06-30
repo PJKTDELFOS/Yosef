@@ -16,7 +16,7 @@
             {% csrf_token %}<!-- Proteção contra ataques CSRF -->
 
             <!-- Renderiza o formulário com estilo do Crispy Forms -->
-            {{ create_pedido_form|crispy }}
+            {{ form|crispy }}
 
             <!-- Botões de submissão -->
             <div class="d-flex justify-content-between">

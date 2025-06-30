@@ -11,7 +11,7 @@
                 enctype="multipart/form-data"> <
             <h1>PEDIDO</h1>
             {% csrf_token %}
-            {{ attpedidoform|crispy }}
+            {{ form|crispy }}
 
             <div style="display: grid; gap: 10px; flex-wrap: wrap; align-items: stretch;">
                 <button type="submit" style="flex: 1; height: 50px;width: 20%; text-align: center; padding: 10px;
