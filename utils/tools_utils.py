@@ -155,7 +155,7 @@ def planilha_upload_path(instance, filename):
     tipo_documento = 'PEDIDO'
 
     return os.path.join(
-        settings.MEDIA_ROOT,'processos',processo_nome,'contratos',
+        'processos',processo_nome,'contratos',
         contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
     )
 
