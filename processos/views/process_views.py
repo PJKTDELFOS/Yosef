@@ -17,7 +17,7 @@ from django.views.decorators.cache import never_cache# para nao deixar carregar 
 import os
 from django.conf import settings
 import shutil
-
+from utils.tools_utils import criar_planilha
 from ..models import Processo
 
 
@@ -558,7 +558,17 @@ def delete_arquivos_pedido(request,processo_pk,pk,pedido_pk):
                 print("Parâmetros inválidos enviados na requisição.")
     return redirect('processos:detalhe_pedido_via_contrato',processo_pk,pk,pedido_pk)#passar os argumentos para
 #a formaçao da url
+def gerar_planilha_pedido(request, pedido_pk):
+    pedido = get_object_or_404(models.Pedidos, pk=pedido_pk)
 
+    if request.method == 'POST':
+        try:
+            criar_planilha(pedido)
+            messages.success(request, 'Planilha do pedido gerada com sucesso.')
+        except Exception as e:
+            messages.error(request, f'Erro ao gerar a planilha: {e}')
+
+        return redirect('processos:detalhe_pedido_tabela', pedido_pk=pedido.pk)
 
 
 

@@ -5,6 +5,7 @@ from django import template
 import os
 from django.conf import settings
 import unidecode
+import pytz
 
 register=Library()
 @register.filter
@@ -143,34 +144,65 @@ def documentos_amoxarifado_load_path(instance,filename):
     return os.path.join(f'operacional/almoxarifado/'
                         f'{tipo}/{nome}/lotes/{lote}/',filename )
 
+
+def planilha_upload_path(instance, filename):
+    processo_nome = (f'{instance.contrato.processo.pk or "novo"}')
+
+    contrato_nome = (f'{instance.contrato.pk or "novo"}')
+
+    pedido_nome = (f'{instance.pk or "novo"}')
+
+    tipo_documento = 'PEDIDO'
+
+    return os.path.join(
+        settings.MEDIA_ROOT,'processos',processo_nome,'contratos',
+        contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
+    )
+
 # ser operacional/frota/ativo/tipo_ativo/nome_ativo/manutencao/tipo/ordem/filename
-def criar_pedido(instance,filename):
-    template_form = 'modelo_pedido.xlsx'
-    workbook = load_workbook(filename=template_form)
-    worksheet = workbook['sheet']
-    worksheet['I9'] = instance.numero
-    worksheet['I10'] = instance.data_origem
-    worksheet['I12'] = instance.cnpj_contratante
-    worksheet['B12'] = instance.contratante
-    worksheet['A15'] = instance.contrato
-    worksheet['C15'] = instance.empenho
-    worksheet['D15'] = instance.ordem_fornecimento
-    worksheet['E15'] = instance.data_origem
-    worksheet['G15'] = instance.contato
-    worksheet['H15'] = instance.telefone
-    worksheet['I15'] = instance.email
-    worksheet['D17'] = instance.objeto
-    worksheet['B16'] = instance.data_entrega
-    worksheet['D16'] = instance.local_entrega
-    worksheet['A21'] = instance.unidade_fornecimento
-    worksheet['B21'] = instance.qtde
-    worksheet['A23'] = instance.observacoes
-    worksheet['B51'] = instance.coordenador
-    name=f'Pedido nº{instance.numero}-contrato:{instance.contrato} contratante:{instance.contratante}'
-    save_path=pedido_upload_path(instance,f'{name}.xlsx')
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    workbook.save(filename=save_path)
-    print(f"Planilha salva como '{name}.xlsx'.")
+def criar_planilha(instance):
+    template_form = os.path.join(settings.BASE_DIR, 'processos/templates/planilhas/modelo_pedido.xlsx')
+    name = f'Pedido-{str(instance.numero)}-{str(instance.contratante)}'
+    save_path = planilha_upload_path(instance, f'{name}.xlsx')
+    if os.path.exists(save_path):
+        print(f"Atualizando planilha existente em: {save_path}")
+        print(save_path, 'atualizando a planilha ')
+    else:
+        try:
+            workbook = load_workbook(filename=template_form)
+            worksheet = workbook['sheet']
+            br_tz = pytz.timezone('America/Sao_Paulo')
+            data_origem = str(instance.data_origem) if instance.data_origem else ''
+            data_entrega = str(instance.data_entrega) if instance.data_entrega else ''
+            data_hora_att = instance.data_hora_att.astimezone(br_tz).strftime(
+                '%d/%m/%Y %H:%M:%S') if instance.data_hora_att else ''
+            recebimento_empenho = str(instance.recebimento_empenho) if instance.recebimento_empenho else ''
+            worksheet['I9'] = instance.numero
+            worksheet['I10'] = data_origem  # criação
+            worksheet['I12'] = instance.cnpj_contratante
+            worksheet['B12'] = instance.contratante
+            worksheet['A15'] = str(instance.contrato)
+            worksheet['C15'] = instance.empenho
+            worksheet['D15'] = instance.ordem_fornecimento
+            worksheet['E15'] = recebimento_empenho  # recebimento empenho
+            worksheet['G15'] = instance.contato
+            worksheet['H15'] = instance.telefone
+            worksheet['I15'] = instance.email
+            worksheet['D17'] = instance.objeto
+            worksheet['B16'] = data_entrega
+            worksheet['D16'] = instance.endereco_entrega
+            worksheet['A21'] = instance.unidade_fornecimento
+            worksheet['B21'] = instance.qtde
+            worksheet['A23'] = instance.observacoes
+            worksheet['B51'] = instance.coordenador
+            worksheet['I11'] = data_hora_att  # ultima modifica
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            workbook.save(filename=save_path)
+            print(save_path, 'caminho da planilha do models ')
+            print(f'planilha salva como {name}.xlsx')
+        except Exception as e:
+            name = f'Pedido_nº{instance.numero}_contrato:{instance.contrato}'
+            print(f"Erro na planilha: {e}, pedido {name} nao  se nao puder fazer a planilha ")
 
 
 

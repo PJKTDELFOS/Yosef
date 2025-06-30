@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User  # para o user que vai cadastrar e operar o sistema
-import pytz
+
 from utils import tools_utils
 from openpyxl import load_workbook
 import os
@@ -206,53 +206,6 @@ class Pedidos(models.Model):
         return f' Pedido nº {self.numero}, Contrato {self.contrato}'
 
 
-
-
-    def criar_planilha(self):
-        template_form = os.path.join(settings.BASE_DIR, 'processos/templates/planilhas/modelo_pedido.xlsx')
-        name = f'Pedido-{str(self.numero)}-{str(self.contratante)}'
-        save_path = tools_utils.pedido_upload_path(self, f'{name}.xlsx')
-        if os.path.exists(save_path):
-            print(f"Atualizando planilha existente em: {save_path}")
-            print(save_path, 'atualizando a planilha ')
-        else:
-            try:
-                workbook = load_workbook(filename=template_form)
-                worksheet = workbook['sheet']
-
-                br_tz=pytz.timezone('America/Sao_Paulo')
-
-                data_origem = str(self.data_origem) if self.data_origem else ''
-                data_entrega = str(self.data_entrega) if self.data_entrega else ''
-                data_hora_att=self.data_hora_att.astimezone(br_tz).strftime('%d/%m/%Y %H:%M:%S') if self.data_hora_att else ''
-                recebimento_empenho=str(self.recebimento_empenho) if self.recebimento_empenho else ''
-                worksheet['I9'] = self.numero
-                worksheet['I10'] = data_origem #criação
-                worksheet['I12'] = self.cnpj_contratante
-                worksheet['B12'] = self.contratante
-                worksheet['A15'] = str(self.contrato)
-                worksheet['C15'] = self.empenho
-                worksheet['D15'] = self.ordem_fornecimento
-                worksheet['E15'] = recebimento_empenho # recebimento empenho
-                worksheet['G15'] = self.contato
-                worksheet['H15'] = self.telefone
-                worksheet['I15'] = self.email
-                worksheet['D17'] = self.objeto
-                worksheet['B16'] = data_entrega
-                worksheet['D16'] = self.endereco_entrega
-                worksheet['A21'] = self.unidade_fornecimento
-                worksheet['B21'] = self.qtde
-                worksheet['A23'] = self.observacoes
-                worksheet['B51'] = self.coordenador
-                worksheet['I11'] = data_hora_att    #ultima modifica
-                os.makedirs(os.path.dirname(save_path), exist_ok=True)
-                workbook.save(filename=save_path)
-                print(save_path,'caminho da planilha do models ')
-                print(f'planilha salva como {name}.xlsx')
-            except Exception as e:
-                name = f'Pedido_nº{self.numero}_contrato:{self.contrato}'
-                print(f"Erro na planilha: {e}, pedido {name} nao  se nao puder fazer a planilha ")
-
     def save(self, *args, **kwargs):
         is_new = self.pk is None
         if is_new and self.documentos:
@@ -261,7 +214,6 @@ class Pedidos(models.Model):
             super().save(*args, **kwargs)
             self.documentos = temp_doc
         super().save(*args, **kwargs)
-        self.criar_planilha()
 
 
 class ItemAlocado(models.Model):

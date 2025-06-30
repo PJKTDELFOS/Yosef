@@ -28,7 +28,7 @@
                 {% for tipo, tipo_arquivos in arquivos.items %}<br>
 
                     <li>
-                        <b>{{ tipo }}</b>
+
                         <ul>
                             {% for arquivo in tipo_arquivos %}
 
@@ -68,6 +68,19 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px; align-items: stretch;">
+
+        <form method="post" action="{% url 'processos:gerar_planilha_pedido' pedido.pk %}" style="margin: 0; flex: 1;">
+            {% csrf_token %}
+            <button type="submit" style="flex: 1;
+            height: 50px; width: 50%;
+            text-align: center;
+            display: flex; align-items: center; justify-content: center;
+            background-color: #007bff;
+            color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                Gerar Pedido
+            </button>
+        </form>
+
         <form method="post" action=""
               style="margin: 0; flex: 1;"><!-- AQUI VAI ATUALIZAÇÃO DO PEDIDO-->
             {% csrf_token %}

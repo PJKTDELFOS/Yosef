@@ -59,6 +59,7 @@ urlpatterns = [
     path('detalhe/<int:processo_pk>/contratos/<int:pk>/pedidos/<int:pedido_pk>/deleteaquivo',
          views.delete_arquivos_pedido,name='deletearquivospedido'),
     path('pedidos/atualizarpedido/<int:pedido_pk>/',views.UpdatePedido.as_view(),name='atualizarpedido'),
+    path('pedido/<int:pedido_pk>/gerar-planilha/', views.gerar_planilha_pedido, name='gerar_planilha_pedido'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
