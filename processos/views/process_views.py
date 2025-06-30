@@ -223,21 +223,21 @@ class Criarcontrato(CreateView):
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
-        # context['create_contract_form'] = context['form']
-        context['form'] = ContractForm(processo_de_origem=self.numero_processo)
+        context['create_contract_form'] = context['form']
+        context['create_contract_form'] = ContractForm(processo_de_origem=self.numero_processo)
         context['processo'] = self.numero_processo
         return context
 
-    def form_valid(self, form,):
-       form.instance.processo = self.numero_processo
+    def form_valid(self, create_contract_form,):
+       create_contract_form.instance.processo = self.numero_processo
        messages.success(self.request, 'CONTRATO cadastrado com sucesso!')
-       return super().form_valid(form)
+       return super().form_valid(create_contract_form)
 
-    def form_invalid(self, form):
-        super().form_invalid(form)
+    def form_invalid(self, create_contract_form):
+        super().form_invalid(create_contract_form)
         print('falhando aqui invalid')
-        print(form.errors)
-        response=super().form_invalid(form)
+        print(create_contract_form.errors)
+        response=super().form_invalid(create_contract_form)
         messages.warning(self.request, 'Contrato sendo gerado, preencha as informaçoes com cuidado!')
         return  response
 
@@ -261,20 +261,20 @@ class UpdateContrato(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = ContractForm(instance=self.contrato, processo_de_origem=self.numero_processo)
+        context['att_contract_form'] = ContractForm(instance=self.contrato, processo_de_origem=self.numero_processo)
         context['processo'] = self.numero_processo
         return context
 
-    def form_valid(self, form):
-        form.instance.processo = self.numero_processo
+    def form_valid(self, att_contract_form):
+        att_contract_form.instance.processo = self.numero_processo
         messages.success(self.request, f'Contrato {self.contrato.numero} atualizado com sucesso!')
-        return super().form_valid(form)
+        return super().form_valid(att_contract_form)
 
-    def form_invalid(self, form):
+    def form_invalid(self, att_contract_form):
         print('Erro ao atualizar contrato:')
-        print(form.errors)
+        print(att_contract_form.errors)
         messages.warning(self.request, 'Preencha as informações do contrato com cuidado.')
-        return super().form_invalid(form)
+        return super().form_invalid(att_contract_form)
 
     def get_success_url(self):
         if'processo_pk' in self.kwargs:
@@ -406,22 +406,22 @@ class CriarPedido(CreateView):
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
-        context['create_pedido_form'] = context['form']
-        context['create_pedido_form'] = PedidoForms(contrato_de_origem=self.contrato)
+        # context['create_pedido_form'] = context['form']
+        context['form'] = PedidoForms(contrato_de_origem=self.contrato)
         context['contrato'] = self.contrato
         return context
 
-    def form_valid(self, create_pedido_form,):
-       create_pedido_form.instance.contrato = self.contrato
+    def form_valid(self,form,):
+       cform.instance.contrato = self.contrato
        messages.success(self.request, 'pedido cadastrado com sucesso!')
-       return super().form_valid(create_pedido_form)
+       return super().form_valid(form)
 
 
-    def form_invalid(self, create_pedido_form):
+    def form_invalid(self, form):
         print('Erro ao atualizar pedido:')
-        print(create_pedido_form.errors)
+        print(form.errors)
         messages.warning(self.request, 'Preencha as informações do contrato com cuidado.')
-        return super().form_invalid(create_pedido_form)
+        return super().form_invalid(form)
 
 
 
@@ -447,27 +447,27 @@ class UpdatePedido(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['attpedidoform'] = context['form']
-        context['attpedidoform'] = PedidoForms(instance=self.object, contrato_de_origem=self.contrato)
+        # context['attpedidoform'] = context['form']
+        context['form'] = PedidoForms(instance=self.object, contrato_de_origem=self.contrato)
         context['contrato'] = self.contrato
         return context
 
-    def form_valid(self, attpedidoform):
-        attpedidoform.instance.contrato = self.contrato
-        response = super().form_valid(attpedidoform)
+    def form_valid(self, form):
+        form.instance.contrato = self.contrato
+        response = super().form_valid(form)
         print('estou aqui no valido')
         processo_nome = str(self.request.GET.get('processo.pk'))
         print(processo_nome, 'processo')
         contrato_nome = str(self.request.GET.get('contrato.pk'))
         print(contrato_nome, 'contrato')
-        print(attpedidoform.cleaned_data)
+        print(form.cleaned_data)
         messages.success(self.request, f'pedido {self.object.numero} atualizado com sucesso')
         return response
 
-    def form_invalid(self, attpedidoform):
-        response = super().form_invalid(attpedidoform)
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
         print('estou aqui no invavalido')
-        print(attpedidoform.errors)
+        print(form.errors)
         messages.warning(self.request, f'pedido {self.object.numero} nao pode ser atualizado')
         return response
 
@@ -517,7 +517,7 @@ class DetalharPedido(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
+        # context['pedidos']=self.get_object().pedidos.all()#captura os pedidos para a pagina do contrato, os associando
         processo=self.get_object().contrato.processo#pegar o processo dentro do contrto dentro do pedido
         processo_nome=str(processo.pk) #lembrei ta pegando o pk da classe pela instancia , associaçao eu acho
         print(processo_nome,'processo_nome no contrato no get context do detalha pedido')
