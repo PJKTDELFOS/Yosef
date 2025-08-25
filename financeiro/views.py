@@ -115,6 +115,7 @@ class Deletepgt(LoginRequiredMixin,DeleteView):
 
     def post(self, request, *args, **kwargs):
         messages.success(self.request,'pagamento deletado com sucesso!')
+        return super().post(request, *args, **kwargs)
 
 class Lista_Contas_a_Receber(LoginRequiredMixin,ListView):
     model = Contas_a_pagar

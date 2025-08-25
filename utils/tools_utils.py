@@ -1,10 +1,9 @@
-import unicodedata
+
 from django.template import Library
 from openpyxl import load_workbook
-from django import template
 import os
 from django.conf import settings
-import unidecode
+from unidecode import unidecode
 import pytz
 
 register=Library()
@@ -54,110 +53,93 @@ def valida_cpf(cpf):
     else:
         return False
 
-import os
+
 
 def sanitize_name(value):
     """Remove caracteres especiais e substitui espaços por underscores."""
-    return ''.join(e if e.isalnum() or e == '_' else '_' for e in value.replace(' ', '_'))
+    return ''.join(e if e.isalnum() or e == '_' else '_' for e in unidecode(str(value)).replace(' ', '_'))
+
+# --- UPLOAD PATHS ---
 
 def processo_upload_path(instance, filename):
-    processo_nome = (f'{instance.pk or "novo"}')
-
+    processo_nome = sanitize_name(instance.pk or "novo")
     tipo_documento = sanitize_name(instance.tipo_documento)
-
-    return os.path.join(f'processos/{processo_nome}/{tipo_documento}', filename)
+    filename = sanitize_name(filename)
+    return os.path.join('processos', processo_nome, tipo_documento, filename)
 
 def contrato_upload_path(instance, filename):
-    processo_nome = (f'{instance.processo.pk or "novo"}')
-    contrato_nome = (f'{instance.pk or "novo"}')
+    processo_nome = sanitize_name(instance.processo.pk or "novo")
+    contrato_nome = sanitize_name(instance.pk or "novo")
     tipo_documento = sanitize_name(instance.tipo_documento)
-
-    return os.path.join(f'processos/{processo_nome}/contratos/{contrato_nome}/{tipo_documento}', filename)
+    filename = sanitize_name(filename)
+    return os.path.join('processos', processo_nome, 'contratos', contrato_nome, tipo_documento, filename)
 
 def pedido_upload_path(instance, filename):
-    processo_nome = (f'{instance.contrato.processo.pk or "novo"}')
-
-    contrato_nome = (f'{instance.contrato.pk or "novo"}')
-
-    pedido_nome = (f'{instance.pk or "novo"}')
-
+    processo_nome = sanitize_name(instance.contrato.processo.pk or "novo")
+    contrato_nome = sanitize_name(instance.contrato.pk or "novo")
+    pedido_nome = sanitize_name(instance.pk or "novo")
     tipo_documento = sanitize_name(instance.tipo_documento)
-
-    return os.path.join(
-       'processos',processo_nome,'contratos',
-        contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
-    )
-
-# settings.MEDIA_ROOT, 'processos', processo_nome, 'contratos', contrato_nome, 'pedidos', pedido_nome, tipo_documento, filename
+    filename = sanitize_name(filename)
+    return os.path.join('processos', processo_nome, 'contratos', contrato_nome, 'pedidos', pedido_nome, tipo_documento, filename)
 
 def docs_rh_load_path(instance, filename):
-    funcionario_arquivos = (f'{instance.cpf or "novo"}')
+    funcionario_arquivos = sanitize_name(instance.cpf or "novo")
     tipo_documento = sanitize_name(instance.tipo_documento)
+    filename = sanitize_name(filename)
+    return os.path.join('rh', funcionario_arquivos, tipo_documento, filename)
 
-    return os.path.join(f'rh/{funcionario_arquivos}/{tipo_documento}', filename)
+def docs_finan_load_path(instance, filename):
+    vencimento = sanitize_name(instance.vencimento)
+    subpasta = sanitize_name(instance.pk)
+    filename = sanitize_name(filename)
+    return os.path.join('financeiro', 'pagamento', vencimento, subpasta, filename)
 
+def docs_finan_load_path_rcbm(instance, filename):
+    data_pgto = sanitize_name(instance.data_pgto)
+    subpasta = sanitize_name(instance.origem)
+    filename = sanitize_name(filename)
+    return os.path.join('financeiro', 'recebimento', data_pgto, subpasta, filename)
 
-def docs_finan_load_path(instance,filename):
-    vencimento = instance.vencimento
-    subpasta=instance.pk
-    arquivo=instance.documentos
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'financeiro/pagamento/{vencimento}/{subpasta}/',filename )
+def documentos_load_path(instance, filename):
+    documento = sanitize_name(instance.documento)
+    setor = sanitize_name(instance.pedido_origem)
+    tipo = sanitize_name(instance.tipo_documento)
+    filename = sanitize_name(filename)
+    return os.path.join('documentos', setor, tipo, documento, filename)
 
-def docs_finan_load_path_rcbm(instance,filename):
-    data_pgto = instance.data_pgto
-    subpasta=instance.origem
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'financeiro/recebimento/{data_pgto}/{subpasta}/',filename )
+def documentos_frota_load_path(instance, filename):
+    placa = sanitize_name(instance.placa)
+    ativo = sanitize_name(instance.Ativo)
+    nome_ativo = f'{ativo}_{placa}'
+    tipo_ativo = sanitize_name(instance.tipo.tipo_de_ativo)
+    filename = sanitize_name(filename)
+    return os.path.join('operacional', 'frota', tipo_ativo, nome_ativo, filename)
 
-def documentos_load_path(instance,filename):
-    documento = instance.documento
-    setor=instance.pedido_origem
-    tipo=instance.tipo_documento
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'documentos/{setor}/{tipo}/{documento}/',filename )
+def documentos_manutencao_frota_load_path(instance, filename):
+    placa = sanitize_name(instance.Ativo_em_manutencao.placa)
+    ativo = sanitize_name(instance.Ativo_em_manutencao.Ativo)
+    nome_ativo = f'{ativo}_{placa}'
+    tipo_ativo = sanitize_name(instance.Ativo_em_manutencao.tipo.tipo_de_ativo)
+    operacao = sanitize_name(instance.operacao)
+    ordem = sanitize_name(instance.pk)
+    return os.path.join('operacional', 'frota', tipo_ativo, nome_ativo, 'manutencao', operacao, f'Ordem_{ordem}', filename)
 
-
-def documentos_frota_load_path(instance,filename):
-    placa=instance.placa
-    ativo = instance.Ativo
-    nome_ativo=f'{ativo}-{placa}'
-    tipo_ativo=instance.tipo.tipo_de_ativo
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'operacional/frota/{tipo_ativo}/{nome_ativo}/',filename )
-
-def documentos_manutencao_frota_load_path(instance,filename):
-    placa=instance.Ativo_em_manutencao.placa
-    ativo = instance.Ativo_em_manutencao.Ativo
-    nome_ativo=f'{ativo}-{placa}'
-    tipo_ativo=instance.Ativo_em_manutencao.tipo.tipo_de_ativo
-    operacao=instance.operacao
-    ordem=instance.pk
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'operacional/frota/{tipo_ativo}/{nome_ativo}/manutencao/{operacao}/Ordem nº{ordem}/',filename )
-
-def documentos_amoxarifado_load_path(instance,filename):
-    tipo=instance.item.tipo
-    nome=instance.item.nome
-    lote=instance.nota
-    filename=unidecode.unidecode(filename.replace(" ", "_"))
-    return os.path.join(f'operacional/almoxarifado/'
-                        f'{tipo}/{nome}/lotes/{lote}/',filename )
-
+def documentos_amoxarifado_load_path(instance, filename):
+    tipo = sanitize_name(instance.item.tipo)
+    nome = sanitize_name(instance.item.nome)
+    lote = sanitize_name(instance.nota)
+    filename = sanitize_name(filename)
+    return os.path.join('operacional', 'almoxarifado', tipo, nome, 'lotes', lote, filename)
 
 def planilha_upload_path(instance, filename):
-    processo_nome = (f'{instance.contrato.processo.pk or "novo"}')
-
-    contrato_nome = (f'{instance.contrato.pk or "novo"}')
-
-    pedido_nome = (f'{instance.pk or "novo"}')
-
+    processo_nome = sanitize_name(instance.contrato.processo.pk or "novo")
+    contrato_nome = sanitize_name(instance.contrato.pk or "novo")
+    pedido_nome = sanitize_name(instance.pk or "novo")
     tipo_documento = 'PEDIDO'
+    filename = sanitize_name(filename)
+    return os.path.join(settings.MEDIA_ROOT, 'processos', processo_nome, 'contratos',
+                        contrato_nome, 'pedidos', pedido_nome, tipo_documento, filename)
 
-    return os.path.join(
-        settings.MEDIA_ROOT,'processos',processo_nome,'contratos',
-        contrato_nome,'pedidos',pedido_nome,tipo_documento,filename
-    )
 
 # ser operacional/frota/ativo/tipo_ativo/nome_ativo/manutencao/tipo/ordem/filename
 def criar_planilha(instance):

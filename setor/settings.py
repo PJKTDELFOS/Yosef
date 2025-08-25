@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os.path
 from pathlib import Path
-from decouple import config
+from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e92(c#kpquip)c9fdn*iz6hmvsk75e_gx_j6*+=d7kp&cbfwy3'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['yosef-5syl.onrender.com','127.0.0.1', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://yosef-5syl.onrender.com']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+#CSRF_TRUSTED_ORIGINS = ['https://yosef-5syl.onrender.com']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'operacional',
     'crispy_bootstrap4',
     'crispy_forms',
+    'axes',
 
 ]
 
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -69,7 +71,7 @@ ROOT_URLCONF = 'setor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ 'base_templates'],
+        'DIRS': [BASE_DIR/'base_templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,18 +93,29 @@ WSGI_APPLICATION = 'setor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DB_HOST = config('DB_HOST')
+DB_PORT = config('DB_PORT', default='')
+
+# Se estiver usando socket unix do Cloud SQL, DB_PORT deve ficar vazio
+if DB_HOST.startswith('/cloudsql/'):
+    DB_PORT = ''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
-
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+CSRF_TRUSTED_ORIGINS = ['https://august-monolith-470110-m1.rj.r.appspot.com']
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -140,11 +153,8 @@ LOGOUT_REDIRECT_URL='perfil:login'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATICFILES_DIRS=[BASE_DIR / 'base_static']
 STATIC_URL = '/static/'
-STATICFILES_DIRS=(
-
-    BASE_DIR/'base_static',
-)
 STATIC_ROOT=BASE_DIR/'static'
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
@@ -154,3 +164,19 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#axes
+AXES_FAILURE_LIMIT = 10  # tentativas de login permitidas
+AXES_COOLOFF_TIME = 0.1  # em horas; tempo que o IP ficará bloqueado
+AXES_LOCK_OUT_AT_FAILURE = True
+
+
+#headers de segurança-desabilitar para desenvolvimento
+SECURE_HSTS_SECONDS = 31536000  # 1 ano
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+X_FRAME_OPTIONS = 'DENY'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

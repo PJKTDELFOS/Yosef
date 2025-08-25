@@ -412,7 +412,7 @@ class CriarPedido(CreateView):
         return context
 
     def form_valid(self,form,):
-       cform.instance.contrato = self.contrato
+       form.instance.contrato = self.contrato
        messages.success(self.request, 'pedido cadastrado com sucesso!')
        return super().form_valid(form)
 
