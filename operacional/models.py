@@ -45,7 +45,7 @@ class Frota(models.Model):
 
     class Meta:
         verbose_name_plural = 'Veiculo'
-        verbose_name = 'Veiculos'
+        verbose_name = 'Veiculoss'
 
 
     def save(self, *args, **kwargs):
