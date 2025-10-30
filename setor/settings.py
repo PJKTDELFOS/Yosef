@@ -115,7 +115,7 @@ AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://august-monolith-470110-m1.rj.r.appspot.com']
+CSRIF_TRUSTED_ORGINS = ['https://august-monolith-470110-m1.rj.r.appspot.com']
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
