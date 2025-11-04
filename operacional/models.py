@@ -38,6 +38,11 @@ class Frota(models.Model):
         ('Avariado',"Avariado"),("Operação","Operação"),("Reservado","Reservado")
     ))
     documento=models.FileField(blank=True,null=True,upload_to=tools_utils.documentos_frota_load_path,max_length=255)
+    custo_manutencao_agregado=models.DecimalField(max_digits=18,
+                                                  editable=False,
+                                                  decimal_places=2,
+                                                  default=Decimal('0.00'),
+                                                  verbose_name="Custo total manutençao")
 
     def __str__(self):
         return f' {self.Ativo}:{self.placa}'

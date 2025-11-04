@@ -1,17 +1,21 @@
-from core.entities.frota_e_equipamentos import frota_e_Equipamentos_Entity,Manutencao_entity
+from core.entities.frota_e_equipamentos import VeiculosEntity,ManutencaoEntity
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from decimal import Decimal
 
-class Frota_repository(ABC):
+class FrotaRepository(ABC):
     @abstractmethod
-    def buscar_veiculo_por_id(self,veiculo_id:int)->Optional[frota_e_Equipamentos_Entity]:
+    def buscar_veiculo_por_id(self,veiculo_id:int)->Optional[VeiculosEntity]:
         pass
 
     @abstractmethod
-    def buscar_manutencao_por_id(self,veiculo_id:int)->list[Manutencao_entity]:
+    def buscar_manutencao_por_veiculo_id(self,veiculo_id:int)->list[ManutencaoEntity]:
         pass
 
     @abstractmethod
-    def salvar(self,manutencao:Manutencao_entity)->Manutencao_entity:
+    def salvar_veiculo(self,veiculo:VeiculosEntity)->VeiculosEntity:
+        pass
+
+    @abstractmethod
+    def salvar_manutencao (self, manutencao:ManutencaoEntity)->ManutencaoEntity:
         pass

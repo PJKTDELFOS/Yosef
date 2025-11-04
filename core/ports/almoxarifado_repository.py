@@ -26,3 +26,11 @@ class AlmoxarifadoRepository(ABC):
     @abstractmethod
     def salvar_lote(self,lote:LoteEntity)->LoteEntity:
         pass
+
+    @abstractmethod
+    def salvar_item(self,item:Item_almoxarifadoEntity)->Item_almoxarifadoEntity:
+        pass
+
+    @abstractmethod
+    def salvar_alocacao(self,item_alocado:Item_alocadoEntity)->Item_alocadoEntity:
+        pass
