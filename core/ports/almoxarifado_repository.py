@@ -18,10 +18,23 @@ class AlmoxarifadoRepository(ABC):
     @abstractmethod
     def buscar_lotes_por_item_id(self,item_id:int)->List[LoteEntity]:
         pass
+    @abstractmethod
+    def buscar_tipo_ativo_por_id(self,id:int)->Optional[TipoAtivoEntity]:
+        pass
+
+    @abstractmethod
+    def busccar_item_alocado_por_item_id(self,item_alocado_id:int)->List[Item_alocadoEntity]:
+        pass
+
+    @abstractmethod
+    def calcular_saida_por_item_id(self,item_id:int)->Decimal:
+        pass #para calcular a saida para os pedidos  de forma individual
 
     @abstractmethod
     def calcular_saida_total_por_item_id(self,item_id:int)->Decimal:
-        pass
+        pass  # para calcular o quanto ja teve de saida daquele item no total, entender melhor como isso e importante
+    #pois nao estou vendo , apesar de achar que vou precisar, que doideira, nao saber se preciso, e achar que preciso
+
 
     @abstractmethod
     def salvar_lote(self,lote:LoteEntity)->LoteEntity:
@@ -33,4 +46,8 @@ class AlmoxarifadoRepository(ABC):
 
     @abstractmethod
     def salvar_alocacao(self,item_alocado:Item_alocadoEntity)->Item_alocadoEntity:
+        pass
+
+    @abstractmethod
+    def salvar_tipo_ativo(self,tipo_ativo:TipoAtivoEntity)->TipoAtivoEntity:
         pass
