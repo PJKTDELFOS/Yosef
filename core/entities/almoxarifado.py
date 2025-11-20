@@ -48,8 +48,8 @@ class LoteEntity:
 @dataclass(frozen=True)
 class Item_alocadoEntity:
     pedido_id: int
-    item_alocado_id:int
-    id: ID_TYPE=None
+    item_estoque_id:int
+    item_alocado_id: ID_TYPE=None
     data_alocacao:Optional[datetime.date]=None
     quantidade:Decimal=Decimal('0.00')
 

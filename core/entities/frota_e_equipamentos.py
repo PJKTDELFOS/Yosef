@@ -29,6 +29,9 @@ class ManutencaoEntity:
     operacao:Optional[str]=None
     registro:Optional[str]=None
     custo_manutencao : Decimal=Decimal('0.00')
+    data_entrada_manutencao:Optional[datetime.date]=None
+
+
 
 
 

@@ -53,14 +53,14 @@ class Frota(models.Model):
         verbose_name = 'Veiculos'
 
 
-    def save(self, *args, **kwargs):
-        isnew=self.pk is None
-        if isnew and self.documento:
-            temp_documento=self.documento
-            self.documento=None
-            super().save(*args, **kwargs)
-            self.documento=temp_documento
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     isnew=self.pk is None
+    #     if isnew and self.documento:
+    #         temp_documento=self.documento
+    #         self.documento=None
+    #         super().save(*args, **kwargs)
+    #         self.documento=temp_documento
+    #     super().save(*args, **kwargs)
 
 # ser operacional/frota/ativo/manutencao/tipo/ordem/filename
 class Manutencao(models.Model):
@@ -87,14 +87,14 @@ class Manutencao(models.Model):
 
 
 
-    def save(self, *args, **kwargs):
-        isnew=self.pk is None
-        if isnew and self.documentos:
-            temp_documento=self.documentos
-            self.documentos=None
-            super().save(*args, **kwargs)
-            self.documentos=temp_documento
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     isnew=self.pk is None
+    #     if isnew and self.documentos:
+    #         temp_documento=self.documentos
+    #         self.documentos=None
+    #         super().save(*args, **kwargs)
+    #         self.documentos=temp_documento
+    #     super().save(*args, **kwargs)
 
 
 class Item_almoxarifado(models.Model):
@@ -103,47 +103,47 @@ class Item_almoxarifado(models.Model):
     def __str__(self):
         return f' {self.nome}'
 
-    @property
-    def quantidade_total(self):
-        entrada = sum(l.quantidade_entrada_nota or 0 for l in self.lotes.all())
-        saida = sum(s.quantidade for s in self.itens_alocados.all())  # Usa a quantidade de itens alocados
-        total_em_estoque = entrada - saida
-        return total_em_estoque
-
-    @property
-    def valor_total_estoque(self):
-        valor_total=sum(v.valor_total or 0 for v in self.lotes.all())
-        return valor_total
-
-    @property
-    def valor_atual_estoque(self):
-        entradas=sum(v.valor_total or 0 for v in self.lotes.all())
-        saidas=sum(s.Valor_total_alocado or 0 for s in self.itens_alocados.all() )
-        valor_atual_estoque=entradas-saidas
-        return valor_atual_estoque
-
-    def valor_atual_estoque_formatado(self):
-        return tools_utils.formata_preco(self.valor_atual_estoque)
-    valor_atual_estoque_formatado.short_description = 'Valor atual em estoque'
-
-
-    def valor_total_estoque_formatado(self):
-        return tools_utils.formata_preco(self.valor_total_estoque)
-    valor_total_estoque_formatado.short_description = 'Valor Total em estoque'
-
-    @property
-    def Preco_unitario_medio(self):
-        quantidade_total = sum(l.quantidade_entrada_nota or 0 for l in self.lotes.all())
-
-        if quantidade_total > 0:
-            valor_total_estoque = self.valor_total_estoque
-            precomedio = valor_total_estoque / quantidade_total
-            return precomedio
-        return None
-
-    def valor_untario_formatado(self):
-        return tools_utils.formata_preco(self.Preco_unitario_medio)
-    valor_untario_formatado.short_description='Valor Unitario medio'
+    # @property
+    # def quantidade_total(self):
+    #     entrada = sum(l.quantidade_entrada_nota or 0 for l in self.lotes.all())
+    #     saida = sum(s.quantidade for s in self.itens_alocados.all())  # Usa a quantidade de itens alocados
+    #     total_em_estoque = entrada - saida
+    #     return total_em_estoque
+    #
+    # @property
+    # def valor_total_estoque(self):
+    #     valor_total=sum(v.valor_total or 0 for v in self.lotes.all())
+    #     return valor_total
+    #
+    # @property
+    # def valor_atual_estoque(self):
+    #     entradas=sum(v.valor_total or 0 for v in self.lotes.all())
+    #     saidas=sum(s.Valor_total_alocado or 0 for s in self.itens_alocados.all() )
+    #     valor_atual_estoque=entradas-saidas
+    #     return valor_atual_estoque
+    #
+    # def valor_atual_estoque_formatado(self):
+    #     return tools_utils.formata_preco(self.valor_atual_estoque)
+    # valor_atual_estoque_formatado.short_description = 'Valor atual em estoque'
+    #
+    #
+    # def valor_total_estoque_formatado(self):
+    #     return tools_utils.formata_preco(self.valor_total_estoque)
+    # valor_total_estoque_formatado.short_description = 'Valor Total em estoque'
+    #
+    # @property
+    # def Preco_unitario_medio(self):
+    #     quantidade_total = sum(l.quantidade_entrada_nota or 0 for l in self.lotes.all())
+    #
+    #     if quantidade_total > 0:
+    #         valor_total_estoque = self.valor_total_estoque
+    #         precomedio = valor_total_estoque / quantidade_total
+    #         return precomedio
+    #     return None
+    #
+    # def valor_untario_formatado(self):
+    #     return tools_utils.formata_preco(self.Preco_unitario_medio)
+    # valor_untario_formatado.short_description='Valor Unitario medio'
 
     class Meta:
         verbose_name = 'Item'
@@ -157,7 +157,7 @@ class lote(models.Model):
     data_entrada=models.DateField(blank=True,null=True,default=timezone.now)
     valor_unitario=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2)
     quantidade_entrada_nota=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2)
-    valor_total=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False)
+    #valor_total=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False)
     Nf=models.FileField(upload_to=tools_utils.documentos_amoxarifado_load_path)
 
     def __str__(self):
@@ -167,17 +167,17 @@ class lote(models.Model):
         verbose_name='Lote'
         verbose_name_plural='lotes'
 
-    def save(self, *args, **kwargs):
-        isnew=self.pk is None
-        if isnew and self.Nf:
-            temp_documento=self.Nf
-            self.Nf=None
-            super().save(*args, **kwargs)
-            self.Nf=temp_documento
-
-        if self.valor_unitario >0 and self.quantidade_entrada_nota>0:
-            self.valor_total=self.valor_unitario*self.quantidade_entrada_nota
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     isnew=self.pk is None
+    #     if isnew and self.Nf:
+    #         temp_documento=self.Nf
+    #         self.Nf=None
+    #         super().save(*args, **kwargs)
+    #         self.Nf=temp_documento
+    #
+    #     if self.valor_unitario >0 and self.quantidade_entrada_nota>0:
+    #         self.valor_total=self.valor_unitario*self.quantidade_entrada_nota
+    #     super().save(*args, **kwargs)
 
 
 

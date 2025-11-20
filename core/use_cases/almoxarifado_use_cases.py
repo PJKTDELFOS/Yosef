@@ -54,6 +54,8 @@ class CalculoItemEstoqueUsecase:
 
     def preco_unitario_medio_por_item_id(self,item_id:int)->Decimal:
         quantidade_estoque=self.quantidade_total_entrada_em_estoque_por_item_id(item_id)
+        if quantidade_estoque <= Decimal('0.00'):
+            return Decimal('0.00').quantize(Decimal('0.00'))
         valor_total=self.valor_total_entrada_em_estoque_por_item_id(item_id)
         preco_medio_unitario=valor_total/quantidade_estoque
         return preco_medio_unitario.quantize(Decimal('0.00'))
@@ -72,14 +74,14 @@ class RegistroDeAlocacaoUseCase:
     def __init__(self,repositorio:AlmoxarifadoRepository):
         self.repo=repositorio
 
-    def registrar(self,item_id:int,pedido_id:int,quantidade_alocada:Decimal):
-        estoque_disponivel=CalculoItemEstoqueUsecase(repositorio=self.repo).quantidade_disponivel_estoque(item_id)
+    def registrar(self,item_estoque_id:int,pedido_id:int,quantidade_alocada:Decimal):
+        estoque_disponivel=CalculoItemEstoqueUsecase(repositorio=self.repo).quantidade_disponivel_estoque(item_estoque_id)
         if quantidade_alocada>estoque_disponivel:
             raise ValueError(
                 f'Estoque disponível de {estoque_disponivel} é inferior à quantidade solicitada: {quantidade_alocada}.'
             )
         nova_alocacao=Item_alocadoEntity(
-            item_alocado_id=item_id,
+            item_estoque_id=item_estoque_id,
             quantidade=quantidade_alocada,
             pedido_id=pedido_id,
             data_alocacao=datetime.date.today()
