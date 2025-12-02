@@ -157,7 +157,7 @@ class lote(models.Model):
     data_entrada=models.DateField(blank=True,null=True,default=timezone.now)
     valor_unitario=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2)
     quantidade_entrada_nota=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2)
-    #valor_total=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False)
+    valor_total=models.DecimalField(blank=True,null=True,max_digits=10,decimal_places=2,editable=False)
     Nf=models.FileField(upload_to=tools_utils.documentos_amoxarifado_load_path)
 
     def __str__(self):

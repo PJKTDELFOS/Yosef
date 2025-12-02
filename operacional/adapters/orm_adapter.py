@@ -20,6 +20,7 @@ from core.entities.frota_e_equipamentos import VeiculosEntity,ManutencaoEntity
 
 from decimal import Decimal
 from typing import List, Optional
+from django.db.models import Sum
 
 
 def frota_model_to_entity(model:FrotaModel)->VeiculosEntity:
@@ -141,13 +142,38 @@ class AlmoxarifadoDjangoRepository(AlmoxarifadoRepository):
             total_saida=Sum('quantidade')
         )
 
-        return resultado.get('total-saida') or Decimal('0.00')
+        return resultado.get('total_saida') or Decimal('0.00')
+
+    def buscar_item_por_id(self,item_id:int) ->Optional[Item_almoxarifadoEntity]:
+        try:
+            model=ItemAlmoxarifadoModel.objects.get(pk=item_id) # type: ignore
+            return item_model_to_entity(model)
+        except ItemAlmoxarifadoModel.DoesNotExist:# type: ignore
+            return None
+    def buscar_tipo_ativo_por_id(self,id:int) ->Optional[TipoAtivoEntity]:
+        try:
+            model=TipoAtivoModel.objects.get(pk=id)# type: ignore
+            return tipo_ativo_model_to_entity(model)
+        except TipoAtivoModel.DoesNotExist:# type: ignore
+            return None
+    def buscar_lotes_por_item_id(self,item_id:int) ->List[LoteEntity]:
+        try:
+            model=LoteModel.objects.get(pk=item_id)
+            return [lote_model_to_entity(l) for l in model]
+        except LoteModel.DoesNotExist:# type: ignore
+            return []
+
+
+
+
+
+
+
 
 
 
 
 class FrotaDjangoRepository(FrotaRepository):
-
     def buscar_veiculo_por_id(self,veiculo_id:int) ->Optional[VeiculosEntity]:
         try:
             model=FrotaModel.objects.get(pk=veiculo_id) # type: ignore
@@ -176,16 +202,24 @@ class FrotaDjangoRepository(FrotaRepository):
 
     def salvar_manutencao(self,manutencao:ManutencaoEntity) ->ManutencaoEntity:
         manutencao_data={
-            'veiculo_id':manutencao.veiculo_id,
+            'Ativeo_em_manutencao_id':manutencao.veiculo_id,
             'motivo':manutencao.motivo,
             'local_de_manutencao':manutencao.local_manutencao,
-            'operacao':manutencao,
+            'operacao':manutencao.operacao,
             'registro':manutencao.registro,
             'custo_manutencao':manutencao.custo_manutencao,
             'data_entrada':manutencao.data_entrada_manutencao
         }
         model,created=ManutencaoModel.objects.update_or_create(pk=manutencao.id,defaults=manutencao_data)
         return manutencao_model_to_entity(model)
+    def calcular_custo_total_manutencao_veiculo_id(self,veiculo_id:int)->Decimal:
+        resultado=ManutencaoModel.objects.filter(
+            Ativo_em_manutencao_id=veiculo_id
+        ).agregate(
+            total_custo=Sum('custo_manutencao')
+        )
+        return resultado.get('total_custo') or Decimal('0.00')
+
 
 
 
